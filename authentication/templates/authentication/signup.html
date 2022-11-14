@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Sign UP</h2>
+    <form method="POST">
+        {% csrf_token %}
+       <p>
+            {{form.username.label}}
+            {{form.username}}
+       </p> 
+
+        <p>
+            {{form.email.label}}
+            {{form.email}}
+        </p>
+
+        <p>
+            {{form.password1.label}}
+            {{form.password1}}
+        </p>
+
+        <p>
+            {{form.password2.label}}
+            {{form.password2}}
+         </p>
+        <button type="submit">Submit</button>
+    </form>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+{% endblock content %}
