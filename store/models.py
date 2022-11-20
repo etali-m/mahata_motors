@@ -97,10 +97,22 @@ class MotorBike(Moto):
     La classe Order permet de définir une commande
 """
 class Order(models.Model):
+    ATTENTE = 'ATTENTE'
+    EN_COURS = 'EN COURS'
+    LIVRE = 'LIVRE'
+
+
+    STATUS_CHOICES = (
+        (ATTENTE, 'attente'), 
+        (EN_COURS, 'En cours de livraison'),
+        (LIVRE, 'Livré')
+    )
+
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_order = models.DateTimeField(auto_now_add =True)
     complete = models.BooleanField(default = False)
     transaction_id = models.CharField(max_length = 100, null=True)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES)
 
 
     def __str__(self):
