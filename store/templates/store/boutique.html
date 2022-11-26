@@ -19,36 +19,18 @@
 <!-- liste des produits -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'images/placeholder.png' %}" >
-            <div class="box-element product">
-                <h6><strong>Product</strong></h6>
-                <hr>
-                <button class="btn btn-outline-secondary att-btn">Ajouter au panier</button>
-                <a class="btn btn-outline-success" href="#">Voir</a>
-                <h5 style="display: inline-block; float:right;">15000FCFA</h5>
+        {% for product in products %}
+            <div class="col-lg-4">
+                <img class="thumbnail" src="{{ product.imageURL }}" >
+                <div class="box-element product">
+                    <h6><strong>{{ product.name }}</strong></h6>
+                    <hr>
+                    <button class="btn btn-outline-secondary att-btn">Ajouter au panier</button>
+                    <a class="btn btn-outline-success" href="#">Voir</a>
+                    <h5 style="display: inline-block; float:right;">{{ product.price }} FCFA</h5>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'images/placeholder.png' %}" >
-            <div class="box-element product">
-                <h6><strong>Product</strong></h6>
-                <hr>
-                <button class="btn btn-outline-secondary att-btn">Ajouter au panier</button>
-                <a class="btn btn-outline-success" href="#">Voir</a>
-                <h5 style="display: inline-block; float:right;">15000FCFA</h5>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'images/placeholder.png' %}" >
-            <div class="box-element product">
-                <h6><strong>Product</strong></h6>
-                <hr>
-                <button class="btn btn-outline-secondary att-btn">Ajouter au panier</button>
-                <a class="btn btn-outline-success" href="#">Voir</a>
-                <h5 style="display: inline-block; float:right;">15000FCFA</h5>
-            </div>
-        </div>
+        {% endfor %}
     </div> 
 </div>
 

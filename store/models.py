@@ -38,6 +38,9 @@ class Brand(models.Model):
     origine = models.CharField(max_length=30)
     #logo = models.ImageField()
 
+    def __str__(self):
+        return self.name
+
 
 class Moto(Product):
     brand = models.OneToOneField(Brand, on_delete=models.CASCADE)
@@ -118,6 +121,20 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    #le prix total d'une commande
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+        
+    #la quantité totale d'article dans le panier
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+
 """
     cette classe permet de définir une ligne de commande
     une commande peut avoir plusieur ligne de commande et une 
@@ -128,6 +145,12 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+
+
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
 
 
 """ 

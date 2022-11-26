@@ -55,14 +55,16 @@
                     <h3>Resumé de votre commande</h3>
                     <hr>
 
-                    <div class="cart-row">
-                        <div style="flex:2"><img class="row-image" src="{% static 'images/placeholder.png' %}" alt=""></div>
-                        <div style="flex:2">product 1</div>
-                        <div style="flex:1"><p>15000F</p></div>
-                        <div style="flex:1"><p>x2</p></div> 
-                    </div>
-                    <h5>Article : 2</h5>
-                    <h5>Totale : 30000FCFA</h5>
+                    {% for item in items %}
+                        <div class="cart-row">
+                            <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}" alt=""></div>
+                            <div style="flex:2">{{ item.product.name }}</div>
+                            <div style="flex:1"><p>{{ item.product.price }}F</p></div>
+                            <div style="flex:1"><p>x{{ item.quantity }}</p></div> 
+                        </div>
+                    {% endfor %}
+                    <h5>Article : {{order.get_cart_items}}</h5>
+                    <h5>Totale : {{order.get_cart_total}} FCFA</h5>
                 </div>
             </div>
         </div>
