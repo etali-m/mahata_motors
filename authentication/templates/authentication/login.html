@@ -1,13 +1,35 @@
-{% extends 'base.html' %}
+{% extends 'authapp.html' %}
+{% load static %}
+{% block image %}
+     <img src="{% static 'images/loginImage.png' %}" width="500" height="550" alt="">
+{% endblock image %}
+
 {% block content %}
     <p>{{ message }}</p>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Connexion</button>
-    </form>
+    <div class="login-content">
+        <h2 class="text-center login-title">CONNEXION</h2>
+        <form method="post" class="" id="login-form">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">Nom utilisateur ou e-mail</label>
+              {{form.username}}
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              {{form.password}}
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Garder ma session ouverte</label>
+            </div>
+            <p class="text-center"><a classe="login-link" href="{% url 'signup' %}">Je n'ai pas de compte</a></p>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary" type="button">Valider</button> 
+            </div>
+        </form>
+    </div>
     {% for message in messages %}
         <p>{{message}}</p>
     {% endfor %}
-    <p>Not a member? <a href="{% url 'signup' %}">Sign up now!</a></p>
 {% endblock content %}

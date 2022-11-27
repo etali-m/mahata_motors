@@ -1,4 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'authapp.html' %}
+{% load static %}
+{% block image %}
+     <img src="{% static 'images/signupImage.png' %}" width="500" height="550" alt="">
+{% endblock image %}
 {% block content %}
     <h2>Sign UP</h2>
     <form method="POST">
@@ -21,7 +25,7 @@
         <p>
             {{form.password2.label}}
             {{form.password2}}
-         </p>
+        </p>
         <button type="submit">Submit</button>
     </form>
     {% if form.errors %}

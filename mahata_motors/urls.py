@@ -22,10 +22,7 @@ import authentication.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(
-        template_name='authentication/login.html',
-        redirect_authenticated_user=True),
-        name='login'),
+    path('login/', authentication.views.login_page, name='login'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('', include('store.urls')),
