@@ -4,30 +4,32 @@
      <img src="{% static 'images/signupImage.png' %}" width="500" height="550" alt="">
 {% endblock image %}
 {% block content %}
-    <h2>Sign UP</h2>
-    <form method="POST">
+<div class="box-content">
+    <h2 class="text-center login-title">INSCRIPTION</h2>
+    <form method="post" class="" id="login-form">
         {% csrf_token %}
-       <p>
-            {{form.username.label}}
-            {{form.username}}
-       </p> 
-
-        <p>
-            {{form.email.label}}
+        <div class="mb-3">
+          <label for="username" class="form-label">Nom utilisateur</label>
+          {{form.username}}
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse e-mail</label>
             {{form.email}}
-        </p>
-
-        <p>
-            {{form.password1.label}}
-            {{form.password1}}
-        </p>
-
-        <p>
-            {{form.password2.label}}
+          </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Mot de passe</label>
+          {{form.password1}}
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Confirmer mot de passe</label>
             {{form.password2}}
-        </p>
-        <button type="submit">Submit</button>
+          </div> 
+        <p class="text-center"><a class="login-link" href="{% url 'login' %}">J'ai dejà un compte</a></p>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary" type="button">Valider</button> 
+        </div>
     </form>
+</div> 
     {% if form.errors %}
         {{ form.errors }}
     {% endif %}
