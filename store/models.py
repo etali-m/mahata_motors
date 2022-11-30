@@ -47,7 +47,7 @@ class Moto(Product):
     chassis = models.IntegerField()
     cylindre = models.FloatField()
     nbre_vitesse = models.IntegerField(blank=True)
-    vignette = models.FloatField()
+    vignette = models.BooleanField(default=False)
     type_model = models.CharField(max_length=20)
     poids = models.DecimalField(max_digits = 7, decimal_places = 2)
     tension_batterie = models.DecimalField(max_digits = 7, decimal_places=2)
@@ -55,7 +55,7 @@ class Moto(Product):
     capacite_recervoir = models.DecimalField(max_digits = 5, decimal_places = 2)
     nbre_place = models.IntegerField()
     coulour = models.CharField(max_length=20)
-    garantie = models.DateField()
+    
 
 
 
@@ -67,6 +67,7 @@ class Moto(Product):
 class Accessory(Product):
     color = models.CharField(max_length=20, blank=True, null=True)
     description = models.TextField()
+    garantie = models.DateField()
 
 
 """
@@ -90,7 +91,7 @@ class MotorBike(Moto):
         (AVENTURE, 'aventure')
     )
 
-    motor_warranty = models.DateField()
+    motor_warranty = models.IntegerField(null=True, blank=True)
     usage = models.CharField(max_length=30, choices=USAGE_CHOICES)
 
 

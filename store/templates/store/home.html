@@ -1,6 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %} 
+{% block content %}
+<div class="navigation">
+  <a href="">Accuel</a>
+  <div class="deroulant">
+    <button class="dropbtn">Vitrine</button>
+    <div class="dropdown-content">
+      <div class="header">
+        <h2>Mega menu</h2>
+      </div>
+      <div class="row">
+        <div class="column">
+          <h3>Category 1</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+        <div class="column">
+          <h3>Category 2</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+        <div class="column">
+          <h3>Category 3</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="deroulant">
+    <button class="dropbtn">Gamme</button>
+    <div class="dropdown-content">
+      <div class="header">
+        <h2>Mega menu</h2>
+      </div>
+      <div class="row">
+        <div class="column">
+          <h3>Category 1</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+        <div class="column">
+          <h3>Category 2</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+        <div class="column">
+          <h3>Category 3</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="">SAV</a>
+</div>
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> 
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -21,5 +81,5 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
+</div> <br><br>
 {% endblock %}
