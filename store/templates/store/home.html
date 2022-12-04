@@ -1,66 +1,98 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
+{% block content %} 
 <div class="navigation">
-  <a href="">Accuel</a>
+  <a href="#home" id="menu-bar"> 
+    Toutes les catégories
+  </a> 
   <div class="deroulant">
-    <button class="dropbtn">Vitrine</button>
-    <div class="dropdown-content">
-      <div class="header">
-        <h2>Mega menu</h2>
-      </div>
-      <div class="row">
-        <div class="column">
-          <h3>Category 1</h3>
+    <button class="dropbtn">
+      <i class="fas fa-motorcycle"></i>
+      Motocyclette 
+    </button>
+    <div class="deroulant-content">
+      <div class="row px-2">
+        <div class="col-3 column">
+          <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
+        </div>
+        <div class="col-3 column">
+          <h3>Utilisation commerciale</h3>
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
         </div>
-        <div class="column">
-          <h3>Category 2</h3>
+        <div class="col-2 column">
+          <h3>Conçu pour la ville</h3>
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
         </div>
-        <div class="column">
-          <h3>Category 3</h3>
+        <div class="col-2 column">
+          <h3>Pour l'aventure</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
         </div>
       </div>
     </div>
-  </div>
+  </div>  
   <div class="deroulant">
-    <button class="dropbtn">Gamme</button>
-    <div class="dropdown-content">
-      <div class="header">
-        <h2>Mega menu</h2>
-      </div>
-      <div class="row">
-        <div class="column">
-          <h3>Category 1</h3>
+    <button class="dropbtn">
+      <i class="fas fa-trailer"></i>
+      Tricycle 
+    </button>
+    <div class="deroulant-content">
+      <div class="row px-2">
+        <div class="col-3 column">
+          <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
+        </div>
+        <div class="col-3 column">
+          <h3>tricycle à 3 roues</h3>
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
         </div>
-        <div class="column">
-          <h3>Category 2</h3>
+        <div class="col-2 column">
+          <h3>tricycle à 5 roues</h3>
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
-        </div>
-        <div class="column">
-          <h3>Category 3</h3>
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
+        </div> 
       </div>
     </div>
-  </div>
-  <a href="">SAV</a>
+  </div>  
+  <a href="#home">Marques</a>
+  <div class="deroulant">
+    <button class="dropbtn"> 
+      <i class="fab fa-intercom"></i>      Accessoires 
+    </button>
+    <div class="deroulant-content">
+      <div class="row px-2">
+        <div class="col-3 column">
+          <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
+        </div>
+        <div class="col-3 column">
+          <h3>Accessoires moto</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+        <div class="col-2 column">
+          <h3>Accessoires tricycle</h3>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div> 
+      </div>
+    </div>
+  </div>  
 </div>
+
+
+
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> 
     <div class="carousel-inner">
       <div class="carousel-item active">
