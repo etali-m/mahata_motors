@@ -295,7 +295,7 @@ h1,h2,h3,h4,h5,h6{
   } 
 
 
-  @media (max-width: 767px) {
+@media (max-width: 767px) {
 	.carousel-inner .carousel-item > div {
 		display: none;
 	}
@@ -305,14 +305,71 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
+.btn_popular{
+	padding:10px;
+	background-color: #e95a0c;
+	color:white;
+	border-radius:8px;
+	border:none;
+}
 
+.btn_popular:hover{
+	opacity: 0.9;
+}
 
-.MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
-    .MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
-        .MultiCarousel .MultiCarousel-inner .item { float: left;}
-        .MultiCarousel .MultiCarousel-inner .item > div { text-align: center; padding:10px; margin:10px; background:#f1f1f1; color:#666;}
-    .MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); }
-    .MultiCarousel .leftLst { left:0; }
-    .MultiCarousel .rightLst { right:0; }
+.item_name{
+	font-weight: bold;
+	font-size: 24px;
+	color:#024d99;
+}
+
+.item_price{
+	font-size:22px;
+	margin-top: -5px;
+	margin-bottom: -5px;
+	font-weight: bold;
+}
+
+/*Carousel*/
+.MultiCarousel { 
+	float: left; 
+	overflow: hidden; 
+	padding: 15px; 
+	width: 100%; 
+	position:relative; 
+}
+
+.MultiCarousel .MultiCarousel-inner { 
+	transition: 1s ease all; 
+	float: left; 
+}
+
+.MultiCarousel .MultiCarousel-inner .item { 
+	float: left;  
+	border:none;
+	margin-top: none;
+	padding:5px;
+}
+
+.MultiCarousel .MultiCarousel-inner .item > div {  
+	border:none;
+}
+
+.MultiCarousel .leftLst, .MultiCarousel .rightLst {
+		position:absolute; 
+		border-radius:50%;
+		top:calc(50% - 20px); 
+}
+
+.MultiCarousel .leftLst { 
+	left:0; 
+}
+
+.MultiCarousel .rightLst { 
+	right:0; 
+}
     
-        .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
+.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { 
+	pointer-events: none; 
+	background:#ccc; 
+}

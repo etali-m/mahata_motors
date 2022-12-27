@@ -39,11 +39,11 @@ $(document).ready(function () {
 
 
             if (bodyWidth >= 1200) {
-                incno = itemsSplit[3];
+                incno = itemsSplit[1];
                 itemWidth = sampwidth / incno;
             }
             else if (bodyWidth >= 992) {
-                incno = itemsSplit[2];
+                incno = itemsSplit[1];
                 itemWidth = sampwidth / incno;
             }
             else if (bodyWidth >= 768) {
