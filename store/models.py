@@ -96,7 +96,6 @@ class MotorBike(Moto):
 
 
 
-
 """
     La classe Order permet de définir une commande
 """

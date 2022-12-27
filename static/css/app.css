@@ -1,5 +1,5 @@
 body{
-	background-color: hsl(0, 0%, 98%);
+	background-color: white;
 	overflow-x: hidden;
 }
 
@@ -150,7 +150,7 @@ h1,h2,h3,h4,h5,h6{
 	width: 100%;
 	left: 0;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1000;
+	z-index: 1000000;
   }
   
   .deroulant-content .header {
@@ -234,7 +234,58 @@ h1,h2,h3,h4,h5,h6{
   input{
 	outline: none;
   }
-  
+
+
+  .divider{
+	width: 100px;
+	padding:1px;
+	background-color: #e95a0c;
+	
+  }
+
+  .section_title{
+	font-weight: 200px;
+  }
+
+  .moto_block{
+	padding:15px 10px; 
+  }
+
+  .moto_block_title{
+	font-family: Tahoma, Geneva, Verdana, sans-serif;
+	font-weight:200;
+  }
+
+  .moto_block_img{
+	margin:10px 0px 15px 0px;
+  }
+
+  .moto_block_price{
+	font-weight: bold;
+  }
+
+  .detail_btn{
+	background-color: #e95a0c;
+	color:white;
+	padding:10px 20px;
+	border:none;
+	border-radius:30px;
+  }
+
+  .card_custom{
+	border:none
+  }
+
+
+  .logo_block{
+	padding: 40px 40px 10px 40px;
+  }
+
+  .logo_block:hover{ 
+	border-radius:5px;
+	box-shadow: 0 0 4px 0 rgba(0,0,0,.16);
+  }
+ 
   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {
 	.column {
@@ -242,3 +293,26 @@ h1,h2,h3,h4,h5,h6{
 	  height: auto;
 	}
   } 
+
+
+  @media (max-width: 767px) {
+	.carousel-inner .carousel-item > div {
+		display: none;
+	}
+	.carousel-inner .carousel-item > div:first-child {
+		display: block;
+	}
+}
+
+
+
+
+.MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
+    .MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
+        .MultiCarousel .MultiCarousel-inner .item { float: left;}
+        .MultiCarousel .MultiCarousel-inner .item > div { text-align: center; padding:10px; margin:10px; background:#f1f1f1; color:#666;}
+    .MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); }
+    .MultiCarousel .leftLst { left:0; }
+    .MultiCarousel .rightLst { right:0; }
+    
+        .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
