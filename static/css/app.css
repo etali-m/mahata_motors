@@ -365,6 +365,22 @@ h1,h2,h3,h4,h5,h6{
 	left:0; 
 }
 
+.btn_chevron{
+	background-color: #e95a0c;
+	color:white;
+	opacity: 0.9;
+}
+
+.btn_chevron:hover{
+	color: white;
+}
+
+.btn_chevron:focus{
+	outline-style: none;
+	box-shadow: none;
+	border-color: transparent;
+}
+
 .MultiCarousel .rightLst { 
 	right:0; 
 }

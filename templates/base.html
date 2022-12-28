@@ -46,9 +46,19 @@
     </nav> 
   </header>
     {% block content %}{% endblock content %}
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>  
+
+  <footer class="row px-5" style="font-size: 14px;">
+    <div class="col-4">
+      <p>&copy;2022 Mahata motors Cameroun &bull; Tous droits réservés</p>
+    </div>
+    <div class="col-5 offset-3 d-flex justify-content-end">
+      <a href="">Mention légale</a>
+      <a href="">Condittions générales</a>
+      <a href="">Politique de confidentialité</a>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>  
 </body>
 </html>
