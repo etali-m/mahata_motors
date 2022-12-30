@@ -104,7 +104,9 @@ h1,h2,h3,h4,h5,h6{
 	background-color: #0066cc;
 	font-family: Arial, Helvetica, sans-serif;
   }
-  
+  .nav{
+	background-color: #f8faff;
+  }
   .navigation > a {
 	float: left;
 	font-size: 16px;

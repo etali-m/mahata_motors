@@ -1,38 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<!-- liste des produits -->
+<main style="background-color:#f7f7f7; padding: 30px 0px;">
+    <div class="container">
 
-<!--RECHERCHE-->
-<div class="row mt-3 mb-5">
-    <form class="col-lg-10 g-3 offset-lg-1 d-flex justify-content-center" 
-        action="" method="get">
-
-        <div class="col-8">
-            <input type="text" class="form-control form-control-md" name="query" placeholder="Search a product... ">
-        </div>&nbsp;
-        <div class="col-2 ml-2">
-            <button type="submit" class="btn btn-warning"> Search</button>
+        <div class="row">
+            
         </div>
 
-    </form>
-</div>
-<!-- liste des produits -->
-<div class="container">
-    <div class="row">
-        {% for product in products %}
-            <div class="col-lg-4">
-                <img class="thumbnail" src="{{ product.imageURL }}" >
-                <div class="box-element product">
-                    <h6><strong>{{ product.name }}</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary att-btn">Ajouter au panier</button>
-                    <a class="btn btn-outline-success" href="#">Voir</a>
-                    <h5 style="display: inline-block; float:right;">{{ product.price }} FCFA</h5>
+        <div class="row">
+            <div class="col-6">
+                <div class="product_item">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                        <small>catégorie</small>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="item_name">Bazar AMG 505</h4>  
+                            <p class="item_price">500 000fcfa</p>
+                        </div>
+                        <p>2019 &bullet; essence &bullet; 10L </p>
+                        <p>Manuel</p>
+                        <div class="d-grid gap-2 pb-2">
+                            <button class="btn_popular" type="button">Voir cette moto</button> 
+                        </div>
+                    </div> 
                 </div>
             </div>
-        {% endfor %}
-    </div> 
-</div>
+            <div class="col-6">
+                <div class="product_item">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                        <small>catégorie</small>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="item_name">Bazar AMG 505</h4>  
+                            <p class="item_price">500 000fcfa</p>
+                        </div>
+                        <p>2019 &bullet; essence &bullet; 10L </p>
+                        <p>Manuel</p>
+                        <div class="d-grid gap-2 pb-2">
+                            <button class="btn_popular" type="button">Voir cette moto</button> 
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div> 
+    </div>
+</main>
 
 <!-- 
 <div class="row">
