@@ -5,19 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
     <!-- bootstrap.css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--Swiperjs-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <!-- icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <!-- main.css -->
     <link rel="stylesheet" href="{% static 'css/app.css' %}">  
     <!-- Font awesom icon-->
-    <script src="https://kit.fontawesome.com/f2070ffc62.js" crossorigin="anonymous"></script> 
+    <script src="https://kit.fontawesome.com/f2070ffc62.js" crossorigin="anonymous"></script>
     <title>Mahata motors</title>
+    <style>
+      
+    </style>
 </head>
 <body>
+  <!--
+    <div id="loader">
+      <div class="spinner"></div>
+    </div>
+  -->
   <header>
-    <nav class="navbar navbar-expand-md py-3" style="box-shadow: 0px 1px 5px rgba(204, 204, 204, 0.577);">
+    <!--<nav class="navbar navbar-expand-md py-3" style="box-shadow: 0px 1px 5px rgba(204, 204, 204, 0.577);">
       <div class="container">
           <a class="navbar-brand text-uppercase fw-bold" href="{% url 'home' %}">
               <img src="{% static 'images/logo1.png' %}" width="130" height="50" alt="">
@@ -27,11 +40,6 @@
             <button class="search_btn" type="submit"><i class="fa fa-search"></i></button>
           </form> 
           <ul class="navbar-nav justify-content-end">  
-              <li class="nav-item">
-                  <a class="" href="{% url 'login' %}">
-                  <button class="compte_btn">Mon compte</button>
-                  </a>
-              </li>
               <li class="nav-item mx-5">
                 <a href="{% url 'cart' %}" class="position-relative">
                   <i class="fas fa-shopping-cart" style="font-size: 25px; color:#0066cc"></i>
@@ -41,24 +49,224 @@
                   </span>
                 </a>
               </li>
+              <li class="nav-item">
+                  <a class="" href="{% url 'login' %}">
+                  <button class="compte_btn">Mon compte</button>
+                  </a>
+              </li>
           </ul>
       </div>
-    </nav> 
+    </nav> -->
+    <div class="menu__navigation">
+      <div class="contener">
+        <div class="menu-btn">
+          <div class="menu-btn__burger"></div>
+        </div>
+        <a class="text-uppercase fw-bold" href="{% url 'home' %}">
+          <img src="{% static 'images/logo1.png' %}" width="130" height="50" alt="">
+        </a> 
+        <form class="search_form d-flex">
+          <input class="search_field" type="search" placeholder="Rechercher sur mahata...." aria-label="Search">
+          <button class="search_btn" type="submit"><i class="fa fa-search"></i></button>
+        </form> 
+        <ul class="menu_navigation_list">
+          <li class="text-center">
+            <a href="{% url 'cart' %}" title="panier">
+              <i class="fas fa-shopping-basket position-relative" style="font-size: 25px;">
+                <span style="font-size: 12px;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  2 
+                </span>
+              </i> 
+              <span class="menu_logo_text">Panier</span>
+            </a>
+          </li>
+          <li class="text-center">
+            <a href="{% url 'login' %}" title="mon compte">
+              <i class="fas fa-user-circle" style="font-size: 25px;"></i> 
+              <span class="menu_logo_text">Mon compte</span>
+            </a>
+          </li>
+        </ul>      
+      </div>
+      <form class="search_form_responsive">
+        <button type="submit"><i class="fal fa-search search_button_responsive"></i></button>
+        <input type="text" class="search_form_responsive_input" placeholder="Rechercher sur mahata...">
+      </form>      
+    </div>
   </header>
+  <div class="navigation">
+    <a href="#home" id="menu-bar"> 
+      Toutes les catégories
+    </a> 
+    <div class="deroulant">
+      <button class="dropbtn">
+        <i class="fas fa-motorcycle"></i>
+        Motocyclette 
+      </button>
+      <div class="deroulant-content">
+        <div class="row px-2">
+          <div class="col-3 column">
+            <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
+          </div>
+          <div class="col-3 column">
+            <h3>Utilisation commerciale</h3>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+          <div class="col-2 column">
+            <h3>Conçu pour la ville</h3>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+          <div class="col-2 column">
+            <h3>Pour l'aventure</h3>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div class="deroulant">
+      <button class="dropbtn">
+        <i class="fas fa-trailer"></i>
+        Tricycle 
+      </button>
+      <div class="deroulant-content">
+        <div class="row px-2">
+          <div class="col-3 column">
+            <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
+          </div>
+          <div class="col-3 column">
+            <h3>tricycle à 3 roues</h3>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+          <div class="col-2 column">
+            <h3>tricycle à 5 roues</h3>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div> 
+        </div>
+      </div>
+    </div>  
+    <a href="#home">Marques</a>
+    <div class="deroulant">
+      <button class="dropbtn"> 
+        <i class="fab fa-intercom"></i> Vitrine
+      </button>
+      <div class="deroulant-content">
+        <div class="row px-2">
+          <div class="col-3 column">
+            <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
+          </div>
+          <div class="col-3 column">
+            <h3>Accessoires</h3>
+            <a href="#">Motocyclette</a>
+            <a href="#">Tricycle</a> 
+          </div>
+          <div class="col-2 column">
+            <h3>Pièces de rechange</h3>
+            <a href="#">Motocyclette</a>
+            <a href="#">Tricycle</a> 
+          </div> 
+        </div>
+      </div>
+    </div>  
+  </div>
     {% block content %}{% endblock content %}
 
-  <footer class="row px-5" style="font-size: 14px;">
-    <div class="col-4">
-      <p>&copy;2022 Mahata motors Cameroun &bull; Tous droits réservés</p>
+  <footer class="px-5">
+    <div class="row">
+      <div class="col-md-3">
+        <h3 class="footer__title">Information</h3>
+        <div>
+          <ul class="footer__ul">
+            <li>Qui sommes nous ?</li>
+            <li>FAQ</li>
+            <li>Opportunités (Services)</li>
+            <li>Contactez nous</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h3 class="footer__title">Service client</h3>
+        <div>
+          <ul class="footer__ul">
+            <li>Mode de paiement</li>
+            <li>Signaler un produit</li>
+            <li>Comment acheter sur mahata ?</li>
+            <li>SAV (Entretien & Garantie)</li>
+            <li>Pièces de rechange</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3 class="footer__title">Mon compte</h3>
+        <div>
+          <ul class="footer__ul">
+            <li>Mon compte</li>
+            <li>Mes commandes</li>
+            <li>Devenir partenaire logistique </li>
+            <li>Comment devenir vendeur?</li>
+            <li>Comment devenir Technicien/Assembleur ?</li>
+            <li>Affiliation</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="col-5 offset-3 d-flex justify-content-end">
-      <a href="">Mention légale</a>
-      <a href="">Condittions générales</a>
-      <a href="">Politique de confidentialité</a>
+    <hr>
+    <div class="row my-3 pb-3">
+      <div class="col-sm-4">
+        <img src="{% static 'images/logo1.png' %}" width="130" height="50" alt="logo_mahata">
+      </div>
+      <div class="col-sm-4">
+        <h3 class="footer__title">Mode de paiement</h3>
+        <div class="d-flex justify-content-start">
+          <p>OM</p>
+          <p>MTN MOMO</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h3 class="footer__title">Suivez nous sur</h3>
+        <div class="d-flex justify-content-start">
+          <a href="">
+            <img src="{% static 'images/facebook.png' %}" alt="facebook_logo" width="30" height="30">
+          </a>
+           &nbsp;
+          <a href="">
+            <img src="{% static 'images/linkedin.png' %}" alt="linkedin_logo" width="30" height="30">
+          </a>
+           &nbsp;
+          <a href="">
+            <img src="{% static 'images/youtube.png' %}" alt="youtube_logo" width="30" height="30">
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
+  <div class="row footer__copyrighsection" style="font-size: 14px;">
+    <div class="col-12 col-md-4 text-center">
+      <span>&copy;2022 Mahata motors Cameroun &bull; Tous droits réservés</span>
+    </div>
+    <div class="col-12 col-md-5 offset-md-3 d-flex justify-content-between text-center">
+      <a class="copyrightsection__link" href="">Mention légale</a>
+      <a class="copyrightsection__link" href="">Conditions générales</a>
+      <a class="copyrightsection__link" href="">Politique de confidentialité</a>
+    </div>
+  </div>  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script> 
+  <script type="text/javascript" src="{% static 'js/app.js' %}"></script> 
+  {% block javascript %} {% endblock javascript %}
 </body>
 </html>

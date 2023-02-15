@@ -2,50 +2,89 @@
 {% load static %}
 {% block content %}
 <!-- liste des produits -->
-<main style="background-color:#f7f7f7; padding: 30px 0px;">
-    <div class="container">
-
-        <div class="row">
-            
+<main> 
+    <section style="background-color:#f7f7f7; padding: 30px 0px;">
+        <div class="container">
+            <div class="row mb-4 stiky-top">  
+                <div class="col">
+                    <select class="form-select ">
+                        <option selected>Marque</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>  
+                <div class="col">
+                    <select class="form-select ">
+                        <option selected>Prix</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>  
+                <div class="col">
+                    <select class="form-select ">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>   
+                <div class="col">
+                    <select class="form-select ">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>   
+                <div class="col">
+                    <select class="form-select">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+            </div>   
+            </div>        
+            <div class="row">
+                <div class="col-6">
+                    <div class="product_item">
+                        <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                        <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                            <small>catégorie</small>
+                            <div class="d-flex justify-content-between">
+                                <h4 class="item_name">Bazar AMG 505</h4>  
+                                <p class="item_price">500 000fcfa</p>
+                            </div>
+                            <p>2019 &bullet; essence &bullet; 10L </p>
+                            <p>Manuel</p>
+                            <div class="d-grid gap-2 pb-2">
+                                <button class="btn_popular" type="button">Voir cette moto</button> 
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="product_item">
+                        <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                        <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                            <small>catégorie</small>
+                            <div class="d-flex justify-content-between">
+                                <h4 class="item_name">Bazar AMG 505</h4>  
+                                <p class="item_price">500 000fcfa</p>
+                            </div>
+                            <p>2019 &bullet; essence &bullet; 10L </p>
+                            <p>Manuel</p>
+                            <div class="d-grid gap-2 pb-2">
+                                <button class="btn_popular" type="button">Voir cette moto</button> 
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div> 
         </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="product_item">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                        <small>catégorie</small>
-                        <div class="d-flex justify-content-between">
-                            <h4 class="item_name">Bazar AMG 505</h4>  
-                            <p class="item_price">500 000fcfa</p>
-                        </div>
-                        <p>2019 &bullet; essence &bullet; 10L </p>
-                        <p>Manuel</p>
-                        <div class="d-grid gap-2 pb-2">
-                            <button class="btn_popular" type="button">Voir cette moto</button> 
-                        </div>
-                    </div> 
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="product_item">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                        <small>catégorie</small>
-                        <div class="d-flex justify-content-between">
-                            <h4 class="item_name">Bazar AMG 505</h4>  
-                            <p class="item_price">500 000fcfa</p>
-                        </div>
-                        <p>2019 &bullet; essence &bullet; 10L </p>
-                        <p>Manuel</p>
-                        <div class="d-grid gap-2 pb-2">
-                            <button class="btn_popular" type="button">Voir cette moto</button> 
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </div> 
-    </div>
+    </section>
 </main>
 
 <!-- 

@@ -15,6 +15,11 @@ def boutique(request):
     return render(request, 'store/boutique.html', context)
 
 
+def details(request):
+    context = {}
+    return render(request, 'store/details.html', context)
+
+
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer

@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="background-color: #f7f7f7;">
+    <div class="row">
+        <div class="MultiCarousel p-0" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+          <div class="MultiCarousel-inner">
+    
+            <div class="item"> 
+              <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%" height="350px">
+            </div>
+            <div class="item"> 
+              <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%" height="350px">
+            </div>
+            <div class="item"> 
+              <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%" height="350px">
+            </div>   
+            <div class="item"> 
+              <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%" height="350px">
+            </div>
+          </div>
+          <button class="btn btn_chevron leftLst"><i class="fas fa-chevron-left"></i></button>
+          <button class="btn btn_chevron rightLst"><i class="fas fa-chevron-right"></i></button>
+      </div> 
+    </div>  
+    <section class="row bg-white mt-1 mb-2 detail__header pt-3 sticky-top">
+      <div class="col-sm-4 px-5">
+         <h3 class="detail__header__name">BAZAR AMG 450</h3>
+         <p>Lorem ipsum dolor sit amet consectetur</p>
+      </div>
+      <div class="col-sm-3 offset-sm-2">
+        <h3 class="detail__header__price">560 000 FCFA</h3>
+        <strike  class="detail__header__price__strike" style="color:red">600 000 FCFA</strike>
+        <p>Lorem ipsum dolor sit </p>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn_commande">Contactez nous</button> &nbsp;
+        <button type="button" class="btn_popular">Commander</button>
+      </div>
+    </section>
+
+    <section class="bg-white mb-3 py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h3 class="text-center">Détails</h3>
+            <div class="divider d-flex mx-auto" style="width:5%;"></div>
+          </div>
+          
+
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <h5><b>Informations</b></h5>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
+                     <div class="col-6 col-md-2 mt-2 text-center">
+                      <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Marque</h6>
+                      <p class="detail__texte">lorem</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/moto.png' %}" alt="" class="detail__logo"> Modèle</h6>
+                      <p class="detail__texte">lorem</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Type de modèle</h6>
+                      <p class="detail__texte">lorem</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/coloration.png' %}" alt="" class="detail__logo"> Couleur</h6>
+                      <p class="detail__texte">lorem</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/delivery.png' %}" alt="" class="detail__logo"> Usage</h6>
+                      <p class="detail__texte">lorem</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <h5><b>Moteur et consommation</b></h5>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
+                    <div class="col-6 col-md-2 mt-2 text-center">
+                      <h6> <img src="{% static 'images/piston.png' %}" alt="" class="detail__logo"> Cylindre</h6>
+                      <p class="detail__texte">123 cm</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/moto.png' %}" alt="" class="detail__logo"> Nbre de vitesse</h6>
+                      <p class="detail__texte">5</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Puissance </h6>
+                      <p class="detail__texte">lorem</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/coloration.png' %}" alt="" class="detail__logo"> Reservoir</h6>
+                      <p class="detail__texte">10 L</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/delivery.png' %}" alt="" class="detail__logo"> Poids</h6>
+                      <p class="detail__texte">200 Kg</p>
+                    </div>
+        
+                    <div class="col-6 col-md-2 text-center">
+                      <h6> <img src="{% static 'images/delivery.png' %}" alt="" class="detail__logo"> Garantie</h6>
+                      <p class="detail__texte">1000 Km</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="bg-white mb-3 py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h3 class="text-center">Description</h3>
+            <div class="divider d-flex mx-auto" style="width:5%;"></div>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ipsam delectus asperiores quis quam voluptate quod aliquid? Magnam dolorum laborum accusantium sunt. Totam, impedit quod delectus rem laboriosam voluptate voluptatem.
+            Lorem ipsum dolor sit amet  
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et nihil sit ipsam dolor omnis laborum voluptatem voluptates voluptatum obcaecati voluptate quas magnam itaque, nemo, cumque inventore, possimus maxime sunt ut! Lorem,  
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="bg-white mb-3 py-4">
+       <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h3 class="text-center">Véhicules similaires</h3>
+            <div class="divider d-flex mx-auto" style="width:5%;"></div>
+          </div>
+          <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                <div>
+                <h4 class="item_name">Nom de la moto</h4>  
+                <p class="item_price">500 000fcfa</p>
+                <p>2019 &bullet; manuel &bullet; essence</p>
+                <div class="d-grid gap-2">
+                  <button class="btn_popular" type="button">Voir cette moto</button> 
+                </div>
+                </div> 
+              </div>  
+
+              <div class="swiper-slide">
+                <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                <div>
+                <h4 class="item_name">Nom de la moto</h4>  
+                <p class="item_price">500 000fcfa</p>
+                <p>2019 &bullet; manuel &bullet; essence</p>
+                <div class="d-grid gap-2">
+                  <button class="btn_popular" type="button">Voir cette moto</button> 
+                </div>
+                </div> 
+              </div> 
+
+              <div class="swiper-slide">
+                <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                <div>
+                <h4 class="item_name">Nom de la moto</h4>  
+                <p class="item_price">500 000fcfa</p>
+                <p>2019 &bullet; manuel &bullet; essence</p>
+                <div class="d-grid gap-2">
+                  <button class="btn_popular" type="button">Voir cette moto</button> 
+                </div>
+                </div> 
+              </div> 
+            </div> 
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev swiper-button-custom"></div>
+            <div class="swiper-button-next swiper-button-custom"></div>
+           
+          </div>
+        </div>
+       </div>
+    </section>
+</div>
+<br><br>
+{% endblock content %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% endblock javascript %}
