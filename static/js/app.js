@@ -1,3 +1,20 @@
+/* responsive menu */
+$(document).ready(function(){
+  $('.navigation_responsive').hide();
+  $('.navigation_responsive_sub').hide();
+
+  //afficher les sous menu du menu responsive au click
+  $('.navigation_responsive_menu').click(function(){
+    $(this).next('.navigation_responsive_sub').slideToggle();
+  });
+
+  //afficher ou masquer le menu au click sur le bouton
+  $('.menu-btn').click(function(){
+    $('.navigation_responsive').slideToggle();
+  });
+  
+});
+
 var swiper1 = new Swiper('#swiper1', {
 
     breakpoints: {
@@ -67,4 +84,3 @@ const menuBtn = document.querySelector('.menu-btn');
   document.getElementById("loader").style.display = "none";
 });*/
 
-/* responsive menu */
