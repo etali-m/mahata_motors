@@ -5,6 +5,7 @@ $(document).ready(function(){
 
   //afficher les sous menu du menu responsive au click
   $('.navigation_responsive_menu').click(function(){
+    $(this).find('.responsive__chevron').toggleClass('fa-chevron-down fa-chevron-up');
     $(this).next('.navigation_responsive_sub').slideToggle();
   });
 
@@ -63,6 +64,34 @@ var swiper2 = new Swiper ('#swiper2', {
   autoplay: {
       delay: 2500, 
   },
+});
+
+/* slider de photo de la page de details */
+var swiper3 = new Swiper('#swiper3', {
+
+  breakpoints: {
+    768:{
+      slidesPerView: 3,
+      spaceBetween: 10,
+    },
+    425:{
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    320:{
+      slidesPerView: 1,
+      spaceBetween: 30,
+    }
+  },
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper .swiper-button-next',
+    prevEl: '.swiper .swiper-button-prev',
+  }, 
 });
 
 
