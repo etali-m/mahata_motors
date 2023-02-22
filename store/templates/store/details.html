@@ -28,16 +28,16 @@
       </div>
     </div>  
     <section class="row bg-white mt-1 mb-2 detail__header pt-3 sticky-top">
-      <div class="col-sm-4 px-5">
+      <div class="col-sm-4 px-5 text-center">
          <h3 class="detail__header__name">BAZAR AMG 450</h3>
          <p>Lorem ipsum dolor sit amet consectetur</p>
       </div>
-      <div class="col-sm-3 offset-sm-2">
+      <div class="col-sm-3 offset-sm-2 text-center">
         <h3 class="detail__header__price">560 000 FCFA</h3>
         <strike  class="detail__header__price__strike" style="color:red">600 000 FCFA</strike>
         <p>Lorem ipsum dolor sit </p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-3 text-center">
         <button type="button" class="btn_commande">Contactez nous</button> &nbsp;
         <button type="button" class="btn_popular">Commander</button>
       </div>
@@ -62,7 +62,7 @@
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
-                     <div class="col-6 col-md-2 mt-2 text-center">
+                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Marque</h6>
                       <p class="detail__texte">lorem</p>
                     </div>
@@ -99,7 +99,7 @@
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
-                    <div class="col-6 col-md-2 mt-2 text-center">
+                    <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/piston.png' %}" alt="" class="detail__logo"> Cylindre</h6>
                       <p class="detail__texte">123 cm</p>
                     </div>
@@ -164,7 +164,7 @@
             <h3 class="text-center">Véhicules similaires</h3>
             <div class="divider d-flex mx-auto" style="width:5%;"></div>
           </div>
-          <div class="swiper">
+          <div class="swiper" id="swiper1">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
               <!-- Slides -->
@@ -179,7 +179,7 @@
                 </div>
                 </div> 
               </div>  
-
+  
               <div class="swiper-slide">
                 <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
                 <div>
@@ -191,7 +191,7 @@
                 </div>
                 </div> 
               </div> 
-
+  
               <div class="swiper-slide">
                 <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
                 <div>
