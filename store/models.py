@@ -67,7 +67,6 @@ class Moto(Product):
 class Accessory(Product):
     color = models.CharField(max_length=20, blank=True, null=True)
     description = models.TextField()
-    garantie = models.DateField()
 
 
 """
