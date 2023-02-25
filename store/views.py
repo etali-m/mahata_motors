@@ -9,10 +9,10 @@ def home(request):
     return render(request, 'store/home.html', context)
 
 
-def boutique(request):
-    products = Product.objects.all()
-    context = {'products':products}
-    return render(request, 'store/boutique.html', context)
+def moto(request):
+    motos = list(MotorBike.objects.all()) + list(Tricycle.objects.all())
+    context = {'motos':motos}
+    return render(request, 'store/motos.html', context)
 
 
 def details(request):

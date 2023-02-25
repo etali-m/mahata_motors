@@ -5,6 +5,11 @@ body {
     overflow-x: hidden;
 }
 
+.login_image{
+    width:500px;
+    height:550px;
+}
+
 .login-title { 
     font-size:1.7rem;
 }
@@ -32,4 +37,25 @@ body {
     border:2px solid #029ff0 !important;
     border-radius: 15px !important;
     width: 100%;
+}
+
+.logo{
+    width:250px;
+    height: 90px;
+}
+
+
+/* MEDIA QUERIES*/
+
+@media screen and (max-width:768px) {
+    .login_image{
+        display: none;
+    }
+
+    .logo{
+        width:200px;
+        height: 80px;
+    }
+
+    
 }

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %} 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> 
     <div class="carousel-inner">
@@ -162,6 +163,30 @@
             <p class="lobo_block_name">Audi</p>
           </div>
         </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <div class="logo_block">
+            <img src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+            <p class="lobo_block_name">NangFang</p>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <div class="logo_block">
+            <img src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+            <p class="lobo_block_name">Senke</p>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <div class="logo_block">
+            <img src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+            <p class="lobo_block_name">Haouju</p>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <div class="logo_block">
+            <img src="{% static 'images/placeholder.png' %}" alt="" width="100%" >
+            <p class="lobo_block_name">Sanili</p>
+          </div>
+        </div>
       </div>
       
     </section>
@@ -173,7 +198,7 @@
     <section class="row mb-4" style="margin:40px 0px;">
 
       <div class="col-12 col-md-5">
-        <img src="{% static 'images/placeholder.png' %}" class="w-100" alt="">
+        <img src="{% static 'images/placeholder.png' %}" class="w-100 rounded" alt="">
       </div>
   
       <div class="col-12 col-md-7 py-4">
@@ -249,7 +274,7 @@
           <div class="swiper-button-next swiper-button-custom"></div>
          
         </div>
-      <a class="text-center mt-4" href="{% url 'boutique' %}">Trouvez votre véhicule &nbsp;<i class="fas fa-chevron-right"></i> </a>
+      <a class="text-center mt-4" href="{% url 'moto' %}">Trouvez votre véhicule &nbsp;<i class="fas fa-chevron-right"></i> </a>
       </div>
     </section>
   </div>
@@ -260,8 +285,8 @@
       <div class="col-md-7 col-12 py-4">
         <div class="row my-3">
           <div class="col-12 text-center">
-              <h2 class="section_title text-start">Devenez Vendeur chez nous</h2>
-              <div class="divider d-flex"></div>
+              <h2 class="section_title text-center">Devenez Vendeur chez nous</h2>
+              <div class="divider d-flex mx-auto"></div>
               <p class="text-center" style="margin: 25px 0px;">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam dolore natus nostrum corrupti quos quo consectetur molestias, dolores beatae autem earum nam non iure est, itaque inventore impedit accusantium sit.
               </p>
@@ -271,7 +296,7 @@
       </div>
 
       <div class="col-md-5 col-12">
-        <img src="{% static 'images/placeholder.png' %}" class="w-100" alt="">
+        <img src="{% static 'images/placeholder.png' %}" class="w-100 rounded" alt="">
       </div>
   
     </section>

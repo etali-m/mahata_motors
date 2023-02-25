@@ -36,10 +36,18 @@ class Product(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=30)
     origine = models.CharField(max_length=30)
-    #logo = models.ImageField()
+    logo = models.ImageField(null=True, blank=True)
+    
 
     def __str__(self):
         return self.name
+
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 
 class Moto(Product):
@@ -73,6 +81,7 @@ class Accessory(Product):
     La classe Tricycle permet de définir la structure d'un tricycle
 """
 class Tricycle(Moto):
+    genre = models.CharField(max_length=50, default="Tricycle", editable=False)
     wheels_number = models.IntegerField(default=3)
 
 
@@ -90,6 +99,7 @@ class MotorBike(Moto):
         (AVENTURE, 'aventure')
     )
 
+    genre = models.CharField(max_length=50, default="Moto", editable=False)
     motor_warranty = models.IntegerField(null=True, blank=True)
     usage = models.CharField(max_length=30, choices=USAGE_CHOICES)
 

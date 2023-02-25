@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <!-- bootstrap.css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -116,7 +116,7 @@
             <div class="navigation_responsive_sub">
               <ul>
                 <li>Tricycle à trois(3) roues</li>
-                <li>Tricycle à trois(3) roues</li> 
+                <li>Tricycle à cinq(5) roues</li> 
              </ul>
             </div>
           </li>
@@ -276,22 +276,20 @@
       </div>
       <div class="col-sm-4">
         <h3 class="footer__title">Mode de paiement</h3>
-        <div class="d-flex justify-content-start">
-          <p>OM</p>
-          <p>MTN MOMO</p>
+        <div class="">
+          <img src="{% static 'images/mtnmomo.png' %}" width="50" height="50" alt="mtnMomo_logo">
+          <img src="{% static 'images/orangemoney.png' %}" width="50" height="50" alt="om_logo"> 
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-2">
         <h3 class="footer__title">Suivez nous sur</h3>
-        <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-around">
           <a href="">
             <img src="{% static 'images/facebook.png' %}" alt="facebook_logo" width="30" height="30">
-          </a>
-           &nbsp;
+          </a> 
           <a href="">
             <img src="{% static 'images/linkedin.png' %}" alt="linkedin_logo" width="30" height="30">
-          </a>
-           &nbsp;
+          </a> 
           <a href="">
             <img src="{% static 'images/youtube.png' %}" alt="youtube_logo" width="30" height="30">
           </a>
