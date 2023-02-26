@@ -19,9 +19,17 @@ class Product(models.Model):
     price = models.IntegerField()
     image = models.ImageField(null=True, blank = True)
     stock = models.BooleanField(default=True, null=True, blank=False)
+    is_on_sale = models.BooleanField(default=False) #si un produit est on solde
+    sale_price = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    def get_sale_price(self):
+        if self.is_on_sale:
+            return self.sale_price
+        else:
+            return None
 
     @property
     def imageURL(self):
@@ -63,6 +71,7 @@ class Moto(Product):
     capacite_recervoir = models.DecimalField(max_digits = 5, decimal_places = 2)
     nbre_place = models.IntegerField()
     coulour = models.CharField(max_length=20)
+    description = models.TextField(blank=True, null=True, default="No description")
     
 
 

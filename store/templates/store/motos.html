@@ -67,12 +67,12 @@
                         <div class="product_item">
                             <img class="" src="{{moto.imageURL}}" alt="" width="100%">
                             <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                                <small>{{moto.usage}}</small>
+                                <small>{{moto.genre}}</small>
                                 <div class="d-flex justify-content-between">
                                     <h4 class="item_name">{{moto.name}}</h4>  
                                     <p class="item_price">{{ moto.price|separate_by_space }} FCFA</p>
                                 </div>
-                                <p>2019 &bullet; essence &bullet; {{moto.capacite_recervoir}} L </p>
+                                <p>{{moto.puissance_admin}} KW &bullet; essence &bullet; {{moto.capacite_recervoir}} L </p>
                                 <p>Manuel</p>
                                 <div class="d-grid gap-2 pb-2">
                                     <button class="btn_popular" type="button">Voir cette moto</button> 
@@ -80,41 +80,7 @@
                             </div> 
                         </div>
                     </div>
-                {% endfor %}
-                <div class="col-12 col-md-4">
-                    <div class="product_item">
-                        <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                        <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                            <small>catégorie</small>
-                            <div class="d-flex justify-content-between">
-                                <h4 class="item_name">Bazar AMG 505</h4>  
-                                <p class="item_price">500 000fcfa</p>
-                            </div>
-                            <p>2019 &bullet; essence &bullet; 10L </p>
-                            <p>Manuel</p>
-                            <div class="d-grid gap-2 pb-2">
-                                <button class="btn_popular" type="button">Voir cette moto</button> 
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="product_item">
-                        <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                        <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                            <small>catégorie</small>
-                            <div class="d-flex justify-content-between">
-                                <h4 class="item_name">Bazar AMG 505</h4>  
-                                <p class="item_price">500 000fcfa</p>
-                            </div>
-                            <p>2019 &bullet; essence &bullet; 10L </p>
-                            <p>Manuel</p>
-                            <div class="d-grid gap-2 pb-2">
-                                <button class="btn_popular" type="button">Voir cette moto</button> 
-                            </div>
-                        </div> 
-                    </div>
-                </div>
+                {% endfor %} 
             </div> 
         </div>
     </section>

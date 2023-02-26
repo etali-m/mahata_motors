@@ -8,5 +8,5 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('motos/', views.moto, name='moto'),
-    path('details/', views.details, name='details'),
+    path('details/<int:moto_id>', views.details, name='details'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

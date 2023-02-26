@@ -6,6 +6,10 @@ body{
 	font-family: 'Lato', sans-serif;
 }
 
+a{
+	text-decoration: none;
+}
+
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
@@ -263,15 +267,17 @@ h1,h2,h3,h4,h5,h6{
 
   .section_title{
 	font-weight: 200px;
+	color:#003e70;
   }
 
   .moto_block{
 	padding:15px 10px; 
+	border:1px solid #c8c8c8;
   }
 
-  .moto_block_title{
-	font-family: Tahoma, Geneva, Verdana, sans-serif;
-	font-weight:200;
+  .moto_block_title{ 
+	font-weight:800;
+	color: #003e70;
   }
 
   .moto_block_img{
@@ -288,10 +294,26 @@ h1,h2,h3,h4,h5,h6{
 	padding:10px 20px;
 	border:none;
 	border-radius:30px;
+	text-decoration: none;
+  }
+
+  .detail_btn:hover{
+	color:white;
+  }
+
+  .btn-find{
+	font-weight: bold; 
+	text-decoration: none;
+	margin-top:50px;
   }
 
   .card_custom{
 	border:none
+  }
+
+  .card-title{
+	color:#003e70;
+	font-size: 25px;
   }
 
 
@@ -427,7 +449,7 @@ ul.footer__ul {
 }
 
 .detail__texte{
-	font-weight: 400;
+	font-weight: 700;
 }
 
 .swiper {
@@ -483,6 +505,7 @@ ul.footer__ul {
   } 
   .menu_logo_text{
 	display: block;
+	color:#003e70;
   }
 
   form.search_form_responsive{

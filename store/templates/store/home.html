@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load custom_filters %}
 {% block content %} 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> 
     <div class="carousel-inner">
@@ -37,53 +37,51 @@
         <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title">Pratique</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">
+            Vous achetez votre véhicule facilement en ligne. Ensuite , nous vous livrons directement à domicile, et cela partout au cameroun.
+          </p>
         </div>
       </div> 
       <div class="card card_custom" style="width: 18rem;">
         <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title">Sécurisé</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">
+            Chez nous, vous êtes toutjours en sécurité, avec un service après vente quasiment gratuit et une garantie de 3850 km de parcour incluse.
+          </p>
         </div>
       </div> 
       <div class="card card_custom" style="width: 18rem;">
         <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="...">
         <div class="card-body text-center">
-          <h5 class="card-title">Pratique</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">Personalisé</h5>
+          <p class="card-text">
+            Avec nous, vous avez le contrôle totale. Du financement à l'immatriculation en passant par le trancking, vous commandez comme vous le souhaitez.
+          </p>
         </div>
       </div> 
   </div> <br> 
   <hr>
   <div class="container">
-    <div class="row">
+    <div class="row gy-2">
       <div class="row my-3">
         <div class="col-12 text-center">
             <h2 class="section_title">Nouveautés</h2>
             <div class="divider d-flex mx-auto"></div>
         </div>
       </div>
-      <div class="col-12 col-md-4">
-        <div class="moto_block">
-          <h3 class="moto_block_title">Nom de la moto</h3>
-          <span>catégorie</span>
-          <img class="moto_block_img" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-          <span style="margin-top:0px">À partir de</span>
-          <p class="moto_block_price">3050000 FCFA</p>
-          <button class="detail_btn">En savoir plus</button>
-        </div>
-      </div> 
-      <div class="col-12 col-md-4">
-        <div class="moto_block">
-          <h3 class="moto_block_title">Nom de la moto</h3>
-          <span>catégorie</span>
-          <img class="moto_block_img" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-          <span style="margin-top:0px">À partir de</span>
-          <p class="moto_block_price">3050000 FCFA</p>
-          <button class="detail_btn">Voir cette moto</button>
-        </div>
-      </div> 
+      {% for moto in motos %}
+        <div class="col-12 col-md-4">
+          <div class="moto_block">
+            <h3 class="moto_block_title">{{moto.name}}</h3>
+            <span>{{moto.genre}}</span>
+            <img class="moto_block_img border-bottom" src="{{moto.imageURL}}" alt="" width="100%">
+            <span style="margin-top:0px">À partir de</span>
+            <p class="moto_block_price">{{moto.price|separate_by_space}} FCFA</p>
+            <a class="detail_btn"  href="{% url 'details' moto_id=moto.pk %}">En savoir plus</a>
+          </div>
+        </div> 
+      {% endfor %}
       <div class="col-12 col-md-4">
         <div class="moto_block">
           <h3 class="moto_block_title">Nom de la moto</h3>
@@ -216,7 +214,7 @@
     </section>
   </div>
 
-  <br>
+  <hr>
 
   <div class="container">
     <section class="row mb-5">
@@ -274,7 +272,7 @@
           <div class="swiper-button-next swiper-button-custom"></div>
          
         </div>
-      <a class="text-center mt-4" href="{% url 'moto' %}">Trouvez votre véhicule &nbsp;<i class="fas fa-chevron-right"></i> </a>
+      <a class="text-center btn-find" href="{% url 'moto' %}">Trouvez votre véhicule &nbsp;<i class="fas fa-chevron-right"></i> </a>
       </div>
     </section>
   </div>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block content %}
 
 <div style="background-color: #f7f7f7;">
@@ -29,11 +30,11 @@
     </div>  
     <section class="row bg-white mt-1 mb-2 detail__header pt-3 sticky-top">
       <div class="col-sm-4 px-5 text-center">
-         <h3 class="detail__header__name">BAZAR AMG 450</h3>
+         <h3 class="detail__header__name">{{moto.name}}</h3>
          <p>Lorem ipsum dolor sit amet consectetur</p>
       </div>
       <div class="col-sm-3 offset-sm-2 text-center">
-        <h3 class="detail__header__price">560 000 FCFA</h3>
+        <h3 class="detail__header__price">{{moto.price|separate_by_space}} FCFA</h3>
         <strike  class="detail__header__price__strike" style="color:red">600 000 FCFA</strike>
         <p>Lorem ipsum dolor sit </p>
       </div>
@@ -64,27 +65,27 @@
                   <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
                      <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/brand1.png' %}" alt="" class="detail__logo"> Marque</h6>
-                      <p class="detail__texte">lorem</p>
+                      <p class="detail__texte">{{moto.brand}}</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/moto.png' %}" alt="" class="detail__logo"> Modèle</h6>
-                      <p class="detail__texte">lorem</p>
+                      <p class="detail__texte">{{moto.name}}</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Type de modèle</h6>
-                      <p class="detail__texte">lorem</p>
+                      <p class="detail__texte">{{moto.type_model}}</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/coloration.png' %}" alt="" class="detail__logo"> Couleur</h6>
-                      <p class="detail__texte">lorem</p>
+                      <p class="detail__texte">{{moto.coulour}}</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/delivery.png' %}" alt="" class="detail__logo"> Usage</h6>
-                      <p class="detail__texte">lorem</p>
+                      <p class="detail__texte">{{moto.usage}}</p>
                     </div>
                   </div>
                 </div>
@@ -101,32 +102,32 @@
                   <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/piston.png' %}" alt="" class="detail__logo"> Cylindre</h6>
-                      <p class="detail__texte">123 cm</p>
+                      <p class="detail__texte">{{moto.cylindre}} cm</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/performance.png' %}" alt="" class="detail__logo"> Nombre de vitesse</h6>
-                      <p class="detail__texte">5</p>
+                      <p class="detail__texte">{{moto.nbre_vitesse}}</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/moteur.png' %}" alt="" class="detail__logo"> Puissance </h6>
-                      <p class="detail__texte">120 KW</p>
+                      <p class="detail__texte">{{moto.puissance_admin}} KW</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/tank.png' %}" alt="" class="detail__logo"> Reservoir</h6>
-                      <p class="detail__texte">10 L</p>
+                      <p class="detail__texte">{{moto.capacite_recervoir}} L</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/weight.png' %}" alt="" class="detail__logo"> Poids</h6>
-                      <p class="detail__texte">200 Kg</p>
+                      <p class="detail__texte">{{moto.poids}} Kg</p>
                     </div>
         
                     <div class="col-6 col-md-2 text-center">
                       <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Garantie</h6>
-                      <p class="detail__texte">1000 Km</p>
+                      <p class="detail__texte">{{moto.motor_warranty}} Km</p>
                     </div>
                   </div>
                 </div>
@@ -146,11 +147,10 @@
             <div class="divider d-flex mx-auto" style="width:5%;"></div>
           </div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ipsam delectus asperiores quis quam voluptate quod aliquid? Magnam dolorum laborum accusantium sunt. Totam, impedit quod delectus rem laboriosam voluptate voluptatem.
-            Lorem ipsum dolor sit amet  
+             {{moto.description}} 
           </p>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et nihil sit ipsam dolor omnis laborum voluptatem voluptates voluptatum obcaecati voluptate quas magnam itaque, nemo, cumque inventore, possimus maxime sunt ut! Lorem,  
+              
           </p>
         </div>
       </div>
@@ -168,17 +168,19 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
               <!-- Slides -->
-              <div class="swiper-slide">
-                <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                <div>
-                <h4 class="item_name">Nom de la moto</h4>  
-                <p class="item_price">500 000fcfa</p>
-                <p>2019 &bullet; manuel &bullet; essence</p>
-                <div class="d-grid gap-2">
-                  <button class="btn_popular" type="button">Voir cette moto</button> 
-                </div>
-                </div> 
-              </div>  
+              {% for similar_moto in similars %}
+                <div class="swiper-slide">
+                  <img class="" src="{{similar_moto.imageURL}}" alt="" width="100%">
+                  <div>
+                  <h4 class="item_name">{{similar_moto.name}}</h4>  
+                  <p class="item_price">{{similar_moto.price|separate_by_space}} FCFA</p>
+                  <p>{{similar_moto.cylindre}} cm &bullet; manuel &bullet; essence</p>
+                  <div class="d-grid gap-2">
+                    <button class="btn_popular" type="button">Voir cette moto</button> 
+                  </div>
+                  </div> 
+                </div>  
+              {% endfor %}
   
               <div class="swiper-slide">
                 <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
