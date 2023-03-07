@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
+from urllib.parse import urlencode
+
 from .models import *
 
 # Create your views here.
@@ -11,11 +13,30 @@ def home(request):
     context = {'motos':motos, 'brands':brands} 
     return render(request, 'store/home.html', context)
 
+ 
 
-def moto(request):
-    motos = list(MotorBike.objects.all()) + list(Tricycle.objects.all())
-    context = {'motos':motos}
-    return render(request, 'store/motos.html', context)
+def boutique(request): 
+
+    #on recupére les éléments du entrés dans le champs de recherche
+    query = request.GET.get('query') 
+     #On recupère les options de sélection des filtres soumises par l'utilisateur
+    marque = request.GET.get('marque') 
+
+    motos = MotorBike.objects.all()
+    tricycles = Tricycle.objects.all()[:10]
+    accessoires = Accessory.objects.all()[:10]
+
+    if query:
+        motos = MotorBike.objects.filter(name__icontains=query)
+        tricycles = Tricycle.objects.filter(name__icontains=query)
+        accessoires = Accessory.objects.filter(name__icontains=query)
+ 
+   
+    if marque:
+        motos = motos.filter(brand__name__icontains=marque)
+
+    context = {'motos':motos, 'tricycles':tricycles, 'accessoires':accessoires}
+    return render(request, 'store/boutique.html', context)
 
 
 def details(request, moto_id):

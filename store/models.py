@@ -9,6 +9,17 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+"""
+La classe Catégorie défini la catégorie d'un produit
+"""
+class Categorie(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(default="No description", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 
 """
     La classe Product défini un produit avec toutes ses caratéristiques
@@ -21,6 +32,7 @@ class Product(models.Model):
     stock = models.BooleanField(default=True, null=True, blank=False)
     is_on_sale = models.BooleanField(default=False) #si un produit est on solde
     sale_price = models.IntegerField(blank=True, null=True)
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name

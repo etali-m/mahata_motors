@@ -354,6 +354,7 @@ h1,h2,h3,h4,h5,h6{
 	background-color: #e95a0c;
 	color:white;
 	border-radius:8px;
+	text-align: center;
 	border:none;
 }
 
@@ -488,16 +489,34 @@ ul.footer__ul {
 	color:white;
 }
 
+.header_boutique{
+	padding: 5px 15px;
+	background-color: #0066cc; 
+}
+
+.header_boutique .title__boutique{
+	color:white;
+	font-weight:bolder;
+}
+
+.header_boutique a{
+	text-decoration: none;
+	color:white;
+	font-size:20px
+}
+
 .menu__navigation{
 	padding-top:10px;
 	padding-bottom:0px;
 	padding-left: 50px;
 	padding-right: 50px;
   }
+
   .contener{
 	display:flex;
 	justify-content: space-between;
   }
+  
   .menu_navigation_list li{
 	display: inline-block;
 	margin:8px 15px 0px 15px;

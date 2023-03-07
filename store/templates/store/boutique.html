@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<!-- liste des produits -->
+<main> 
+    <section style="background-color:#f7f7f7; padding: 30px 0px;">
+        <div class="container">
+            <!-- filtre de selection--> 
+                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white">
+                    <div class="col-md-4 col-6">
+                        <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
+                        <select name="marque" class="form-select">
+                            <optgroup label="Top marques">
+                                <option selected value="">Marques</option>
+                                <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
+                                <option value="nangfang">Nang fang</option>
+                                <option value="senke">Senke</option>
+                            </optgroup>
+                            <optgroup label="Autres marques"> 
+                                <option value="">Concimecam</option>
+                                <option value="">Sanili</option>
+                            </optgroup>
+                        </select>
+                    </div>    
+                    <div class="col-md-4 col-6">
+                        <select class="form-select">
+                            <option selected value="">Type</option>
+                            <option value="motocyclette">Motocyclette</option>
+                            <option value="tricycle">Tricycle</option>
+                            <option value="accessoires">Accéssoire</option>
+                        </select>
+                    </div>   
+                    <div class="col-md-4 col-6">
+                        <select class="form-select">
+                            <option selected>Gamme</option>
+                            <option value="1">Utilisation commerciale</option>
+                            <option value="2">Pour la ville</option>
+                            <option value="3">Pour l'aventure</option>
+                        </select>
+                    </div>   
+                    <div class="col-md-4 col-6">
+                        <select class="form-select">
+                            <option selected>Prix jusqu'a(FCFA)</option>
+                            <option value="1">400 000 </option>
+                            <option value="2">450 000</option>
+                            <option value="3">500 000</option>
+                            <option value="3">600 000</option>
+                            <option value="3">700 000</option>
+                            <option value="3">800 000</option>
+                            <option value="3">1000 000</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <select class="form-select">
+                            <option selected>Couleur</option>
+                            <option value="1">Rouge</option>
+                            <option value="2">Blue</option>
+                            <option value="3">Vert</option>
+                            <option value="">Noir</option>
+                        </select>
+                    </div>  
+                    <div class="col-md-4 col-6">
+                        <button class="form-control btn filter-search-button" type="submit">resultats(253)</button>
+                    </div>  
+                </form>      
+            
+            <!-- affichage des motos -->
+            {% if motos or accessoires %}
+                {% if motos %}
+                    <div class="row mb-3">
+                        <div class="col-12 header_boutique d-flex justify-content-between">
+                            <h4 class="title__boutique">Moto</h4> 
+                            
+                            <div>
+                                <a href="">Voir plus</a> 
+                            </div>    
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        {% for moto in motos %}
+                            <div class="col-12 col-md-4">
+                                <div class="product_item">
+                                    <img class="" src="{{moto.imageURL}}" alt="" width="100%">
+                                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                                        <small>{{moto.genre}}</small>
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="item_name">{{moto.name}}</h4>  
+                                            <p class="item_price">{{ moto.price|separate_by_space }} FCFA</p>
+                                        </div>
+                                        <p>{{moto.puissance_admin}} KW &bullet; essence &bullet; {{moto.capacite_recervoir}} L </p>
+                                        <p>Manuel</p>
+                                        <div class="d-grid gap-2 pb-2"> 
+                                            <a class="btn btn_popular" href="{% url 'details' moto_id=moto.pk %}" type="button">Voir cette moto</a> 
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        {% endfor %} 
+                    </div> 
+                {% endif %}
+                
+                {% if accessoires %}
+                    <div class="row mb-3">
+                        <div class="col-12 header_boutique d-flex justify-content-between">
+                            <h4 class="title__boutique">Accéssoires</h4> 
+                            
+                            <div>
+                                <a href="">Voir plus</a> 
+                            </div>    
+                        </div>
+                    </div>
+                {% endif %} 
+
+            {% endif %}
+
+        </div>
+    </section>
+</main>
+
+<!-- 
+<div class="row">
+    <div class="col-lg-12 d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_obj.has_previous %} 
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">previous</span>
+                        </a> 
+                    </li> 
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">next</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+          </nav>
+    </div>
+</div>
+-->
+ 
+{% endblock content %}
