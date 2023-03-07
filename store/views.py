@@ -19,9 +19,13 @@ def boutique(request):
 
     #on recupére les éléments du entrés dans le champs de recherche
     query = request.GET.get('query') 
-     #On recupère les options de sélection des filtres soumises par l'utilisateur
-    marque = request.GET.get('marque') 
+    #On recupère les options de sélection des filtres soumises par l'utilisateur
+    marque = request.GET.get('marque')
+    type = request.GET.get('type')
+    gamme = request.GET.get('gamme')
+    prix_max = request.GET.get('prix')
 
+    brands = Brand.objects.all().exclude(name__icontains='Bazar').exclude(name__icontains='cocimecam').exclude(name__icontains='senke')
     motos = MotorBike.objects.all()
     tricycles = Tricycle.objects.all()[:10]
     accessoires = Accessory.objects.all()[:10]
@@ -34,8 +38,18 @@ def boutique(request):
    
     if marque:
         motos = motos.filter(brand__name__icontains=marque)
+    if type:
+        motos = motos.filter(categorie__name__icontains=type)
+    if gamme:
+        motos = motos.filter(usage__icontains=gamme)
+    if prix_max:
+        motos = motos.filter(price__lte=prix_max)
 
-    context = {'motos':motos, 'tricycles':tricycles, 'accessoires':accessoires}
+    context = {'motos':motos, 
+               'tricycles':tricycles, 
+               'accessoires':accessoires,
+               'brands':brands,
+               }
     return render(request, 'store/boutique.html', context)
 
 

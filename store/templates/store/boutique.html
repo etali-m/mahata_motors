@@ -15,17 +15,18 @@
                             <optgroup label="Top marques">
                                 <option selected value="">Marques</option>
                                 <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
-                                <option value="nangfang">Nang fang</option>
-                                <option value="senke">Senke</option>
+                                <option value="cocimecam" {% if 'marque' in request.GET and request.GET.marque == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
+                                <option value="senke" {% if 'marque' in request.GET and request.GET.marque == 'senke' %}selected{% endif %}>Senke</option>
                             </optgroup>
                             <optgroup label="Autres marques"> 
-                                <option value="">Concimecam</option>
-                                <option value="">Sanili</option>
+                                {% for brand in brands %}
+                                    <option value="{{ brand.name }}">{{ brand.name }}</option>
+                                {% endfor %} 
                             </optgroup>
                         </select>
                     </div>    
                     <div class="col-md-4 col-6">
-                        <select class="form-select">
+                        <select class="form-select" name="type">
                             <option selected value="">Type</option>
                             <option value="motocyclette">Motocyclette</option>
                             <option value="tricycle">Tricycle</option>
@@ -33,36 +34,36 @@
                         </select>
                     </div>   
                     <div class="col-md-4 col-6">
-                        <select class="form-select">
-                            <option selected>Gamme</option>
-                            <option value="1">Utilisation commerciale</option>
-                            <option value="2">Pour la ville</option>
-                            <option value="3">Pour l'aventure</option>
+                        <select class="form-select" name="gamme">
+                            <option selected value="">Gamme</option>
+                            <option value="commercial">Utilisation commerciale</option>
+                            <option value="ville">Pour la ville</option>
+                            <option value="aventure">Pour l'aventure</option>
                         </select>
                     </div>   
                     <div class="col-md-4 col-6">
-                        <select class="form-select">
-                            <option selected>Prix jusqu'a(FCFA)</option>
-                            <option value="1">400 000 </option>
-                            <option value="2">450 000</option>
-                            <option value="3">500 000</option>
-                            <option value="3">600 000</option>
-                            <option value="3">700 000</option>
-                            <option value="3">800 000</option>
-                            <option value="3">1000 000</option>
+                        <select class="form-select" name="prix">
+                            <option value="">Prix jusqu'à (FCFA)</option>
+                            <option value="400000">400 000 </option>
+                            <option value="450000">450 000</option>
+                            <option value="500000">500 000</option>
+                            <option value="600000">600 000</option>
+                            <option value="700000">700 000</option>
+                            <option value="800000">800 000</option>
+                            <option value="1000000">1000 000</option>
                         </select>
                     </div>
                     <div class="col-md-4 col-6">
-                        <select class="form-select">
-                            <option selected>Couleur</option>
-                            <option value="1">Rouge</option>
-                            <option value="2">Blue</option>
-                            <option value="3">Vert</option>
-                            <option value="">Noir</option>
+                        <select class="form-select" name="color">
+                            <option  value="">Couleur</option>
+                            <option value="rouge">Rouge</option>
+                            <option value="bleu">Bleu</option>
+                            <option value="vert">Vert</option>
+                            <option value="noir">Noir</option>
                         </select>
                     </div>  
-                    <div class="col-md-4 col-6">
-                        <button class="form-control btn filter-search-button" type="submit">resultats(253)</button>
+                    <div class="col-md-4 col-6 d-grid">
+                        <button class="filter-search-button" type="submit">Resultats</button>
                     </div>  
                 </form>      
             
@@ -79,7 +80,7 @@
                         </div>
                     </div>
         
-                    <div class="row">
+                    <div class="row gy-2">
                         {% for moto in motos %}
                             <div class="col-12 col-md-4">
                                 <div class="product_item">
