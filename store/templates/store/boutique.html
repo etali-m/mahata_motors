@@ -36,9 +36,9 @@
                     <div class="col-md-4 col-6">
                         <select class="form-select" name="gamme">
                             <option selected value="">Gamme</option>
-                            <option value="commercial">Utilisation commerciale</option>
-                            <option value="ville">Pour la ville</option>
-                            <option value="aventure">Pour l'aventure</option>
+                            <option value="commercial" {% if 'gamme' in request.GET and request.GET.gamme == 'commercial' %}selected{% endif %}>Utilisation commerciale</option>
+                            <option value="ville"{% if 'gamme' in request.GET and request.GET.gamme == 'ville' %}selected{% endif %}>Pour la ville</option>
+                            <option value="aventure"{% if 'gamme' in request.GET and request.GET.gamme == 'aventure' %}selected{% endif %}>Pour l'aventure</option>
                         </select>
                     </div>   
                     <div class="col-md-4 col-6">

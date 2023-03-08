@@ -141,6 +141,7 @@
       </div>
     </div>
   </header>
+  
   <div class="navigation">
     <a href="#home" id="menu-bar"> 
       Toutes les catégories
@@ -156,19 +157,19 @@
             <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
           </div>
           <div class="col-3 column">
-            <h3>Utilisation commerciale</h3>
+            <a href="{% url 'boutique' %}?gamme=commercial"><h3>Utilisation commerciale</h3></a>
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>
           </div>
           <div class="col-2 column">
-            <h3>Conçu pour la ville</h3>
+            <a href="{% url 'boutique' %}?gamme=ville"><h3>Conçu pour la ville</h3></a>
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>
           </div>
           <div class="col-2 column">
-            <h3>Pour l'aventure</h3>
+            <a href="{% url 'boutique' %}?gamme=aventure"><h3>Pour l'aventure</h3></a>
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>

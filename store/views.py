@@ -25,6 +25,8 @@ def boutique(request):
     gamme = request.GET.get('gamme')
     prix_max = request.GET.get('prix')
 
+    #on récupère les éléments pour le menu de navigation 
+
     brands = Brand.objects.all().exclude(name__icontains='Bazar').exclude(name__icontains='cocimecam').exclude(name__icontains='senke')
     motos = MotorBike.objects.all()
     tricycles = Tricycle.objects.all()[:10]
@@ -48,7 +50,7 @@ def boutique(request):
     context = {'motos':motos, 
                'tricycles':tricycles, 
                'accessoires':accessoires,
-               'brands':brands,
+               'brands':brands, 
                }
     return render(request, 'store/boutique.html', context)
 
@@ -69,6 +71,11 @@ def details(request, moto_id):
 
         
     return render(request, 'store/details.html', context)
+
+
+def detail_categorie(request, categorie):
+    return render(request,'store/categorie.html')
+
 
 
 def cart(request):
