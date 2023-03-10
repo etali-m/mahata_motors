@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{% static 'css/app.css' %}">  
     <!-- Font awesom icon-->
     <script src="https://kit.fontawesome.com/f2070ffc62.js" crossorigin="anonymous"></script>
-    <title>Mahata motors</title>
+    <title>Mahata motors - site de vente de véhicules</title>
+    <link rel="shortcut icon" href="{% static 'images/logo3.png' %}" type="image/x-icon">
     <style>
       
     </style>
@@ -158,9 +159,9 @@
           </div>
           <div class="col-3 column">
             <a href="{% url 'boutique' %}?gamme=commercial"><h3>Utilisation commerciale</h3></a>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            {% for motorbike in commercials %}
+                <a href="#">{{motorbike.name}}</a>
+            {% endfor %} 
           </div>
           <div class="col-2 column">
             <a href="{% url 'boutique' %}?gamme=ville"><h3>Conçu pour la ville</h3></a>

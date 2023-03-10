@@ -1,5 +1,68 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <p>Catégories: moto</p>
+     <div class="row my-5">
+        <div class="col-12 text-center mb-5"> 
+            <h2 class="categorie__title">{{categorie}} Moto</h2>
+            <div class="divider d-flex mx-auto"></div>
+        </div>
+
+        <div class="col-12 text-center mb-3 mt-4"> 
+            <h2 class="subcategorie__title">Nos catégories</h2>
+            <div class="divider d-flex mx-auto"></div>
+        </div>
+
+        <div class="col-12">
+            <div class="swiper" id="swiper__categorie">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper py-2">
+                  <!-- Slides -->
+                  <div class="swiper-slide categorie_blog">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div>
+                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5>  
+                    </div> 
+                  </div>  
+      
+                  <div class="swiper-slide categorie_blog">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div>
+                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5>
+                    </div> 
+                  </div> 
+      
+                  <div class="swiper-slide categorie_blog">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div>
+                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
+                    </div> 
+                  </div> 
+
+                  <div class="swiper-slide categorie_blog">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div>
+                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
+                    </div> 
+                  </div>
+                  <div class="swiper-slide categorie_blog">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div>
+                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
+                    </div> 
+                  </div>
+                  <div class="swiper-slide categorie_blog">
+                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                    <div>
+                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
+                    </div> 
+                  </div>
+                </div> 
+              
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev swiper-button-custom"></div>
+                <div class="swiper-button-next swiper-button-custom"></div>
+               
+              </div>
+        </div>
+     </div>
 {% endblock %}

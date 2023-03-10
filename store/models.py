@@ -20,6 +20,20 @@ class Categorie(models.Model):
         return self.name
 
 
+"""
+    sous-categorie
+"""
+
+class Subcategorie(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(default="No description", null=True, blank=True)
+    parent_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.name
+
+
 
 """
     La classe Product défini un produit avec toutes ses caratéristiques
@@ -33,6 +47,7 @@ class Product(models.Model):
     is_on_sale = models.BooleanField(default=False) #si un produit est on solde
     sale_price = models.IntegerField(blank=True, null=True)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, default=1)
+    subcategorie = models.ForeignKey(Subcategorie, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
