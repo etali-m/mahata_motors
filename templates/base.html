@@ -98,7 +98,7 @@
         <ul>
           <li>
             <div  class="navigation_responsive_menu">
-              <span><i class="fas fa-motorcycle"></i> Motocyclettes</span>
+              <a href="{% url 'categorie' categorie_slug='motocyclette' %}"><i class="fas fa-motorcycle"></i> Motocyclettes</a>
               <i class="fas fa-chevron-down responsive__chevron"></i>
             </div>
             <div class="navigation_responsive_sub">
@@ -142,95 +142,9 @@
       </div>
     </div>
   </header>
-  
-  <div class="navigation">
-    <a href="#home" id="menu-bar"> 
-      Toutes les catégories
-    </a> 
-    <div class="deroulant">
-      <button class="dropbtn">
-        <i class="fas fa-motorcycle"></i>
-        Motocyclette 
-      </button>
-      <div class="deroulant-content">
-        <div class="row px-2">
-          <div class="col-3 column">
-            <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
-          </div>
-          <div class="col-3 column">
-            <a href="{% url 'boutique' %}?gamme=commercial"><h3>Utilisation commerciale</h3></a>
-            {% for motorbike in commercials %}
-                <a href="#">{{motorbike.name}}</a>
-            {% endfor %} 
-          </div>
-          <div class="col-2 column">
-            <a href="{% url 'boutique' %}?gamme=ville"><h3>Conçu pour la ville</h3></a>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
-          <div class="col-2 column">
-            <a href="{% url 'boutique' %}?gamme=aventure"><h3>Pour l'aventure</h3></a>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
-        </div>
-      </div>
-    </div>  
-    <div class="deroulant">
-      <button class="dropbtn">
-        <i class="fas fa-trailer"></i>
-        Tricycle 
-      </button>
-      <div class="deroulant-content">
-        <div class="row px-2">
-          <div class="col-3 column">
-            <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
-          </div>
-          <div class="col-3 column">
-            <h3>tricycle à 3 roues</h3>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
-          <div class="col-2 column">
-            <h3>tricycle à 5 roues</h3>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div> 
-        </div>
-      </div>
-    </div>  
-    <a href="#home">Marques</a>
-    <div class="deroulant">
-      <button class="dropbtn"> 
-        <i class="fab fa-intercom"></i> Vitrine
-      </button>
-      <div class="deroulant-content">
-        <div class="row px-2">
-          <div class="col-3 column">
-            <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
-          </div>
-          <div class="col-3 column">
-            <h3>Accessoires</h3>
-            <a href="#">Motocyclette</a>
-            <a href="#">Tricycle</a> 
-          </div>
-          <div class="col-2 column">
-            <h3>Pièces de rechange</h3>
-            <a href="#">Motocyclette</a>
-            <a href="#">Tricycle</a> 
-          </div> 
-        </div>
-      </div>
-    </div>  
-  </div>
-    {% block content %}{% endblock content %}
+
+
+  {% block content %}{% endblock content %}
 
   <footer class="px-5">
     <div class="row">

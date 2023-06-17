@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load custom_filters %}
+
+
 {% block content %} 
+
+{% include 'store/navigation.html'%}
+
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> 
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -23,7 +28,6 @@
       <span class="visually-hidden">Next</span>
     </button>
 </div> <br>
-
 <div class="main"> 
 
   <div class="row d-flex  justify-content-center"> 

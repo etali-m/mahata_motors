@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
 {% block content %}
+{% include 'store/navigation.html'%}
+
      <div class="row my-5">
         <div class="col-12 text-center mb-5"> 
             <h2 class="categorie__title">{{categorie}} Moto</h2>
             <div class="divider d-flex mx-auto"></div>
         </div>
-
-        <div class="col-12 text-center mb-3 mt-4"> 
-            <h2 class="subcategorie__title">Nos catégories</h2>
-            <div class="divider d-flex mx-auto"></div>
-        </div>
-
-        <div class="col-12">
+        
+        {% if subcategories %}
+          <div class="col-12">
             <div class="swiper" id="swiper__categorie">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper py-2">
-                  <!-- Slides -->
+                  <!-- Slides --> 
                   <div class="swiper-slide categorie_blog">
                     <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
                     <div>
@@ -64,5 +64,18 @@
                
               </div>
         </div>
+        {% else %}
+        <div class="col-12 text-center mb-3 mt-4"> 
+          <h2 class="subcategorie__title">Nos produits</h2>
+          <div class="divider d-flex mx-auto"></div>
+        </div> 
+        <div>
+          {% for product in products %}
+            {{product.name}}
+          {% endfor %}
+        </div>
+
+        {% endif %}
+
      </div>
 {% endblock %}

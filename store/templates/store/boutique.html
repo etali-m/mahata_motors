@@ -3,7 +3,9 @@
 {% load custom_filters %}
 
 {% block content %}
+{% include 'store/navigation.html'%}
 <!-- liste des produits -->
+
 <main> 
     <section style="background-color:#f7f7f7; padding: 30px 0px;">
         <div class="container">
@@ -20,7 +22,7 @@
                             </optgroup>
                             <optgroup label="Autres marques"> 
                                 {% for brand in brands %}
-                                    <option value="{{ brand.name }}">{{ brand.name }}</option>
+                                    <option value="{{ brand.name }}" {% if 'marque' in request.GET and request.GET.marque == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
                                 {% endfor %} 
                             </optgroup>
                         </select>
@@ -28,9 +30,14 @@
                     <div class="col-md-4 col-6">
                         <select class="form-select" name="type">
                             <option selected value="">Type</option>
-                            <option value="motocyclette">Motocyclette</option>
-                            <option value="tricycle">Tricycle</option>
-                            <option value="accessoires">Accéssoire</option>
+                            {% for categorie in categories %}
+                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option>
+                                {% if categorie.sous_categories.all %}
+                                    {% for sous_categorie in categorie.sous_categories.all %}
+                                        <option style="padding-left: 15px;" value="{{ sous_categorie.name }}" {% if 'type' in request.GET and request.GET.type == sous_categorie.name  %}selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp; {{ sous_categorie.name }} </option>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
                         </select>
                     </div>   
                     <div class="col-md-4 col-6">
@@ -72,10 +79,10 @@
                 {% if motos %}
                     <div class="row mb-3">
                         <div class="col-12 header_boutique d-flex justify-content-between">
-                            <h4 class="title__boutique">Moto</h4> 
+                            <h4 class="title__boutique">Motocyclette</h4> 
                             
                             <div>
-                                <a href="">Voir plus</a> 
+                                <a href="{% url 'categorie' categorie_slug='motocyclette' %}">Voir plus</a> 
                             </div>    
                         </div>
                     </div>
@@ -113,6 +120,25 @@
                             </div>    
                         </div>
                     </div>
+                    <div class="row gy-2">
+                        {% for accessoire in accessoires %}
+                            <div class="col-12 col-md-4">
+                                <div class="product_item">
+                                    <img class="" src="{{accessoire.imageURL}}" alt="" width="100%">
+                                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                                        <small>accessoire</small>
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="item_name">{{accessoire.name}}</h4>  
+                                            <p class="item_price">{{ accessoire.price|separate_by_space }} FCFA</p>
+                                        </div> 
+                                        <div class="d-grid gap-2 pb-2"> 
+                                            <a class="btn btn_popular" href="#" type="button">Voir cet équipement</a> 
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        {% endfor %} 
+                    </div> 
                 {% endif %} 
 
             {% endif %}

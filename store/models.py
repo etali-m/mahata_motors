@@ -1,5 +1,6 @@
 from django.db import models
 from authentication.models import User 
+from autoslug import AutoSlugField
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank = True, on_delete=models.CASCADE)
@@ -15,23 +16,12 @@ La classe Catégorie défini la catégorie d'un produit
 class Categorie(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(default="No description", null=True, blank=True)
+    parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='sous_categories')
+    slug = AutoSlugField(unique=True, populate_from='name')
 
     def __str__(self):
         return self.name
 
-
-"""
-    sous-categorie
-"""
-
-class Subcategorie(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField(default="No description", null=True, blank=True)
-    parent_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return self.name
 
 
 
@@ -46,8 +36,7 @@ class Product(models.Model):
     stock = models.BooleanField(default=True, null=True, blank=False)
     is_on_sale = models.BooleanField(default=False) #si un produit est on solde
     sale_price = models.IntegerField(blank=True, null=True)
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, default=1)
-    subcategorie = models.ForeignKey(Subcategorie, on_delete=models.CASCADE, null=True, blank=True)
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, default=1, related_name='produits')
 
     def __str__(self):
         return self.name

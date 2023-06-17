@@ -1,5 +1,5 @@
 body{
-	background-color: white; 
+	background-color: rgb(255, 255, 255); 
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
@@ -138,9 +138,16 @@ h1,h2,h3,h4,h5,h6{
 	font: inherit;
 	margin: 0;
   }
-  
-  .navigation a:hover, .deroulant:hover .dropbtn {
+
+  .navigation a{
+	color:white;
+  }
+ 
+  .dropbtn:hover {
 	background-color: rgb(255, 255, 255);
+  }
+
+  .dropbtn:hover > a{
 	color:#0066cc; 
   }
 
@@ -509,7 +516,7 @@ ul.footer__ul {
 	padding-top:10px;
 	padding-bottom:0px;
 	padding-left: 50px;
-	padding-right: 50px;
+	padding-right: 50px; 
   }
 
   .contener{

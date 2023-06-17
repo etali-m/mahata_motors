@@ -1,16 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 
 from urllib.parse import urlencode
 
 from .models import *
+ 
 
-# Create your views here.
+#recuperer les catégories et les produits associés
+def navigation(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits') 
+    context= {'categories':categories} 
+    return render(request, 'store/navigation.html', context)
+
+
 def home(request):
     motos = list(MotorBike.objects.all()) + list(Tricycle.objects.all())
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits') 
     brands = Brand.objects.all()[:12]
-    context = {'motos':motos, 'brands':brands} 
+    context = {'motos':motos, 'brands':brands, 'categories': categories} 
     return render(request, 'store/home.html', context)
 
  
@@ -28,21 +36,33 @@ def boutique(request):
     #on récupère les éléments pour le menu de navigation 
     commercials = MotorBike.objects.all()[:8]
 
+    #on recupère toutes les marques pour les filtres 
+    #sauf les marques bazar, cocimecam, senke
     brands = Brand.objects.all().exclude(name__icontains='Bazar').exclude(name__icontains='cocimecam').exclude(name__icontains='senke')
-    motos = MotorBike.objects.all()
-    tricycles = Tricycle.objects.all()[:10]
-    accessoires = Accessory.objects.all()[:10]
 
-    if query:
-        motos = MotorBike.objects.filter(name__icontains=query)
+    #les catégories pour le menu de navigation
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    motos = MotorBike.objects.all()
+    tricycles = Tricycle.objects.all() 
+    accessoires = Accessory.objects.all() 
+
+    if query and query!="":
+        motos = MotorBike.objects.filter(Q(name__icontains=query) | Q(brand__name__icontains=query))
         tricycles = Tricycle.objects.filter(name__icontains=query)
         accessoires = Accessory.objects.filter(name__icontains=query)
+
  
    
+   #si il y a des filtres qui sont choisis
     if marque:
         motos = motos.filter(brand__name__icontains=marque)
+        tricycles = tricycles.filter(brand__name__icontains=marque)
+        accessoires = accessoires.filter(name__icontains=marque)
     if type:
         motos = motos.filter(categorie__name__icontains=type)
+        tricycles = tricycles.filter(categorie__name__icontains=type)
+        accessoires = accessoires.filter(Q(categorie__name__icontains=type) | Q(categorie__parent_category__name__icontains=type))
     if gamme:
         motos = motos.filter(usage__icontains=gamme)
     if prix_max:
@@ -52,7 +72,8 @@ def boutique(request):
                'tricycles':tricycles, 
                'accessoires':accessoires,
                'brands':brands, 
-               'commercials':commercials
+               'commercials':commercials,
+               'categories':categories,
                }
     return render(request, 'store/boutique.html', context)
 
@@ -75,13 +96,26 @@ def details(request, moto_id):
     return render(request, 'store/details.html', context)
 
 
-def detail_categorie(request, categorie):
-    #on recupère les élément de la categorie
-    subcategories = get_object_or_404(Subcategorie, parent_categorie__name=categorie)
+def detail_categorie(request, categorie_slug):
+    #On recupère toutes les categories pour le menu
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
 
+    #on recupère les élément de la categorie
+    category = get_object_or_404(Categorie, slug=categorie_slug)
+    subcategories = Categorie.objects.filter(parent_category=category)
+
+    #si il y a des sous catégorie on les récupère
+    if subcategories:
+        products = []
+    else:
+        products = category.produits.all()
+    
+    
     context = {
-        'categorie':categorie,
-        'subcategories':subcategories
+        'categories':categories,
+        'categorie':category, 
+        'products':products,
+        'subcategories':subcategories,
     }
     return render(request,'store/categorie.html', context)
 
