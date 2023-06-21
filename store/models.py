@@ -1,11 +1,15 @@
 from django.db import models
 from authentication.models import User 
+from django.utils.text import slugify
 from autoslug import AutoSlugField
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank = True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=20)
+
+    class Meta:
+        verbose_name_plural = 'Clients'
 
     def __str__(self):
         return self.name
@@ -15,12 +19,25 @@ La classe Catégorie défini la catégorie d'un produit
 """
 class Categorie(models.Model):
     name = models.CharField(max_length=200)
+    image = models.ImageField(null=True, blank = True)
     description = models.TextField(default="No description", null=True, blank=True)
     parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='sous_categories')
     slug = AutoSlugField(unique=True, populate_from='name')
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Categorie, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.name
+    
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 
 
@@ -62,6 +79,8 @@ class Brand(models.Model):
     origine = models.CharField(max_length=30)
     logo = models.ImageField(null=True, blank=True)
     
+    class Meta:
+        verbose_name_plural = 'Marques'
 
     def __str__(self):
         return self.name
@@ -101,13 +120,19 @@ class Accessory(Product):
     color = models.CharField(max_length=20, blank=True, null=True)
     description = models.TextField()
 
+    class Meta:
+        verbose_name_plural = 'Accessoires'
+
+
 
 """
     La classe Tricycle permet de définir la structure d'un tricycle
 """
 class Tricycle(Moto):
-    genre = models.CharField(max_length=50, default="Tricycle", editable=False)
-    wheels_number = models.IntegerField(default=3)
+    wheels_number = models.IntegerField(default=3) #il faut mettre les nombres de roues par 
+    
+    class Meta:
+        verbose_name_plural = 'Tricycles'
 
 
 """
@@ -124,9 +149,11 @@ class MotorBike(Moto):
         (AVENTURE, 'aventure')
     )
 
-    genre = models.CharField(max_length=50, default="Moto", editable=False)
     motor_warranty = models.IntegerField(null=True, blank=True)
     usage = models.CharField(max_length=30, choices=USAGE_CHOICES)
+
+    class Meta:
+        verbose_name_plural = 'Motocylettes'
 
 
 
@@ -150,6 +177,9 @@ class Order(models.Model):
     complete = models.BooleanField(default = False)
     transaction_id = models.CharField(max_length = 100, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
+
+    class Meta:
+        verbose_name_plural = 'Commandes'
 
 
     def __str__(self):
@@ -199,6 +229,10 @@ class ShippingAddress(models.Model):
     quater = models.CharField(max_length=200, null=False)
     codepostal = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        verbose_name_plural = 'Adresses de livraison'
 
     def __str__(self):
         return self.address

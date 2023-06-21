@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 
 {% block content %}
@@ -7,73 +8,50 @@
 
      <div class="row my-5">
         <div class="col-12 text-center mb-5"> 
-            <h2 class="categorie__title">{{categorie}} Moto</h2>
+            <h2 class="categorie__title">{{ categorie.name }} </h2>
             <div class="divider d-flex mx-auto"></div>
+            <div class="container mt-4">
+              <!--{{ categorie.description }}-->
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto aspernatur mollitia repellendus officia id similique quos obcaecati illo veniam necessitatibus ex qui architecto, doloribus dicta nisi impedit ipsa molestias cum?
+            </div>
         </div>
-        
-        {% if subcategories %}
-          <div class="col-12">
-            <div class="swiper" id="swiper__categorie">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper py-2">
-                  <!-- Slides --> 
-                  <div class="swiper-slide categorie_blog">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div>
-                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5>  
-                    </div> 
-                  </div>  
-      
-                  <div class="swiper-slide categorie_blog">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div>
-                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5>
-                    </div> 
-                  </div> 
-      
-                  <div class="swiper-slide categorie_blog">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div>
-                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
-                    </div> 
-                  </div> 
 
-                  <div class="swiper-slide categorie_blog">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div>
-                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
-                    </div> 
-                  </div>
-                  <div class="swiper-slide categorie_blog">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div>
-                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
-                    </div> 
-                  </div>
-                  <div class="swiper-slide categorie_blog">
-                    <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
-                    <div>
-                    <h5 class="categorie_name py-3 text-center">Nom de la catégorie</h5> 
-                    </div> 
-                  </div>
-                </div> 
-              
-                <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev swiper-button-custom"></div>
-                <div class="swiper-button-next swiper-button-custom"></div>
-               
-              </div>
-        </div>
+        {% if subcategories %}
+          <div class="row">
+            <div class="col-12 text-center">
+              {% for subcategorie in subcategories %}
+                {{ subcategorie.name }}
+              {% endfor %}
+            </div>
+          </div>
+          
         {% else %}
         <div class="col-12 text-center mb-3 mt-4"> 
           <h2 class="subcategorie__title">Nos produits</h2>
           <div class="divider d-flex mx-auto"></div>
+
+          <div class="container mt-4">
+            <div class="row gy-2">
+              {% for product in products %}
+                  <div class="col-12 col-md-3">
+                      <div class="product_item">
+                          <img class="" src="{{product.imageURL}}" alt="" width="100%">
+                          <div class="bg-white px-2 py-3" style="border-radius: 0px 0px 5px 5px;">
+                              <small>{{product.genre}}</small>
+                              <div class="d-flex justify-content-between">
+                                  <h4 class="item_name" style="font-size: 18px;">{{product.name}}</h4>  
+                                  <p class="item_price" style="font-size: 18px;">{{ product.price|separate_by_space }} FCFA</p>
+                              </div> 
+                              <div class="d-grid gap-2 pb-2"> 
+                                  <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir</a> 
+                              </div>
+                          </div> 
+                      </div>
+                  </div>
+              {% endfor %} 
+            </div> 
+          </div>
         </div> 
-        <div>
-          {% for product in products %}
-            {{product.name}}
-          {% endfor %}
-        </div>
 
         {% endif %}
 

@@ -6,7 +6,7 @@
     {% for categorie in categories %}
         <div class="deroulant">
             <button class="dropbtn">
-            <a href="{% url 'boutique' %}?type={{ categorie.name }}">
+            <a href="{% url 'categorie' categorie_slug=categorie.slug %}">
             <i class="fas fa-motorcycle"></i>
              {{ categorie.name }}
             </a> 
@@ -19,7 +19,7 @@
                 {% if categorie.sous_categories.all %}
                     {% for sous_categorie in categorie.sous_categories.all %}
                         <div class="col-3 column">
-                            <a href="{% url 'boutique' %}?type={{ sous_categorie.name }}"><h3>{{sous_categorie.name}}</h3></a>
+                            <a href="{% url 'categorie' categorie_slug=sous_categorie.slug %}"><h3>{{sous_categorie.name}}</h3></a>
                             {% for produit in sous_categorie.produits.all %}
                                 <a href="#">{{ produit.name }}</a>
                             {% endfor %} 

@@ -241,7 +241,7 @@ h1,h2,h3,h4,h5,h6{
   }
 
   input.search_field{
-	width: 400px;
+	width: 450px;
 	height: 35px;
 	padding:5px;
 	border-radius: 10px 0px 0px 10px;
@@ -560,7 +560,7 @@ ul.footer__ul {
   }
 
   #swiper__categorie{
-	width: 90%; 
+	width: 60%; 
 	margin:auto; 
 	margin-top:15px;
 	margin-bottom: 15px;
@@ -826,6 +826,9 @@ ul.footer__ul {
 	opacity: 0.9;
 }
 
+.product_item:hover{
+	box-shadow:hsl(0, 0%, 75%) 0 0 16px;
+}
 
 /*#loader {
 	position: fixed;

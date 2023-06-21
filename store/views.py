@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required 
-
-from urllib.parse import urlencode
+ 
+from urllib.parse import urlencode, unquote
 
 from .models import *
  
@@ -79,7 +79,10 @@ def boutique(request):
 
 
 def details(request, moto_id):
-    #on verifie si l'objet est une moto
+    #on verifie si l'objet est une 
+    #les catégories pour le menu de navigation
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
     try:
         moto = get_object_or_404(MotorBike, id=moto_id) 
         similars = MotorBike.objects.filter(genre= moto.genre).exclude(id=moto.id)[:5]
@@ -90,19 +93,22 @@ def details(request, moto_id):
     
     
     
-    context = {'moto':moto, 'similars':similars}
+    context = {'moto':moto, 
+               'similars':similars,
+               'categories':categories}
 
         
     return render(request, 'store/details.html', context)
 
 
-def detail_categorie(request, categorie_slug):
+def detail_categorie(request, categorie_slug): 
     #On recupère toutes les categories pour le menu
     categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+    brands = Brand.objects.all()[:5]
 
     #on recupère les élément de la categorie
-    category = get_object_or_404(Categorie, slug=categorie_slug)
-    subcategories = Categorie.objects.filter(parent_category=category)
+    category = get_object_or_404(Categorie, slug=categorie_slug.lower())
+    subcategories = Categorie.objects.filter(parent_category=category) 
 
     #si il y a des sous catégorie on les récupère
     if subcategories:
@@ -113,9 +119,10 @@ def detail_categorie(request, categorie_slug):
     
     context = {
         'categories':categories,
-        'categorie':category, 
+        'categorie':category,  
         'products':products,
         'subcategories':subcategories,
+        'brands':brands,
     }
     return render(request,'store/categorie.html', context)
 
