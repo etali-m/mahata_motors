@@ -86,7 +86,7 @@ def details(request, moto_id):
 
     try:
         moto = get_object_or_404(MotorBike, id=moto_id) 
-        similars = MotorBike.objects.filter(genre= moto.genre).exclude(id=moto.id)[:5]
+        similars = MotorBike.objects.filter(categorie= moto.categorie).exclude(id=moto.id)[:5]
     #Si l'objet n'est pas une moto on verifie qu'il est un tricycle
     except Http404:
         moto = get_object_or_404(Tricycle, id=moto_id)
