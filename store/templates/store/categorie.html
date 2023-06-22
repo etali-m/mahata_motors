@@ -19,41 +19,53 @@
         {% if subcategories %}
           <div class="row">
             <div class="col-12 text-center">
-              {% for subcategorie in subcategories %}
-                {{ subcategorie.name }}
-              {% endfor %}
+              <div class="row mx-auto d-flex justify-content-center">
+                {% for subcategorie in subcategories %}
+                  <div class="col-md-2">
+                    <div class="subcategorie__block">
+                      <a href="{% url 'boutique' %}?type={{subcategorie.name}}">
+                        <img src="{{subcategorie.imageURL}}" alt=""> 
+                        <div>{{subcategorie.name}}</div>
+                      </a>
+                    </div> 
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
-          
-        {% else %}
-        <div class="col-12 text-center mb-3 mt-4"> 
-          <h2 class="subcategorie__title">Nos produits</h2>
-          <div class="divider d-flex mx-auto"></div>
-
-          <div class="container mt-4">
-            <div class="row gy-2">
-              {% for product in products %}
-                  <div class="col-12 col-md-3">
-                      <div class="product_item">
-                          <img class="" src="{{product.imageURL}}" alt="" width="100%">
-                          <div class="bg-white px-2 py-3" style="border-radius: 0px 0px 5px 5px;">
-                              <small>{{product.genre}}</small>
-                              <div class="d-flex justify-content-between">
-                                  <h4 class="item_name" style="font-size: 18px;">{{product.name}}</h4>  
-                                  <p class="item_price" style="font-size: 18px;">{{ product.price|separate_by_space }} FCFA</p>
-                              </div> 
-                              <div class="d-grid gap-2 pb-2"> 
-                                  <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir</a> 
-                              </div>
-                          </div> 
-                      </div>
-                  </div>
-              {% endfor %} 
-            </div> 
-          </div>
-        </div> 
-
         {% endif %}
+           
+          <div class="col-12 text-center mb-3 mt-4"> 
+            <h2 class="subcategorie__title">Nos produits</h2>
+            <div class="divider d-flex mx-auto"></div>
+
+            <div class="container mt-4">
+              <div class="row gy-2">
+                {% for product in products %}
+                    <div class="col-12 col-md-3">
+                        <div class="product_item">
+                            <img class="" src="{{product.imageURL}}" alt="" width="100%" >
+                            <div class="bg-white px-2 py-3" style="border-radius: 0px 0px 5px 5px;">
+                                <small>{{product.categorie}}</small>
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="item_name" style="font-size: 18px;">{{product.name}}</h4>  
+                                    <p class="item_price" style="font-size: 18px;">{{ product.price|separate_by_space }} FCFA</p>
+                                </div> 
+                                <div class="d-grid gap-2 pb-2"> 
+                                    <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir</a> 
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                {% endfor %} 
+              </div>
+              <div class="row mt-5">
+                <div class="col-12">
+                  <a type="button" href="{% url 'boutique' %}?type={{categorie.name}}" class="categorie_moreButton btn">Voir plus de produits</a>
+                </div>
+              </div> 
+            </div>
+          </div>
 
      </div>
 {% endblock %}

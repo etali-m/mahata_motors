@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required 
  
 from urllib.parse import urlencode, unquote
+from random import shuffle
 
 from .models import *
  
@@ -111,10 +112,14 @@ def detail_categorie(request, categorie_slug):
     subcategories = Categorie.objects.filter(parent_category=category) 
 
     #si il y a des sous catégorie on les récupère
+   
+    products = category.produits.all()
     if subcategories:
-        products = []
-    else:
-        products = category.produits.all()
+        for subcategory in subcategories:
+            products = products.union(subcategory.produits.all())
+        products = list(products)
+        shuffle(products)
+    
     
     
     context = {
@@ -129,6 +134,8 @@ def detail_categorie(request, categorie_slug):
 
 
 def cart(request):
+    #les catégories pour le menu de navigation
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -136,7 +143,7 @@ def cart(request):
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0}
-    context = {'items':items, 'order':order}
+    context = {'categories': categories, 'items':items, 'order':order}
     return render(request, 'store/cart.html', context)
 
 

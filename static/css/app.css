@@ -367,6 +367,7 @@ h1,h2,h3,h4,h5,h6{
 
 .btn_popular:hover{
 	opacity: 0.9;
+	color:white;
 }
 
 .item_name{
@@ -830,6 +831,32 @@ ul.footer__ul {
 	box-shadow:hsl(0, 0%, 75%) 0 0 16px;
 }
 
+.product_item{
+	border-radius: 10px;
+}
+
+.subcategorie__block a{
+	color:black;
+}
+
+.subcategorie__block img{
+	width: 130px;
+	height: 130px;
+	padding:8px;
+	border:2px solid #e95a0c;
+	border-radius: 50%; 
+}
+
+.categorie_moreButton{
+	background-color: #003e70;
+	color:white;
+	text-transform: uppercase;
+	padding: 10px;
+}
+.categorie_moreButton:hover{
+	color:rgb(235, 235, 235);
+	opacity: 0.85;
+}
 /*#loader {
 	position: fixed;
 	top: 0;
