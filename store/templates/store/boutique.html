@@ -75,7 +75,7 @@
                 </form>      
             
             <!-- affichage des motos -->
-            {% if motos or accessoires %}
+            {% if motos or accessoires or tricycles %}
                 {% if motos %}
                     <div class="row mb-3">
                         <div class="col-12 header_boutique d-flex justify-content-between">
@@ -110,6 +110,42 @@
                     </div> 
                 {% endif %}
                 
+                
+                {% if tricycles %}
+                    <div class="row mb-3">
+                        <div class="col-12 header_boutique d-flex justify-content-between">
+                            <h4 class="title__boutique">Tricycles</h4> 
+                            
+                            <div>
+                                <a href="{% url 'categorie' categorie_slug='motocyclette' %}">Voir plus</a> 
+                            </div>    
+                        </div>
+                    </div>
+        
+                    <div class="row gy-2">
+                        {% for tricycle in tricycles %}
+                            <div class="col-12 col-md-4">
+                                <div class="product_item">
+                                    <img class="" src="{{moto.imageURL}}" alt="" width="100%">
+                                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
+                                        <small>{{tricycle.categorie}}</small>
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="item_name">{{tricycle.name}}</h4>  
+                                            <p class="item_price">{{ tricycle.price|separate_by_space }} FCFA</p>
+                                        </div>
+                                        <p>{{tricycle.puissance_admin}} KW &bullet; essence &bullet; {{tricycle.capacite_recervoir}} L </p>
+                                        <p>Manuel</p>
+                                        <div class="d-grid gap-2 pb-2"> 
+                                            <a class="btn btn_popular" href="{% url 'details' moto_id=tricycle.pk %}" type="button">Voir cette moto</a> 
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        {% endfor %} 
+                    </div> 
+                {% endif %}
+
+
                 {% if accessoires %}
                     <div class="row mb-3">
                         <div class="col-12 header_boutique d-flex justify-content-between">

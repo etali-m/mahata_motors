@@ -382,9 +382,26 @@ h1,h2,h3,h4,h5,h6{
 	margin-bottom: -5px;
 	font-weight: bold;
 }
+
+.prefooter{
+	background-color: #0066cc;
+	color:white;
+	padding: 20px;
+}
+
+.prefooter h6{
+	font-size: 16px;
+	color:white;
+	font-weight: 600;
+}
+
+
+
 footer{ 
-	padding-top: 25px;
-	box-shadow: 0px -3px 10px #d7d7d7;
+	padding-top: 30px;
+	padding-bottom:40px;
+	color: white;
+	background-color: #e95a0c;
 }
 
 ul.footer__ul {
@@ -393,12 +410,13 @@ ul.footer__ul {
 }
 
 .footer__ul li{
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 300;
+	color:#FFF4E1;
 }
 
 .footer__copyrighsection{
-	background-color: #0066cc; 
+	background-color: #e55000; 
 	color:white; 
 	padding:10px;
 	font-weight: 300; 
@@ -418,8 +436,8 @@ ul.footer__ul {
 
 .footer__title{
 	font-size:20px;
-	color:#e95a0c;
-	font-weight: 500;
+	font-weight: bolder;
+	color:white
 }
 
 /*====================== page de details ======================*/

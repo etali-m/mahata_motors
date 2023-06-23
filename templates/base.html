@@ -152,6 +152,23 @@
 
   {% block content %}{% endblock content %}
 
+  <div class="prefooter">
+    <div class="row container">
+       <div class="col-md-4">
+        <h6>Livraison rapide</h6>
+        <span>Entre 1  et 4 jours</span>
+       </div>
+       <div class="col-md-4">
+        <h6>Paiements sécurisé</h6>
+        <div class="paiementblock d-flex justify-content-center">
+
+        </div>
+       </div>
+       <div class="col-md-4">
+        <h6>La communauté mahata</h6>
+       </div>
+    </div>
+  </div>
   <footer class="px-5">
     <div class="row">
       <div class="col-md-3">
@@ -177,7 +194,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <h3 class="footer__title">Mon compte</h3>
         <div>
           <ul class="footer__ul">
@@ -190,45 +207,24 @@
           </ul>
         </div>
       </div>
-    </div>
-    <hr>
-    <div class="row my-3 pb-3">
-      <div class="col-sm-4">
-        <img src="{% static 'images/logo1.png' %}" width="130" height="50" alt="logo_mahata">
-      </div>
-      <div class="col-sm-4">
-        <h3 class="footer__title">Mode de paiement</h3>
-        <div class="">
-          <img src="{% static 'images/mtnmomo.png' %}" width="50" height="50" alt="mtnMomo_logo">
-          <img src="{% static 'images/orangemoney.png' %}" width="50" height="50" alt="om_logo"> 
+      <div class="col-md-3">
+        <h3 class="footer__title">Informations légales</h3>
+        <div>
+          <ul class="footer__ul">
+            <li>Mention légale</li>
+            <li>Politique de confidentialité</li>
+            <li>Conditions générales</li> 
+          </ul>
         </div>
       </div>
-      <div class="col-sm-2">
-        <h3 class="footer__title">Suivez nous sur</h3>
-        <div class="d-flex justify-content-around">
-          <a href="">
-            <img src="{% static 'images/facebook.png' %}" alt="facebook_logo" width="30" height="30">
-          </a> 
-          <a href="">
-            <img src="{% static 'images/linkedin.png' %}" alt="linkedin_logo" width="30" height="30">
-          </a> 
-          <a href="">
-            <img src="{% static 'images/youtube.png' %}" alt="youtube_logo" width="30" height="30">
-          </a>
-        </div>
-      </div>
-    </div>
+    </div> 
   </footer>
   <div class="row footer__copyrighsection" style="font-size: 14px;">
-    <div class="col-12 col-md-4 text-center">
+    <div class="col-12 text-center">
       <span>&copy;2022 Mahata motors Cameroun &bull; Tous droits réservés</span>
-    </div>
-    <div class="col-12 col-md-5 offset-md-3 d-flex justify-content-between text-center">
-      <a class="copyrightsection__link" href="">Mention légale</a>
-      <a class="copyrightsection__link" href="">Conditions générales</a>
-      <a class="copyrightsection__link" href="">Politique de confidentialité</a>
-    </div>
+    </div> 
   </div>  
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>

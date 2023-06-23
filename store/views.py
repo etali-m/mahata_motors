@@ -148,6 +148,8 @@ def cart(request):
 
 
 def checkout(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -155,5 +157,5 @@ def checkout(request):
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0}
-    context = {'items':items, 'order':order}
+    context = {'items':items, 'order':order, 'categories':categories}
     return render(request, 'store/checkout.html', context)
