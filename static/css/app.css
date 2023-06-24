@@ -353,6 +353,10 @@ h1,h2,h3,h4,h5,h6{
 	.carousel-inner .carousel-item > div:first-child {
 		display: block;
 	}
+	.detail__header{
+		text-align: center;
+		justify-content: center;
+	}
 }
 
 
@@ -384,13 +388,17 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .prefooter{
-	background-color: #0066cc;
+	background-color:#e55000bf;
 	color:white;
 	padding: 20px; 
 }
 
 .prefooter_div{
 	border-right: 1px solid white;
+}
+
+.prefooter_div > span{
+	font-size:14px;
 }
  
 
@@ -475,12 +483,14 @@ ul.footer__ul {
 }
 .detail__header__name{
 	font-size: 33px;
-	color:#0066cc;
+	color:#00366c;
+	font-weight: bold;
 }
 
 .detail__header__price{
 	font-size: 28px;
-	color:#0066cc;
+	color:#a60000;
+	font-weight: bold;
 }
 
 .btn_commande{
@@ -783,6 +793,11 @@ ul.footer__ul {
 		height: 200px;
 	}
 
+	.site-logo{
+		width: 100px;
+		height: 40px;
+	}
+
 	header{
 		position: sticky;
 		z-index: 100000;
@@ -790,7 +805,60 @@ ul.footer__ul {
 		background-color: white;
 		width: 100%; 
 		box-shadow: 0 0 8px #a1a1a1;
-	} 
+	}
+	
+	.prefooter_div{
+		border:none;
+	}
+
+	.prefooter > .container > div{
+		text-align: center;
+		margin-top: 25px;
+	}
+
+	.prefooter_div > span{
+		font-size:16px;
+	}
+	
+	.prefooter h6{
+		font-size: 20px;
+		color:white;
+		font-weight: 600;
+	}
+
+	.paiementblock{
+		justify-content: center;
+	}
+	
+	.prefooter h6 > img{
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		padding:2px;
+		background-color: white;
+	}
+	
+	.paiementblock > img{
+		width: 50px;
+		height: 50px;
+		margin-right: 10px;
+	}
+
+	.communityblock i {
+		font-size: 25px;
+	}
+
+
+	
+	.communityblock{
+		margin-top: 20px;
+	}
+	
+	.communityblock > a{
+		font-size: 20px;
+		margin-right: 10px;
+		color:#f0f0f0;
+	}
 }
 
 

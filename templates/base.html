@@ -65,7 +65,7 @@
           <div class="menu-btn__burger"></div>
         </div>
         <a class="text-uppercase fw-bold" href="{% url 'home' %}">
-          <img src="{% static 'images/logo1.png' %}" width="130" height="50" alt="">
+          <img class="site-logo" src="{% static 'images/logo1.png' %}" width="130" height="50" alt="">
         </a> 
         <form class="search_form d-flex" action="{% url 'boutique' %}" accept-charset="utf-8" method="GET">
           <input class="search_field" type="search" name="query" placeholder="Rechercher sur mahata...." aria-label="Search" >
@@ -156,7 +156,7 @@
     <div class="row container">
        <div class="col-md-4 col-sm-12 prefooter_div">
         <h6> <img src="{% static '/images/fast-delivery.png' %}" alt="">&nbsp;Livraison rapide</h6>
-        <span style="font-size: 14px;">Entre 1  et 4 jours</span>
+        <span>Entre 1  et 4 jours</span>
        </div>
        <div class="col-md-4 col-sm-12 prefooter_div">
         <h6> <img src="{% static 'images/padlock.png' %}" alt=""> Paiements sécurisé</h6>
