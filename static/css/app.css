@@ -386,13 +386,42 @@ h1,h2,h3,h4,h5,h6{
 .prefooter{
 	background-color: #0066cc;
 	color:white;
-	padding: 20px;
+	padding: 20px; 
 }
+
+.prefooter_div{
+	border-right: 1px solid white;
+}
+ 
 
 .prefooter h6{
 	font-size: 16px;
 	color:white;
 	font-weight: 600;
+}
+
+.prefooter h6 > img{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	padding:2px;
+	background-color: white;
+}
+
+.paiementblock > img{
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}
+
+.communityblock{
+	margin-top: 20px;
+}
+
+.communityblock > a{
+	font-size: 20px;
+	margin-right: 10px;
+	color:#f0f0f0;
 }
 
 
@@ -401,7 +430,7 @@ footer{
 	padding-top: 30px;
 	padding-bottom:40px;
 	color: white;
-	background-color: #e95a0c;
+	background-color: #e95a0c; 
 }
 
 ul.footer__ul {
