@@ -11,7 +11,7 @@ class AccessoryAdmin(admin.ModelAdmin):
 class MotorBikeAdmin(admin.ModelAdmin):
     def get_changeform_initial_data(self, request):
         initial = super().get_changeform_initial_data(request)
-        moto_category = Categorie.objects.get(name__icontains='Motocylette')
+        moto_category = Categorie.objects.get(name__icontains='Motocy')
         initial['categorie'] = moto_category.id
         return initial
 

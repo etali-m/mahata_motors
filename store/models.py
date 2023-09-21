@@ -1,7 +1,7 @@
 from django.db import models
 from authentication.models import User 
 from django.utils.text import slugify
-from autoslug import AutoSlugField
+from autoslug import AutoSlugField   
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank = True, on_delete=models.CASCADE)
@@ -39,21 +39,20 @@ class Categorie(models.Model):
             url = ''
         return url
 
-
-
-
 """
     La classe Product défini un produit avec toutes ses caratéristiques
 """
-
+ 
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.IntegerField()
-    image = models.ImageField(null=True, blank = True)
+    image = models.ImageField(upload_to='product_images/', null=True, blank = True)
     stock = models.BooleanField(default=True, null=True, blank=False)
     is_on_sale = models.BooleanField(default=False) #si un produit est on solde
     sale_price = models.IntegerField(blank=True, null=True)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, default=1, related_name='produits')
+    description = models.TextField(blank=True, null=True, default="No description") 
+
 
     def __str__(self):
         return self.name
@@ -71,6 +70,17 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+
+
+
+""" 
+    Cette classe permet de définir les images pour un produit car un produit peut avoir plusieurs images
+"""
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='product_images/')
 
 
 
@@ -106,7 +116,6 @@ class Moto(Product):
     capacite_recervoir = models.DecimalField(max_digits = 5, decimal_places = 2)
     nbre_place = models.IntegerField()
     coulour = models.CharField(max_length=20)
-    description = models.TextField(blank=True, null=True, default="No description")
     
 
 
@@ -117,8 +126,7 @@ class Moto(Product):
 
 
 class Accessory(Product):
-    color = models.CharField(max_length=20, blank=True, null=True)
-    description = models.TextField()
+    color = models.CharField(max_length=20, blank=True, null=True) 
 
     class Meta:
         verbose_name_plural = 'Accessoires'

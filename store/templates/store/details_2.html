@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+{% include 'store/navigation.html' %}
+
+
+<div style="background-color: #f7f7f7;">
+    <section class="bg-white mb-3 py-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <img src="{% static 'images/placeholder.png' %}" alt="Image du produit" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h3 class="detail__header__name">{{item.name}}</h3>
+                    <p><h3 class="detail__header__price">{{item.price|separate_by_space}} FCFA</h3></p>
+                    <strike  class="detail__header__price__strike" style="color:red">20 000 FCFA</strike>
+                    <p>Disponibilité: <span class="text-success">En stock</span></p>
+                    <p>Livraison estimée: 2-3 jours ouvrables</p>
+                    <div class="d-flex align-items-center"> <!-- Utilisez la classe "d-flex" pour aligner les éléments horizontalement -->
+                        <div class="input-group mr-5" style="width: 25%;"> <!-- Utilisez le style "width: 75%;" pour réduire la largeur de 25% -->
+                            <span class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" id="moins">-</button>
+                            </span>
+                            <input type="text" class="form-control text-center" id="quantite" value="1" readonly>
+                            <span class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="plus">+</button>
+                            </span>
+                        </div> &nbsp;&nbsp;
+                        <button class="btn btn_popular">Ajouter au panier</button> <!-- Utilisez la classe "ml-3" pour ajouter un espacement à gauche -->
+                    </div> <br>
+                    <p>Catégorie: <b>{{item.categorie}}</b></p>
+                </div>
+            </div>
+        </div> 
+    </section>  
+ 
+    <section class="bg-white mb-3 py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h3 class="text-center">Description</h3>
+            <div class="divider d-flex mx-auto" style="width:5%;"></div>
+          </div>
+          <p>
+             {{moto.description}} 
+          </p>
+          <p>
+              
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="bg-white mb-3 py-4">
+       <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h3 class="text-center">Véhicules similaires</h3>
+            <div class="divider d-flex mx-auto" style="width:5%;"></div>
+          </div>
+          <div class="swiper" id="swiper1">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              {% for similar_moto in similars %}
+                <div class="swiper-slide">
+                  <img class="" src="{{similar_moto.imageURL}}" alt="" width="100%">
+                  <div class="px-2">
+                  <div class="d-flex justify-content-between">
+                    <h4 class="item_name">{{similar_moto.name}}</h4>  
+                    <p class="item_price">{{similar_moto.price|separate_by_space}} FCFA</p> 
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn_popular" type="button">Voir cette moto</button> 
+                  </div>
+                  </div> 
+                </div>  
+              {% endfor %}
+  
+              <div class="swiper-slide">
+                <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                <div>
+                <h4 class="item_name">Nom de la moto</h4>  
+                <p class="item_price">500 000fcfa</p>
+                <p>2019 &bullet; manuel &bullet; essence</p>
+                <div class="d-grid gap-2">
+                  <button class="btn_popular" type="button">Voir cette moto</button> 
+                </div>
+                </div> 
+              </div> 
+  
+              <div class="swiper-slide">
+                <img class="" src="{% static 'images/placeholder.png' %}" alt="" width="100%">
+                <div>
+                <h4 class="item_name">Nom de la moto</h4>  
+                <p class="item_price">500 000fcfa</p>
+                <p>2019 &bullet; manuel &bullet; essence</p>
+                <div class="d-grid gap-2">
+                  <button class="btn_popular" type="button">Voir cette moto</button> 
+                </div>
+                </div> 
+              </div> 
+            </div> 
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev swiper-button-custom"></div>
+            <div class="swiper-button-next swiper-button-custom"></div>
+           
+          </div>
+        </div>
+       </div>
+    </section>
+</div>
+<br><br>
+{% endblock content %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% endblock javascript %}

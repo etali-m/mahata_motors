@@ -4,6 +4,7 @@
 {% block content %}
 {% include 'store/navigation.html' %}
 
+
 <div style="background-color: #f7f7f7;">
     <div class="row">
       <div class="swiper" id="swiper3">
@@ -39,9 +40,9 @@
         <strike  class="detail__header__price__strike" style="color:red">600 000 FCFA</strike>
         <p>Lorem ipsum dolor sit </p>
       </div>
-      <div class="col-sm-3 text-center">
+      <div class="col-sm-3">
         <button type="button" class="btn_commande">Contactez nous</button> &nbsp;
-        <button type="button" class="btn_popular">Commander</button>
+        <button type="button" class="btn_popular">Acheter maintenant</button>
       </div>
     </section>
 
@@ -52,89 +53,231 @@
             <h3 class="text-center">Détails</h3>
             <div class="divider d-flex mx-auto" style="width:5%;"></div>
           </div>
-          
 
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <h5><b>Informations</b></h5>
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
-                     <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/brand1.png' %}" alt="" class="detail__logo"> Marque</h6>
-                      <p class="detail__texte">{{moto.brand}}</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/moto.png' %}" alt="" class="detail__logo"> Modèle</h6>
-                      <p class="detail__texte">{{moto.name}}</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Type de modèle</h6>
-                      <p class="detail__texte">{{moto.type_model}}</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/coloration.png' %}" alt="" class="detail__logo"> Couleur</h6>
-                      <p class="detail__texte">{{moto.coulour}}</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/delivery.png' %}" alt="" class="detail__logo"> Usage</h6>
-                      <p class="detail__texte">{{moto.usage}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+          <div class="row mt-4">
+            <hr>
+            <div class="col-sm-6">
+              <h5 class="details__section__header"><i class="fas fa-motorcycle"></i> &nbsp;Données de base</h5>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <h5><b>Moteur et consommation</b></h5>
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <div class="row detail__container mt-4 mb-4 d-flex justify-content-center">
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/piston.png' %}" alt="" class="detail__logo"> Cylindre</h6>
-                      <p class="detail__texte">{{moto.cylindre}} cm</p>
+            <div class="col-sm-6">
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Marque</h6>
                     </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/performance.png' %}" alt="" class="detail__logo"> Nombre de vitesse</h6>
-                      <p class="detail__texte">{{moto.nbre_vitesse}}</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/moteur.png' %}" alt="" class="detail__logo"> Puissance </h6>
-                      <p class="detail__texte">{{moto.puissance_admin}} KW</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/tank.png' %}" alt="" class="detail__logo"> Reservoir</h6>
-                      <p class="detail__texte">{{moto.capacite_recervoir}} L</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/weight.png' %}" alt="" class="detail__logo"> Poids</h6>
-                      <p class="detail__texte">{{moto.poids}} Kg</p>
-                    </div>
-        
-                    <div class="col-6 col-md-2 text-center">
-                      <h6> <img src="{% static 'images/brand.png' %}" alt="" class="detail__logo"> Garantie</h6>
-                      <p class="detail__texte">{{moto.motor_warranty}} Km</p>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.brand}}</span>
                     </div>
                   </div>
-                </div>
+                </div> 
+              </div>
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Modèle</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.name}}</span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Type de modèle</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.type_model}}</span>
+                    </div>
+                  </div>
+                </div> 
+              </div> 
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Usage</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.usage}}</span>
+                    </div>
+                  </div>
+                </div> 
+              </div> 
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Garantie moteur</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.motor_warranty}} Km</span>
+                    </div>
+                  </div>
+                </div> 
               </div>
             </div>
           </div>
+          <div class="row mt-3">
+            <hr>
+            <div class="col-sm-6">
+              <h5 class="details__section__header"><i class="bi bi-clock-history"></i> &nbsp; Historique du véhicule</h5>
+            </div>
+            <div class="col-sm-6">
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Kilométrage</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">0 Km</span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Année</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">2023</span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <hr>
+            <div class="col-sm-6">
+              <h5 class="details__section__header"><i class="bi bi-steam mr-2"></i> &nbsp;Caractéristiques techniques</h5>
+            </div>
+            <div class="col-sm-6">
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Puissance</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.puissance_admin}} KW</span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Cylindre</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.cylindre}} cm<sup>3</sup></span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Vitesse</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.nbre_vitesse}}</span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <hr>
+            <div class="col-sm-6">
+              <h5 class="details__section__header"><i class="bi bi-fuel-pump-diesel mr-2"></i> &nbsp; Consommation énergetique</h5>
+            </div>
+            <div class="col-sm-6">
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Carburant</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">Essence</span>
+                    </div>
+                  </div>
+                </div> 
+              </div> 
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Reservoir</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.capacite_recervoir}} L</span>
+                    </div>
+                  </div>
+                </div> 
+              </div> 
+            </div>
+          </div>
+          <div class="row mt-3">
+            <hr>
+            <div class="col-sm-6">
+              <h5 class="details__section__header"><i class="bi bi-gear-wide-connected"></i> &nbsp; Equipement</h5>
+            </div>
+            <div class="col-sm-6">
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Sécurité</h6>
+                    </div>
+                    <div class="col-5 offset-2 d-flex flex-column">
+                      <span class="detail__texte">Casque</span>
+                      <span class="detail__texte">Alarme</span>
+                    </div>
+                    <div class="col-5">
+                      <h6>Géolocalisation</h6>
+                    </div>
+                    <div class="col-5 offset-2 d-flex flex-column">
+                      <span class="detail__texte">GPS</span> 
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <hr>
+            <div class="col-sm-6">
+              <h5 class="details__section__header"><i class="bi bi-palette-fill"></i> &nbsp;Couleur</h5>
+            </div>
+            <div class="col-sm-6">
+              <div class="row d-flex flex-column">
+                <div class="col-sm-8 col-12">
+                  <div class="row">
+                    <div class="col-5">
+                      <h6>Couleur extérieur</h6>
+                    </div>
+                    <div class="col-5 offset-2">
+                      <span class="detail__texte">{{moto.coulour}}</span>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div> 
         </div>
       </div>
     </section>
@@ -172,10 +315,11 @@
               {% for similar_moto in similars %}
                 <div class="swiper-slide">
                   <img class="" src="{{similar_moto.imageURL}}" alt="" width="100%">
-                  <div>
-                  <h4 class="item_name">{{similar_moto.name}}</h4>  
-                  <p class="item_price">{{similar_moto.price|separate_by_space}} FCFA</p>
-                  <p>{{similar_moto.cylindre}} cm &bullet; manuel &bullet; essence</p>
+                  <div class="px-2">
+                  <div class="d-flex justify-content-between">
+                    <h4 class="item_name">{{similar_moto.name}}</h4>  
+                    <p class="item_price">{{similar_moto.price|separate_by_space}} FCFA</p> 
+                  </div>
                   <div class="d-grid gap-2">
                     <button class="btn_popular" type="button">Voir cette moto</button> 
                   </div>

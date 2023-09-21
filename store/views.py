@@ -102,6 +102,26 @@ def details(request, moto_id):
     return render(request, 'store/details.html', context)
 
 
+def details_item(request, item_id):
+    #on verifie si l'objet est une 
+    #les catégories pour le menu de navigation
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+ 
+    item = get_object_or_404(Accessory, id=item_id) 
+    similars = Accessory.objects.filter(categorie= item.categorie).exclude(id=item.id)[:5]
+     
+    
+    
+    
+    context = {'item':item, 
+               'similars':similars,
+               'categories':categories}
+
+        
+    return render(request, 'store/details_2.html', context)
+
+
+
 def detail_categorie(request, categorie_slug): 
     #On recupère toutes les categories pour le menu
     categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
