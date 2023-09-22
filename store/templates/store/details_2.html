@@ -10,8 +10,30 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 ">
-                    <img src="{% static 'images/placeholder.png' %}" alt="Image du produit" class="img-fluid">
-                </div>
+                  {% if item_images %}
+                    <div class="swiper" id="swiper4">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                          <!-- Slides -->
+                          {% for item_image in item_images %}
+                            <div class="swiper-slide">
+                              <img class="detail__image" src="{{ item_image.image.url }}" alt="{{ item_image.title }}" width="100%" height="300">
+                            </div>  
+                          {% endfor %}  
+                          
+                        </div> 
+                      
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev swiper-button-custom"></div>
+                        <div class="swiper-button-next swiper-button-custom"></div>
+                       
+                    </div>
+                  {% else %}  
+                    <div class="d-flex justify-content-center">
+                      <img src="{{ item.imageURL }}" alt="">
+                    </div> 
+                  {% endif %}
+                </div> 
                 <div class="col-md-6">
                     <h3 class="detail__header__name">{{item.name}}</h3>
                     <p><h3 class="detail__header__price">{{item.price|separate_by_space}} FCFA</h3></p>
@@ -19,7 +41,7 @@
                     <p>Disponibilité: <span class="text-success">En stock</span></p>
                     <p>Livraison estimée: 2-3 jours ouvrables</p>
                     <div class="d-flex align-items-center"> <!-- Utilisez la classe "d-flex" pour aligner les éléments horizontalement -->
-                        <div class="input-group mr-5" style="width: 25%;"> <!-- Utilisez le style "width: 75%;" pour réduire la largeur de 25% -->
+                        <div class="input-group mr-5" id="details2__btn__quantite" style="width: 35%;"> <!-- Utilisez le style "width: 75%;" pour réduire la largeur de 25% -->
                             <span class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button" id="moins">-</button>
                             </span>
@@ -44,7 +66,7 @@
             <div class="divider d-flex mx-auto" style="width:5%;"></div>
           </div>
           <p>
-             {{moto.description}} 
+             {{item.description}} 
           </p>
           <p>
               

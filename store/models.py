@@ -72,15 +72,18 @@ class Product(models.Model):
         return url
 
 
-
-
 """ 
     Cette classe permet de définir les images pour un produit car un produit peut avoir plusieurs images
 """
 
-class ProductImage(models.Model):
+class Images(models.Model): 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='product_images/')
+    title = models.CharField(max_length=50, blank=True)
+    image = models.ImageField(blank=True, upload_to='product_images/')
+
+
+    def __str__(self):
+        return self.title
 
 
 

@@ -86,15 +86,18 @@ def details(request, moto_id):
 
     try:
         moto = get_object_or_404(MotorBike, id=moto_id) 
+        moto_images = moto.images.all()
         similars = MotorBike.objects.filter(categorie= moto.categorie).exclude(id=moto.id)[:5]
     #Si l'objet n'est pas une moto on verifie qu'il est un tricycle
     except Http404:
         moto = get_object_or_404(Tricycle, id=moto_id)
+        moto_images = moto.images.all()
         similars = Tricycle.objects.filter(genre= moto.genre).exclude(id=moto.id)[:5]
     
     
     
     context = {'moto':moto, 
+               'moto_images': moto_images,
                'similars':similars,
                'categories':categories}
 
@@ -108,12 +111,14 @@ def details_item(request, item_id):
     categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
  
     item = get_object_or_404(Accessory, id=item_id) 
+    item_images = item.images.all()
     similars = Accessory.objects.filter(categorie= item.categorie).exclude(id=item.id)[:5]
      
     
     
     
     context = {'item':item, 
+               'item_images': item_images,
                'similars':similars,
                'categories':categories}
 

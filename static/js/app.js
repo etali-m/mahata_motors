@@ -95,6 +95,35 @@ var swiper3 = new Swiper('#swiper3', {
 });
 
 
+/* slider de photo de la page de details accessoire et pièces */
+var swiper4 = new Swiper('#swiper4', {
+
+  breakpoints: {
+    768:{
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    425:{
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+    320:{
+      slidesPerView: 1,
+      spaceBetween: 30,
+    }
+  },
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper .swiper-button-next',
+    prevEl: '.swiper .swiper-button-prev',
+  }, 
+});
+
+
 /* slider de photo de la page de details */
 
 

@@ -520,6 +520,10 @@ ul.footer__ul {
 	color:rgb(59, 59, 59);
 }
 
+.details2__btn__quantite{
+	width: 25%;
+}
+
 .swiper {
 	width: 80%; 
 }
@@ -793,6 +797,14 @@ ul.footer__ul {
 @media screen and (max-width: 572px) {
 	.carousel-image{
 		height: 200px;
+	}
+
+	#details2__btn__quantite{
+		width: 35%;
+	}
+
+	#swiper4{
+		width: 100%;
 	}
 
 	.site-logo{

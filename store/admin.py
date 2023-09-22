@@ -1,7 +1,13 @@
 from django.contrib import admin 
 from .models import * 
 
+class ProductImageline(admin.TabularInline):
+    model =Images
+    extra = 3
+
+
 class AccessoryAdmin(admin.ModelAdmin):
+    inlines=[ProductImageline]
     def get_changeform_initial_data(self, request):
         initial = super().get_changeform_initial_data(request)
         accessory_category = Categorie.objects.get(name__icontains='Accessoire')
@@ -9,6 +15,7 @@ class AccessoryAdmin(admin.ModelAdmin):
         return initial
     
 class MotorBikeAdmin(admin.ModelAdmin):
+    inlines=[ProductImageline]
     def get_changeform_initial_data(self, request):
         initial = super().get_changeform_initial_data(request)
         moto_category = Categorie.objects.get(name__icontains='Motocy')
@@ -17,6 +24,7 @@ class MotorBikeAdmin(admin.ModelAdmin):
 
 
 class TricycleAdmin(admin.ModelAdmin):
+    inlines=[ProductImageline]
     def get_changeform_initial_data(self, request):
         initial = super().get_changeform_initial_data(request)
         tricycle_category = Categorie.objects.get(name__icontains='Tricycle')
@@ -35,3 +43,4 @@ admin.site.register(Tricycle, TricycleAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(ShippingAddress) 
+admin.site.register(Images)
