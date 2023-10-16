@@ -5,9 +5,8 @@
     </a>  
     {% for categorie in categories %}
         <div class="deroulant">
-            <button class="dropbtn">
-            <a href="{% url 'categorie' categorie_slug=categorie.slug %}">
-            <i class="fas fa-motorcycle"></i>
+            <button class="dropbtn" style="border-right: 1px solid white;">
+            <a href="{% url 'categorie' categorie_slug=categorie.slug %}">  
              {{ categorie.name }}
             </a> 
             </button> 

@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'mahata_motors.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DBmahata',
+        'NAME': 'mahata',
         'USER': 'etali',
         'PASSWORD': '',
         'HOST': '',

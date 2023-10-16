@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'store/navigation.html' %}
+
+<div class="container mb-4">
+    <div class="row pt-5 pb-3">
+        <div class="col-12">
+            <h2 class="section_title">Contactez nous maintenant</h2>
+            <div class="divider"></div>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-12 text-center">
+            <p><b>Bienvenue sur mahata motors</b></p>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-6 p-4">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.3873597007782!2d11.510413406900447!3d3.8744401115112392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bc5f437794791%3A0x7c43d925595ddd4!2sisalyd%2C%20Eyewear%20for%20Blacks*21!5e0!3m2!1sfr!2scm!4v1696257029521!5m2!1sfr!2scm" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="col-sm-6">
+            <div class="row mt-4">
+                <div class="col-8">
+                    Pour toutes vos préoccupations, remarques ou suggestions, vous pouvez nous laisser un message. Nous prendrons un réel plaisir à vous répondre dans les delais raisonables.
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="contact__section__title mb-4"><i class="fas fa-phone-alt"></i> &nbsp;  Appelez-nous</h4>
+                    <ul>
+                        <li><b>Service client : </b>(+237) </li>
+                        <li>(+237) </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="contact__section__title mb-4"><i class="far fa-envelope"></i> &nbsp; Emails</h4>
+                    <ul>
+                        <li><a href="">support@mahate.com</a></li>
+                        <li><a href="">serviceclient@mahata.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="contact__section__title mb-4"><i class="far fa-clock"></i> &nbsp; Horaires d'ouverture</h4>
+                    <ul>
+                        <li>Du lundi au vendredi : de <b>8H</b> à <b>17H</b></li>
+                        <li>Le samedi de <b>8H</b> à <b>16H</b> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <!-- Formulaire de contact -->
+            <h2>Laissez un message</h2>
+            <form class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nom">Civilité</label>
+                        <select name="" class="form-control" id="">
+                            <option value="">Mr</option>
+                            <option value="">Mme</option>
+                            <option value="">Société</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom complet</label>
+                        <input type="text" class="form-control" id="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Numéro de téléphone</label>
+                        <input type="tel" class="form-control" id="telephone" required>
+                    </div> 
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nom">Objet</label>
+                        <input type="text" class="form-control" id="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="5" maxlength="300" required></textarea>
+                        <small class="">300 caractères maximum</small>
+                    </div>
+                    <button type="submit" class="btn btn_popular mt-1">Envoyer</button>
+                </div> 
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock content %}

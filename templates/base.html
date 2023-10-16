@@ -69,20 +69,19 @@
         </a> 
         <form class="search_form d-flex" action="{% url 'boutique' %}" accept-charset="utf-8" method="GET">
           <input class="search_field" type="search" name="query" placeholder="Rechercher sur mahata...." aria-label="Search" >
-          <button class="search_btn" type="submit"><i class="fa fa-search"></i></button>
+          <button class="search_btn" type="submit"><i class="bi bi-search"></i></button>
         </form> 
         <ul class="menu_navigation_list">
           <li class="text-center">
             <a href="{% url 'boutique' %}" title="le magasin">
-              <i class="fas fa-store" style="font-size: 25px; color:#e95a0c;"></i> 
+              <i class="bi bi-shop-window" style="font-size: 25px; color:#e95a0c;"></i> 
               <span class="menu_logo_text">Magasin</span>
             </a>
           </li>
           <li class="text-center">
             <a href="{% url 'cart' %}" title="panier">
               <i class="bi bi-basket-fill position-relative" style="font-size: 25px;">
-                <span style="font-size: 12px;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  2 
+                <span style="font-size: 12px;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2 
                 </span>
               </i> 
               <span class="menu_logo_text">Panier</span>
@@ -90,7 +89,7 @@
           </li>
           <li class="text-center">
             <a href="{% url 'login' %}" title="mon compte">
-              <i class="fas fa-user-circle" style="font-size: 25px; color:#e95a0c;"></i> 
+              <i class="bi bi-person-circle" style="font-size: 25px; color:#e95a0c;"></i> 
               <span class="menu_logo_text">Mon compte</span>
             </a>
           </li>
@@ -188,10 +187,11 @@
         <h3 class="footer__title">Information</h3>
         <div>
           <ul class="footer__ul">
-            <li>Qui sommes nous ?</li>
-            <li>FAQ</li>
-            <li>Opportunités (Services)</li>
-            <li>Contactez nous</li>
+            <li><a class="footer__link" href="{% url 'about' %}">Qui sommes nous ?</a></li>
+            <li><a href="" class="footer__link">FAQ</a></li>
+            <li><a href="{% url 'services' %}" class="footer__link">Opportunités (Services)</a></li>
+            <li><a href="{% url 'contact' %}" class="footer__link">Contactez nous</a></li>
+            <li><a href="{% url 'contact' %}" class="footer__link">Livraison</a></li>
           </ul>
         </div>
       </div>
@@ -199,11 +199,10 @@
         <h3 class="footer__title">Service client</h3>
         <div>
           <ul class="footer__ul">
-            <li>Mode de paiement</li>
+            <li><a href="{% url 'paiement-method' %}" class="footer__link">Mode de paiement</a></li>
             <li>Signaler un produit</li>
-            <li>Comment acheter sur mahata ?</li>
-            <li>SAV (Entretien & Garantie)</li>
-            <li>Pièces de rechange</li>
+            <li><a href="{% url 'how-to-buy' %}" class="footer__link">Comment acheter sur mahata ?</a></li>
+            <li> <a href="{% url 'sav' %}" class="footer__link">SAV (Entretien & Garantie)</a></li> 
           </ul>
         </div>
       </div>
@@ -214,8 +213,8 @@
             <li>Mon compte</li>
             <li>Mes commandes</li>
             <li>Devenir partenaire logistique </li>
-            <li>Comment devenir vendeur?</li>
-            <li>Comment devenir Technicien/Assembleur ?</li>
+            <li><a href="{% url 'vendeur' %}" class="footer__link">Comment devenir vendeur?</a></li>
+            <li><a href="{% url 'assembleur' %}" class="footer__link">Comment devenir Technicien/Assembleur ?</a></li>
             <li>Affiliation</li>
           </ul>
         </div>

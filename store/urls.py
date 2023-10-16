@@ -14,4 +14,13 @@ urlpatterns = [
     path('details_2/<int:item_id>', views.details_item, name='details-item'),
 
     path('categories/<slug:categorie_slug>', views.detail_categorie, name='categorie'),
+
+    path('contact/', views.contact, name='contact'),
+    path('about/', views.about, name='about'),
+    path('services/', views.services, name='services'),
+    path('paiement-method/', views.paiment_method, name='paiement-method'),
+    path('sav/', views.sav, name='sav'),
+    path('how-to-buy/', views.how_to_buy, name='how-to-buy'),
+    path('devenir-vendeur/', views.vendeur, name='vendeur'),
+    path('devenir-assembleur/', views.assembleur, name='assembleur'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

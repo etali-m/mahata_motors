@@ -16,7 +16,8 @@ def navigation(request):
 
 
 def home(request):
-    motos = list(MotorBike.objects.all()) + list(Tricycle.objects.all())
+    #motos = list(MotorBike.objects.all()) + list(Tricycle.objects.all())
+    motos = Moto.objects.all()
     categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits') 
     brands = Brand.objects.all()[:12]
     context = {'motos':motos, 'brands':brands, 'categories': categories} 
@@ -35,7 +36,7 @@ def boutique(request):
     prix_max = request.GET.get('prix')
 
     #on récupère les éléments pour le menu de navigation 
-    commercials = MotorBike.objects.all()[:8]
+    #commercials = MotorBike.objects.all()[:8]
 
     #on recupère toutes les marques pour les filtres 
     #sauf les marques bazar, cocimecam, senke
@@ -44,11 +45,11 @@ def boutique(request):
     #les catégories pour le menu de navigation
     categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
 
-    motos = MotorBike.objects.all()
-    tricycles = Tricycle.objects.all() 
-    accessoires = Accessory.objects.all() 
+    motos = Moto.objects.all() 
+    equipements = Equipement.objects.all() 
 
-    if query and query!="":
+    """
+   if query and query!="":
         motos = MotorBike.objects.filter(Q(name__icontains=query) | Q(brand__name__icontains=query))
         tricycles = Tricycle.objects.filter(name__icontains=query)
         accessoires = Accessory.objects.filter(name__icontains=query)
@@ -68,36 +69,30 @@ def boutique(request):
         motos = motos.filter(usage__icontains=gamme)
     if prix_max:
         motos = motos.filter(price__lte=prix_max)
-
-    context = {'motos':motos, 
-               'tricycles':tricycles, 
-               'accessoires':accessoires,
-               'brands':brands, 
-               'commercials':commercials,
-               'categories':categories,
+    """
+    context = {
+                'motos': motos,
+                'equipements': equipements,
+                'categories':categories,
                }
-    return render(request, 'store/boutique.html', context)
 
+    return render(request, 'store/boutique.html', context)
+ 
 
 def details(request, moto_id):
     #on verifie si l'objet est une 
     #les catégories pour le menu de navigation
     categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
 
-    try:
-        moto = get_object_or_404(MotorBike, id=moto_id) 
-        moto_images = moto.images.all()
-        similars = MotorBike.objects.filter(categorie= moto.categorie).exclude(id=moto.id)[:5]
-    #Si l'objet n'est pas une moto on verifie qu'il est un tricycle
-    except Http404:
-        moto = get_object_or_404(Tricycle, id=moto_id)
-        moto_images = moto.images.all()
-        similars = Tricycle.objects.filter(genre= moto.genre).exclude(id=moto.id)[:5]
+
+    moto = get_object_or_404(Moto, id=moto_id) 
+    #moto_images = moto.images.all()
+    similars = Moto.objects.filter(categorie= moto.categorie).exclude(id=moto.id)[:5] 
     
     
     
     context = {'moto':moto, 
-               'moto_images': moto_images,
+               #'moto_images': moto_images,
                'similars':similars,
                'categories':categories}
 
@@ -184,3 +179,83 @@ def checkout(request):
         order = {'get_cart_total':0, 'get_cart_items':0}
     context = {'items':items, 'order':order, 'categories':categories}
     return render(request, 'store/checkout.html', context)
+
+
+def contact(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/contact.html', context)
+
+
+def about(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/a-propos.html', context)
+
+
+def services(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/services.html', context)
+
+
+def paiment_method(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/paiement-method.html', context)
+
+
+def sav(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/sav.html', context)
+
+
+def how_to_buy(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/how-to-buy.html', context)
+
+
+def assembleur(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/technicien-assembleur.html', context)
+
+
+def vendeur(request):
+    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+
+    context={
+        'categories':categories,
+    }
+
+    return render(request, 'store/vendeur.html', context)

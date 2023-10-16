@@ -13,7 +13,33 @@ $(document).ready(function(){
   $('.menu-btn').click(function(){
     $('.navigation_responsive').slideToggle();
   });
-  
+
+  //Afiicher ou masquer un filtre sur la page boutique
+  $('#filter-btn-motocyclette').click(function() {
+      $('.content-table').hide();
+      $('#boutique-moto-block').show();
+      $('#filtre-moto').show();
+      $('.filter-menu div').removeClass('active');
+      $(this).addClass('active');
+  });
+
+  $('#filter-btn-accessoires').click(function() {
+      $('.content-table').hide();
+      $('#boutique-equipement-block').show();
+      $('#filtre-accessoires').show();
+      $('.filter-menu div').removeClass('active');
+      $(this).addClass('active');
+  });
+
+  $('#filter-btn-pieces').click(function() {
+      $('.content-table').hide();
+      $('#boutique-equipement-block').show();
+      $('#filtre-pieces').show();
+      $('.filter-menu div').removeClass('active');
+      $(this).addClass('active');
+  }); 
+
+
 });
 
 var swiper1 = new Swiper('#swiper1', {

@@ -6,11 +6,73 @@
 {% include 'store/navigation.html'%}
 <!-- liste des produits -->
 
+<style>
+    .filter-tab{
+        background-color: #DCDCDC;
+        border-right: 1px solid white;
+    } 
+    .filter-menu{
+        padding-left: 0px; 
+        padding-right: 0px;
+    }
+    .filter-tab img{
+        width: 40px;
+        height: 40px;
+    }
+    .active .filter-tab-bottom{ 
+        width: auto;
+        height: 3px;
+        background-color: orangered;
+    }
+    .active{
+        background-color:white;  
+        display: block;
+    }
+    #filter-section{
+        padding-top: 80px;
+        padding-bottom: 40px;
+        background-image: url("{% static 'images/banniere.jpg' %}");
+        background-size: cover;
+    }
+</style>
+
 <main> 
-    <section style="background-color:#f7f7f7; padding: 30px 0px;">
-        <div class="container">
-            <!-- filtre de selection--> 
-                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white">
+    <section style="background-color:#f7f7f7; padding: 0px;">
+        
+        <div id="filter-section"  >
+            <!-- filtre de selection-->  
+            <div class="container">
+                <div class="row px-2 mb-1">
+                    <div class="d-flex justify-content-start bg-white w-auto filter-menu">
+                        <div type="boutton" class="filter-tab py-2 px-3 active" id="filter-btn-motocyclette">
+                            <img src="{% static 'images/moto.png' %}" alt="">
+                            <div class="filter-tab-bottom"></div>
+                        </div>
+                        <div type="button" class="filter-tab py-2 px-3" id="filter-btn-accessoires">
+                            <img src="{% static 'images/casque-moto.png' %}" alt="">
+                            <div class="filter-tab-bottom"></div>
+                        </div>
+                        <div type="button" class="filter-tab py-2 px-3" id="filter-btn-pieces">
+                            <img src="{% static 'images/courroie-de-distribution.png' %}" alt="">
+                            <div class="filter-tab-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Formulaire pour les motos et les tricyles -->
+                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" id="filtre-moto"> 
+                    <div class="col-md-4 col-6">
+                        <select class="form-select" name="type">
+                            <option selected value="">Type</option>
+                            {% for categorie in categories %}
+                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option>
+                                {% if categorie.sous_categories.all %}
+                                    {% for sous_categorie in categorie.sous_categories.all %}
+                                        <option style="padding-left: 15px;" value="{{ sous_categorie.name }}" {% if 'type' in request.GET and request.GET.type == sous_categorie.name  %}selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp; {{ sous_categorie.name }} </option>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
                     <div class="col-md-4 col-6">
                         <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
                         <select name="marque" class="form-select">
@@ -25,19 +87,6 @@
                                     <option value="{{ brand.name }}" {% if 'marque' in request.GET and request.GET.marque == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
                                 {% endfor %} 
                             </optgroup>
-                        </select>
-                    </div>    
-                    <div class="col-md-4 col-6">
-                        <select class="form-select" name="type">
-                            <option selected value="">Type</option>
-                            {% for categorie in categories %}
-                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option>
-                                {% if categorie.sous_categories.all %}
-                                    {% for sous_categorie in categorie.sous_categories.all %}
-                                        <option style="padding-left: 15px;" value="{{ sous_categorie.name }}" {% if 'type' in request.GET and request.GET.type == sous_categorie.name  %}selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp; {{ sous_categorie.name }} </option>
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
                         </select>
                     </div>   
                     <div class="col-md-4 col-6">
@@ -72,106 +121,153 @@
                     <div class="col-md-4 col-6 d-grid">
                         <button class="filter-search-button" type="submit">Resultats</button>
                     </div>  
-                </form>      
-            
+                </form>
+
+                <!-- Formulaire pour les accéssoires -->
+                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" style="display:none;" id="filtre-accessoires"> 
+                    <div class="col-md-4 col-6">
+                        <select class="form-select" name="type">
+                            <option selected value="">Catégorie</option>
+                            {% for categorie in categories %}
+                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option>
+                                {% if categorie.sous_categories.all %}
+                                    {% for sous_categorie in categorie.sous_categories.all %}
+                                        <option style="padding-left: 15px;" value="{{ sous_categorie.name }}" {% if 'type' in request.GET and request.GET.type == sous_categorie.name  %}selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp; {{ sous_categorie.name }} </option>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
+                        <select name="marque" class="form-select">
+                            <optgroup label="Top marques">
+                                <option selected value="">Fabriquant</option>
+                                <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
+                                <option value="cocimecam" {% if 'marque' in request.GET and request.GET.marque == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
+                                <option value="senke" {% if 'marque' in request.GET and request.GET.marque == 'senke' %}selected{% endif %}>Senke</option>
+                            </optgroup>
+                            <optgroup label="Autres marques"> 
+                                {% for brand in brands %}
+                                    <option value="{{ brand.name }}" {% if 'marque' in request.GET and request.GET.marque == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
+                                {% endfor %} 
+                            </optgroup>
+                        </select>
+                    </div> 
+                    <div class="col-md-4 col-6 d-grid">
+                        <button class="filter-search-button" type="submit">Resultats</button>
+                    </div>  
+                </form>
+
+                <!-- Formulaire pour les pièces de rechanges -->
+                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" style="display:none" id="filtre-pieces">  
+                    <div class="col-md-3 col-6">
+                        <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
+                        <select name="marque" class="form-select">
+                            <optgroup label="Top marques">
+                                <option selected value="">Marques</option>
+                                <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
+                                <option value="cocimecam" {% if 'marque' in request.GET and request.GET.marque == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
+                                <option value="senke" {% if 'marque' in request.GET and request.GET.marque == 'senke' %}selected{% endif %}>Senke</option>
+                            </optgroup>
+                            <optgroup label="Autres marques"> 
+                                {% for brand in brands %}
+                                    <option value="{{ brand.name }}" {% if 'marque' in request.GET and request.GET.marque == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
+                                {% endfor %} 
+                            </optgroup>
+                        </select>
+                    </div>   
+                    <div class="col-md-3 col-6">
+                        <select class="form-select" name="gamme">
+                            <option selected value="">Année</option>
+                            <option value="">2018</option>
+                            <option value="">2019</option>
+                            <option value="">2020</option>
+                            <option value="">2021</option>
+                            <option value="">2022</option>
+                        </select>
+                    </div>   
+                    <div class="col-md-3 col-6">
+                        <select class="form-select" name="color">
+                            <option  value="">Modèle</option>
+                            <option value="rouge">Rouge</option>
+                            <option value="bleu">Bleu</option>
+                            <option value="vert">Vert</option>
+                            <option value="noir">Noir</option>
+                        </select>
+                    </div>  
+                    <div class="col-md-3 col-6 d-grid">
+                        <button class="filter-search-button" type="submit">Resultats</button>
+                    </div>  
+                </form>
+            </div> 
+        </div>
+               
+
+        <div class="container">
             <!-- affichage des motos -->
-            {% if motos or accessoires or tricycles %}
+            {% if motos or equipement %}
                 {% if motos %}
-                    <div class="row mb-3">
-                        <div class="col-12 header_boutique d-flex justify-content-between">
-                            <h4 class="title__boutique">Motocyclette</h4> 
-                            
-                            <div>
-                                <a href="{% url 'categorie' categorie_slug='motocyclette' %}">Voir plus</a> 
-                            </div>    
-                        </div>
-                    </div>
-        
-                    <div class="row gy-2">
-                        {% for moto in motos %}
-                            <div class="col-6 col-md-3">
-                                <div class="product_item">
-                                    <img class="" src="{{moto.imageURL}}" alt="" width="100%">
-                                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                                        <small>{{moto.categorie}}</small>
-                                        <div class="d-flex justify-content-between">
-                                            <h4 class="item_name">{{moto.name}}</h4>  
-                                            <p class="item_price">{{moto.price|separate_by_space}} FCFA</p>
+                    <div id="boutique-moto-block" class="content-table">
+                        <div class="row mb-3 mt-3">
+                            <div class="col-12 header_boutique d-flex justify-content-between">
+                                <h4 class="title__boutique">Motocyclettes & Tricycles</h4> 
+                            </div>
+                        </div> 
+            
+                        <div class="row gy-2">
+                            {% for moto in motos %} 
+                                <div class="col-6 col-md-3">
+                                    <div class="product_item">
+                                        <img class="" src="{{moto.imageURL}}" alt="" width="100%">
+                                        <div class="bg-white p-2" style="border-radius: 0px 0px 5px 5px;">
+                                            <small>{{moto.categorie}}</small>
+                                            <div class="d-flex justify-content-between">
+                                                <h4 class="item_name">{{moto.brand}} {{moto.type_model}}</h4>  
+                                                <p class="item_price">{{moto.price|separate_by_space}} F</p> 
+                                            </div> 
+                                            <p>2019 &bullet; manuel &bullet; essence</p>
+                                            <div class="d-grid gap-1 pb-2"> 
+                                                <a class="btn btn_popular" href="{% url 'details' moto_id=moto.pk %}" type="button">Voir cette moto</a> 
+                                            </div>
                                         </div> 
-                                        <div class="d-grid gap-1 pb-2"> 
-                                            <a class="btn btn_popular" href="{% url 'details' moto_id=moto.pk %}" type="button">Voir cette moto</a> 
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                        {% endfor %} 
-                    </div> 
-                {% endif %}
-                
-                
-                {% if tricycles %}
-                    <div class="row mb-3 mt-2">
-                        <div class="col-12 header_boutique d-flex justify-content-between">
-                            <h4 class="title__boutique">Tricycles</h4> 
-                            
-                            <div>
-                                <a href="{% url 'categorie' categorie_slug='motocyclette' %}">Voir plus</a> 
-                            </div>    
+                                    </div>
+                                </div> 
+                            {% endfor %} 
                         </div>
                     </div>
-        
-                    <div class="row gy-2">
-                        {% for tricycle in tricycles %}
-                            <div class="col-6 col-md-3">
-                                <div class="product_item">
-                                    <img class="" src="{{moto.imageURL}}" alt="" width="100%">
-                                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                                        <small>{{tricycle.categorie}}</small>
-                                        <div class="d-flex justify-content-between">
-                                            <h4 class="item_name">{{tricycle.name}}</h4>  
-                                            <p class="item_price">{{ tricycle.price|separate_by_space }} FCFA</p>
-                                        </div>
-                                        <p>{{tricycle.puissance_admin}} KW &bullet; essence &bullet; {{tricycle.capacite_recervoir}} L </p>
-                                        <p>Manuel</p>
-                                        <div class="d-grid gap-2 pb-2"> 
-                                            <a class="btn btn_popular" href="{% url 'details' moto_id=tricycle.pk %}" type="button">Voir cette moto</a> 
-                                        </div>
-                                    </div> 
-                                </div>
+                {% endif %} 
+
+                {% if equipements %}
+                    <div id="boutique-equipement-block" class="content-table" style="display:none;">
+                        <div class="row mb-3 mt-2">
+                            <div class="col-12 header_boutique d-flex justify-content-between">
+                                <h4 class="title__boutique">Pièces de rechanges & Accéssoires</h4> 
+                                
+                                <div>
+                                    <a href="">Voir plus</a> 
+                                </div>    
                             </div>
-                        {% endfor %} 
-                    </div> 
-                {% endif %}
-
-
-                {% if accessoires %}
-                    <div class="row mb-3 mt-2">
-                        <div class="col-12 header_boutique d-flex justify-content-between">
-                            <h4 class="title__boutique">Accéssoires</h4> 
-                            
-                            <div>
-                                <a href="">Voir plus</a> 
-                            </div>    
                         </div>
-                    </div>
-                    <div class="row gy-2">
-                        {% for accessoire in accessoires %}
-                            <div class="col-6 col-md-3">
-                                <div class="product_item">
-                                    <img class="" src="{{accessoire.imageURL}}" alt="" width="100%">
-                                    <div class="bg-white p-3" style="border-radius: 0px 0px 5px 5px;">
-                                        <small>{{accessoire.categorie}}</small>
-                                        <div class="d-flex justify-content-between">
-                                            <h4 class="item_name">{{accessoire.name}}</h4>  
-                                            <p class="item_price">{{ accessoire.price|separate_by_space }} FCFA</p>
+                        <div class="row gy-2">
+                            {% for accessoire in equipements %}
+                                <div class="col-6 col-md-3">
+                                    <div class="product_item">
+                                        <img class="" src="{{accessoire.imageURL}}" alt="" width="100%">
+                                        <div class="bg-white p-2" style="border-radius: 0px 0px 5px 5px;">
+                                            <small>{{accessoire.categorie}}</small>
+                                            <div class="d-flex justify-content-between">
+                                                <h4 class="item_name">{{accessoire.name}} {{accessoire.moto_cible}}</h4>  
+                                                <p class="item_price">{{ accessoire.price|separate_by_space }} FCFA</p>
+                                            </div> 
+                                            <div class="d-grid gap-2 pb-2"> 
+                                                <a class="btn btn_popular" href="{% url 'details-item' item_id=accessoire.pk %}" type="button">Voir cet équipement</a> 
+                                            </div>
                                         </div> 
-                                        <div class="d-grid gap-2 pb-2"> 
-                                            <a class="btn btn_popular" href="{% url 'details-item' item_id=accessoire.pk %}" type="button">Voir cet équipement</a> 
-                                        </div>
-                                    </div> 
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %} 
+                            {% endfor %} 
+                        </div> 
                     </div> 
                 {% endif %} 
 
@@ -180,7 +276,7 @@
         </div>
     </section>
 </main>
-
+<br>
 <!-- 
 <div class="row">
     <div class="col-lg-12 d-flex justify-content-center">

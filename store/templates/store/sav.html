@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'store/navigation.html' %}
+
+<div class="container">
+    <div class="row py-5">
+        <div class="col-12">
+            <h2 class="section_title">Service après-vente moto</h2>
+            <div class="divider"></div>
+        </div>
+    </div> 
+
+    <section class="jumbotron text-center">
+        <img src="{% static 'images/moto2.jpg' %}" alt="Service Après-Vente Moto" class="img-fluid"> 
+    </section>
+
+    <!-- Contenu principal -->
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Informations de Contact du Service Après-Vente -->
+                <h2 class="section_title">Informations de Contact</h2>
+                <ul>
+                    <li>Adresse : 123, Rue de l'Atelier, Ville</li>
+                    <li>Numéro de téléphone : +33 01 23 45 67 89</li>
+                    <li>Adresse e-mail : <a href="mailto:service@votresite.com">service@votresite.com</a></li>
+                    <li>Heures d'ouverture :
+                        <ul>
+                            <li>Lundi - Vendredi : 9h00 - 18h00</li>
+                            <li>Samedi : 10h00 - 16h00</li>
+                            <li>Dimanche : Fermé</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <!-- Rendez-vous en Ligne -->
+                <h2 class="section_title">Planifiez un Rendez-vous</h2>
+                <form>
+                    <!-- Champs du formulaire (nom, téléphone, etc.) -->
+                    <div class="form-group">
+                        <label for="service-type">Type de Service</label>
+                        <select class="form-control" id="service-type">
+                            <option>Réparation</option>
+                            <option>Entretien</option>
+                            <option>Diagnostic</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                    <!-- Autres champs du formulaire (date, heure, etc.) -->
+                    <!-- Bouton "Planifier un Rendez-vous" -->
+                </form>
+            </div>
+        </div>
+
+        <!-- Services Offerts -->
+        <h2 class="mt-5 section_title">Services Offerts</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Service 1 -->
+                <h3>Service de Réparation</h3>
+                <p>Description du service de réparation.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- Service 2 -->
+                <h3>Service d'Entretien</h3>
+                <p>Description du service d'entretien.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- Service 3 -->
+                <h3>Service de Diagnostic</h3>
+                <p>Description du service de diagnostic.</p>
+            </div>
+        </div> 
+    </main>
+</div>
+
+
+
+{% endblock content %}

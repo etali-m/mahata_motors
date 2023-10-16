@@ -19,6 +19,7 @@ La classe Catégorie défini la catégorie d'un produit
 """
 class Categorie(models.Model):
     name = models.CharField(max_length=200)
+    logo = models.ImageField(null=True, blank = True)
     image = models.ImageField(null=True, blank = True)
     description = models.TextField(default="No description", null=True, blank=True)
     parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='sous_categories')
@@ -38,30 +39,35 @@ class Categorie(models.Model):
         except:
             url = ''
         return url
-
+    
+    @property
+    def logoURL(self):
+        try:
+            url = self.logo.url
+        except:
+            url = ''
+        return url
 """
     La classe Product défini un produit avec toutes ses caratéristiques
 """
  
 class Product(models.Model):
-    name = models.CharField(max_length=200)
-    price = models.IntegerField()
-    image = models.ImageField(upload_to='product_images/', null=True, blank = True)
-    stock = models.BooleanField(default=True, null=True, blank=False)
-    is_on_sale = models.BooleanField(default=False) #si un produit est on solde
-    sale_price = models.IntegerField(blank=True, null=True)
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, default=1, related_name='produits')
-    description = models.TextField(blank=True, null=True, default="No description") 
+    price = models.PositiveIntegerField()
+    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
+    stock = models.BooleanField(default=True)
+    is_on_sale = models.BooleanField(default=False)
+    sale_price = models.PositiveIntegerField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, default="No description")
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, related_name='produits', default=1)
 
 
-    def __str__(self):
-        return self.name
 
     def get_sale_price(self):
         if self.is_on_sale:
             return self.sale_price
         else:
             return None
+
 
     @property
     def imageURL(self):
@@ -70,27 +76,17 @@ class Product(models.Model):
         except:
             url = ''
         return url
-
+    
 
 """ 
     Cette classe permet de définir les images pour un produit car un produit peut avoir plusieurs images
-"""
-
-class Images(models.Model): 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    title = models.CharField(max_length=50, blank=True)
-    image = models.ImageField(blank=True, upload_to='product_images/')
-
-
-    def __str__(self):
-        return self.title
-
+""" 
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=30)
-    origine = models.CharField(max_length=30)
-    logo = models.ImageField(null=True, blank=True)
+    origine = models.CharField(max_length=30, null=True, blank=True)
+    logo = models.ImageField(null=True, blank=True)     
     
     class Meta:
         verbose_name_plural = 'Marques'
@@ -107,49 +103,20 @@ class Brand(models.Model):
 
 
 class Moto(Product):
-    brand = models.OneToOneField(Brand, on_delete=models.CASCADE)
-    chassis = models.IntegerField()
-    cylindre = models.FloatField()
-    nbre_vitesse = models.IntegerField(blank=True)
-    vignette = models.BooleanField(default=False)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     type_model = models.CharField(max_length=20)
-    poids = models.DecimalField(max_digits = 7, decimal_places = 2)
-    tension_batterie = models.DecimalField(max_digits = 7, decimal_places=2)
+    annee = models.PositiveIntegerField()
+    chassis = models.PositiveIntegerField()
+    cylindre = models.FloatField()
+    nbre_vitesse = models.PositiveIntegerField(blank=True)
+    vignette = models.BooleanField(default=False)
+    poids = models.DecimalField(max_digits=7, decimal_places=2)
+    tension_batterie = models.DecimalField(max_digits=7, decimal_places=2)
     puissance_admin = models.FloatField()
-    capacite_recervoir = models.DecimalField(max_digits = 5, decimal_places = 2)
-    nbre_place = models.IntegerField()
+    capacite_recervoir = models.DecimalField(max_digits=5, decimal_places=2)
+    nbre_place = models.PositiveIntegerField()
     coulour = models.CharField(max_length=20)
-    
 
-
-
-
-    class Meta:
-        abstract = True
-
-
-class Accessory(Product):
-    color = models.CharField(max_length=20, blank=True, null=True) 
-
-    class Meta:
-        verbose_name_plural = 'Accessoires'
-
-
-
-"""
-    La classe Tricycle permet de définir la structure d'un tricycle
-"""
-class Tricycle(Moto):
-    wheels_number = models.IntegerField(default=3) #il faut mettre les nombres de roues par 
-    
-    class Meta:
-        verbose_name_plural = 'Tricycles'
-
-
-"""
-    La class MotorBike permet de définir la structure d'une motocyclette
-"""
-class MotorBike(Moto):
     VILLE = 'VILLE'
     COMMERCIAL = 'COMMERCIAL'
     AVENTURE = 'AVENTURE'
@@ -160,11 +127,22 @@ class MotorBike(Moto):
         (AVENTURE, 'aventure')
     )
 
-    motor_warranty = models.IntegerField(null=True, blank=True)
-    usage = models.CharField(max_length=30, choices=USAGE_CHOICES)
+    motor_warranty = models.PositiveIntegerField(null=True, blank=True)
+    usage = models.CharField(max_length=30, choices=USAGE_CHOICES, blank=True, null=True)
+    wheels_number = models.PositiveIntegerField(default=2)
+ 
+    def __str__(self):
+        return (str(self.brand) +" - " + str(self.type_model))
 
-    class Meta:
-        verbose_name_plural = 'Motocylettes'
+
+class Equipement(Product):
+    name = models.CharField(max_length=200)
+    fabirquant = models.CharField(max_length=50) 
+    moto_cible = models.ForeignKey(Moto, on_delete=models.SET_NULL, null=True, blank=True) #une motot vient avec des équipements tels que casque etc...
+    
+
+    def __str__(self):
+        return self.name
 
 
 

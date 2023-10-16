@@ -283,8 +283,9 @@ h1,h2,h3,h4,h5,h6{
   }
 
   .moto_block_title{ 
-	font-weight:800;
+	font-weight:700;
 	color: #003e70;
+	font-size:18px;
   }
 
   .moto_block_img{
@@ -549,7 +550,7 @@ ul.footer__ul {
 }
 
 .carousel-image{
-	height: 450px;
+	height: 650px;
 }
 
 /*======== panier =======*/
@@ -567,7 +568,7 @@ ul.footer__ul {
 
 .header_boutique .title__boutique{
 	color:white;
-	font-weight:bolder;
+	font-weight:bolder; 
 }
 
 .header_boutique a{
@@ -987,6 +988,21 @@ ul.footer__ul {
 	color:rgb(70, 70, 70);
 	font-weight: bold;
 } 
+
+.footer__link{
+	color:white;
+}
+
+.footer__link:hover{
+	color:white;
+}
+
+.contact__section__title{
+	color:rgb(57, 57, 57);
+	font-size: 28px;
+	font-weight: 550;
+}
+  
 
 /*#loader {
 	position: fixed;

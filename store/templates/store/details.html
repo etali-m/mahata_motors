@@ -29,8 +29,8 @@
         <img src="{{ moto.imageURL }}" alt="" width="130" height="100">
       </div>
       <div class="col-sm-4">
-         <h3 class="detail__header__name">{{moto.name}}</h3>
-         <p>Lorem ipsum dolor sit amet consectetur</p>
+         <h3 class="detail__header__name">{{moto.brand}} {{ moto.type_model }}</h3>
+         <p><b>Usage</b> : {{ moto.usage }}</p>
       </div>
       <div class="col-sm-3 text-md-end">
         <h3 class="detail__header__price">{{moto.price|separate_by_space}} FCFA</h3>
@@ -69,24 +69,12 @@
                     </div>
                   </div>
                 </div> 
-              </div>
+              </div> 
               <div class="row d-flex flex-column">
                 <div class="col-sm-8 col-12">
                   <div class="row">
                     <div class="col-5">
                       <h6>Modèle</h6>
-                    </div>
-                    <div class="col-5 offset-2">
-                      <span class="detail__texte">{{moto.name}}</span>
-                    </div>
-                  </div>
-                </div> 
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col-sm-8 col-12">
-                  <div class="row">
-                    <div class="col-5">
-                      <h6>Type de modèle</h6>
                     </div>
                     <div class="col-5 offset-2">
                       <span class="detail__texte">{{moto.type_model}}</span>
@@ -155,7 +143,7 @@
           <div class="row mt-3">
             <hr>
             <div class="col-sm-6">
-              <h5 class="details__section__header"><i class="bi bi-steam mr-2"></i> &nbsp;Caractéristiques techniques</h5>
+              <h5 class="details__section__header"><i class="bi bi-steam mr-2"></i> &nbsp;Spécifications techniques</h5>
             </div>
             <div class="col-sm-6">
               <div class="row d-flex flex-column">
@@ -315,8 +303,9 @@
                   <div class="px-2">
                   <div class="d-flex justify-content-between">
                     <h4 class="item_name">{{similar_moto.name}}</h4>  
-                    <p class="item_price">{{similar_moto.price|separate_by_space}} FCFA</p> 
+                    <p class="item_price">{{similar_moto.price|separate_by_space}} FCFA</p>
                   </div>
+                  <p>2019 &bullet; manuel &bullet; essence</p>
                   <div class="d-grid gap-2">
                     <button class="btn_popular" type="button">Voir cette moto</button> 
                   </div>

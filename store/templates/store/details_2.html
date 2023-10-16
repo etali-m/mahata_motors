@@ -141,4 +141,30 @@
 
 {% block javascript %}
 <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+<script>
+  // Récupérez les éléments du DOM
+  const quantiteInput = document.getElementById("quantite");
+  const boutonPlus = document.getElementById("plus");
+  const boutonMoins = document.getElementById("moins");
+
+  // Définissez la limite minimale de la quantité
+  const limiteMinimale = 1;
+
+  // Écoutez l'événement clic du bouton "+"
+  boutonPlus.addEventListener("click", function () {
+  let quantite = parseInt(quantiteInput.value);
+  quantite = isNaN(quantite) ? limiteMinimale : quantite;
+  quantiteInput.value = quantite + 1;
+  });
+
+  // Écoutez l'événement clic du bouton "-"
+  boutonMoins.addEventListener("click", function () {
+  let quantite = parseInt(quantiteInput.value);
+  quantite = isNaN(quantite) ? limiteMinimale : quantite;
+  if (quantite > limiteMinimale) {
+      quantiteInput.value = quantite - 1;
+  }
+  });
+
+</script>
 {% endblock javascript %}
