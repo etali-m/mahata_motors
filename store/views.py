@@ -8,19 +8,11 @@ from random import shuffle
 from .models import *
  
 
-#recuperer les catégories et les produits associés
-def navigation(request):
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits') 
-    context= {'categories':categories} 
-    return render(request, 'store/navigation.html', context)
-
-
 def home(request):
     #motos = list(MotorBike.objects.all()) + list(Tricycle.objects.all())
-    motos = Moto.objects.all()
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits') 
+    motos = Moto.objects.all() 
     brands = Brand.objects.all()[:12]
-    context = {'motos':motos, 'brands':brands, 'categories': categories} 
+    context = {'motos':motos, 'brands':brands } 
     return render(request, 'store/home.html', context)
 
  
@@ -41,9 +33,7 @@ def boutique(request):
     #on recupère toutes les marques pour les filtres 
     #sauf les marques bazar, cocimecam, senke
     brands = Brand.objects.all().exclude(name__icontains='Bazar').exclude(name__icontains='cocimecam').exclude(name__icontains='senke')
-
-    #les catégories pour le menu de navigation
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+ 
 
     motos = Moto.objects.all() 
     equipements = Equipement.objects.all() 
@@ -72,20 +62,16 @@ def boutique(request):
     """
     context = {
                 'motos': motos,
-                'equipements': equipements,
-                'categories':categories,
+                'equipements': equipements, 
                }
 
     return render(request, 'store/boutique.html', context)
  
 
 def details(request, moto_id):
-    #on verifie si l'objet est une 
-    #les catégories pour le menu de navigation
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+    #on verifie si l'objet est une  
 
-
-    moto = get_object_or_404(Moto, id=moto_id) 
+    moto = get_object_or_404(Moto, id=moto_id)  
     #moto_images = moto.images.all()
     similars = Moto.objects.filter(categorie= moto.categorie).exclude(id=moto.id)[:5] 
     
@@ -93,8 +79,7 @@ def details(request, moto_id):
     
     context = {'moto':moto, 
                #'moto_images': moto_images,
-               'similars':similars,
-               'categories':categories}
+               'similars':similars }
 
         
     return render(request, 'store/details.html', context)
