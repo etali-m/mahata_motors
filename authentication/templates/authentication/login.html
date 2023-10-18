@@ -1,36 +1,75 @@
-{% extends 'authapp.html' %}
+{% extends 'base.html' %}
 {% load static %}
-
-{% block image %}
-     <img src="{% static 'images/loginImage.png' %}" class="login_image" alt="login_image">
-{% endblock image %}
-
 {% block content %}
-    <p>{{ message }}</p>
-    <div class="box-content">
-        <h2 class="text-center login-title">CONNEXION</h2>
-        <form method="post" class="" id="login-form">
+
+{% include 'store/navigation.html' %}
+<br>
+<div class="container mt-5 mb-4">
+  <div class="row">
+    <div class="col-md-6 px-5">
+      <div class="row">
+        <div class="col-12 ">
+          <h2 class="login-title">On se connait déjà ?</h2>
+          <p>Connectez vous avec votre adresse e-mail pour continuer</p>
+        </div>
+      </div>
+      <p>{{ message }}</p> 
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <form method="post" class="" id="login-form">
             {% csrf_token %}
             <div class="mb-3">
-              <label for="username" class="form-label">Nom utilisateur ou e-mail</label>
+              <label for="username" class="form-label">Adresse e-mail</label>
               {{form.username}}
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
-            <div class="mb-3">
+            <div class="mb-1">
               <label for="password" class="form-label">Mot de passe</label>
               {{form.password}}
             </div>
-            <div class="mb-3 form-check">
+            <!--<div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Garder ma session ouverte</label>
+            </div>-->
+            <div class="mb-3 text-center">
+              <a href="" class="password-forget">mot de passe oublié ?</a>
             </div>
-            <p class="text-center"><a class="login-link" href="{% url 'signup' %}">Je n'ai pas de compte</a></p>
+             
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn btn-primary submit-btn" type="button">Valider</button> 
+                <button type="submit" class="btn btn_popular submit-btn" type="button">Valider</button> 
             </div>
-        </form>
+            <hr>
+            <small style="color:grey;">
+              En vous connectant, vous acceptez de vous conformer à la politique de confidentialité et aux conditions générales de mahata motors.
+            </small>
+          </form>
+          {% for message in messages %}
+              <p>{{message}}</p>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-    {% for message in messages %}
-        <p>{{message}}</p>
-    {% endfor %}
+    <div class="col-md-6 px-5">
+      <div class="row">
+        <div class="col-12 ">
+          <h2 class="login-title">Je crée mon compte</h2>
+          <p>En créant votre compte vous profitez de nombreux avantages sur mahata motors.</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 mb-4"> 
+            <ul>
+              <li class="signup-item">L'historique de vos commandes passées sur le site et en magasin</li>
+              <li class="signup-item">Le suivi de la livraision de vos commandes en temps réel</li>
+            </ul>  
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto mt-4">
+          <a href="{% url 'signup' %}" type="button" class="btn btn_popular submit-btn" type="button">Créer mon compte</a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+    
 {% endblock content %}

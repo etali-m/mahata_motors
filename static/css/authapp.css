@@ -3,3 +3,18 @@
     color: #003e70;
     font-weight: bold;
 }
+
+.form-label{
+    font-weight:bold;
+}
+
+.signup-item {
+    color:gray;
+    margin-top: 10px;
+}
+
+.password-forget{
+    color:grey;
+    font-size:11px;
+    text-decoration: underline;
+}

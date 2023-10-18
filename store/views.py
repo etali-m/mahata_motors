@@ -206,11 +206,9 @@ def paiment_method(request):
     return render(request, 'store/paiement-method.html', context)
 
 
-def sav(request):
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+def sav(request): 
 
-    context={
-        'categories':categories,
+    context={ 
     }
 
     return render(request, 'store/sav.html', context)

@@ -3,6 +3,7 @@
 {% block content %}
 
 {% include 'store/navigation.html' %}
+<br>
 <div class="container mb-4">
   <div class="row">
     <div class="container mt-5"> <!-- Vous pouvez également ajouter 'container' pour un centrage plus efficace -->
@@ -31,16 +32,14 @@
               <button type="submit" class="btn btn_popular">Valider</button> 
             </div>
           </form>
+          {% if form.errors %}
+              {{ form.errors }}
+          {% endif %}
         </div>
       </div>
     </div>
     
   </div>
-</div>
-<div class="box-content">
-    
 </div> 
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
+<br>
 {% endblock content %}
