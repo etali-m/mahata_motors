@@ -4,100 +4,120 @@
 {% block content %}
 {% include 'store/navigation.html' %}
 
-<div class="container">
-    <div class="row py-5">
-        <div class="col-12">
-            <h2 class="section_title">Service après-vente moto</h2>
-            <div class="divider"></div>
-        </div>
-    </div> 
-
-    <section class="jumbotron text-center">
-        <img src="{% static 'images/moto2.jpg' %}" alt="Service Après-Vente Moto" class="img-fluid"> 
-    </section>
-
-    <!-- Contenu principal -->
-    <main class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Informations de Contact du Service Après-Vente -->
-                <h3 class="section_title">Informations de Contact</h3>
-                <ul>
-                    <li>Adresse : 123, Rue de l'Atelier, Ville</li>
-                    <li>Numéro de téléphone : +33 01 23 45 67 89</li>
-                    <li>Adresse e-mail : <a href="mailto:service@votresite.com">service@votresite.com</a></li>
-                    <li>Heures d'ouverture :
-                        <ul>
-                            <li>Lundi - Vendredi : 9h00 - 18h00</li>
-                            <li>Samedi : 10h00 - 16h00</li>
-                            <li>Dimanche : Fermé</li>
-                        </ul>
-                    </li>
-                </ul>
+<div class="">
+    <div class="container mb-5">
+        <div class="row py-5">
+            <div class="col-12">
+                <h2 class="section_title">Service après-vente</h2>
+                <div class="divider"></div>
             </div>
-            <div class="col-md-6">
-                <!-- Rendez-vous en Ligne -->
-                <h3 class="section_title">Planifiez un Rendez-vous</h3>
-                <form>
-                    <!-- Champs du formulaire (nom, téléphone, etc.) -->
-                    <div class="form-group">
-                        <label for="service-type">Type de Service</label>
-                        <select class="form-control" id="service-type">
-                            <option>Réparation</option>
-                            <option>Entretien</option>
-                            <option>Diagnostic</option>
-                            <option>Autre</option>
-                        </select>
-                    </div>
-                    <!-- Autres champs du formulaire (date, heure, etc.) -->
-                    <!-- Bouton "Planifier un Rendez-vous" -->
-                </form>
+        </div> 
+    
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="jumbotron text-center">
+                    <img src="{% static 'images/moto2.jpg' %}" alt="Service Après-Vente Moto" class="img-fluid"> 
+                </section>
+            </div>
+            <div class="col-sm-6 px-5">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis necessitatibus velit illo hic quia praesentium rem sed, iusto ipsa a! Fugiat aliquam, beatae error voluptatum accusamus illo quasi architecto aliquid?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias necessitatibus nobis provident consequuntur quis, eius aliquam temporibus? Architecto ut velit, deleniti delectus fuga cupiditate molestiae alias dignissimos! Vitae, rem ab!
+                </p>
             </div>
         </div>
+    </div>
+    <div class="section-divider"></div>
 
-        <!-- Services Offerts -->
-        <h3 class="mt-5 section_title">Services Offerts</h3>
-        <br>
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Service 1 --> 
-                <div class="card sav-card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title my-3">Service de Réparation</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="py-5 ">
+        <div class="container py-2"> 
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Service 1 --> 
+                    <div class="card sav-card" style="width: 18rem;">
+                        <img src="{% static 'images/motorcycle-reparation.png' %}" class="card-img-top" alt="service reparation">
+                        <div class="card-body">
+                          <h6 class="card-title my-2">Réparation</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" type="button" class="sav-btn">En savoir plus</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <!-- Service 2 --> 
-                <div class="card sav-card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title my-3">Service d'Entretien</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="col-md-4">
+                    <!-- Service 2 --> 
+                    <div class="card sav-card" style="width: 18rem;">
+                        <img src="{% static 'images/motorcycle-maintance.png' %}" class="card-img-top" alt="service entretien">
+                        <div class="card-body">
+                          <h6 class="card-title my-2">Entretien</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" type="button" class="sav-btn">En savoir plus</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <!-- Service 3 --> 
-                <div class="card sav-card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title my-3">Service de diagnostic</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="col-md-4">
+                    <!-- Service 3 --> 
+                    <div class="card sav-card" style="width: 18rem;">
+                        <img src="{% static 'images/motorcycle-diagnostic.png' %}" class="card-img-top" alt="service diagnostic">
+                        <div class="card-body">
+                          <h6 class="card-title my-2">Diagnostic</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" type="button" class="sav-btn">En savoir plus</a>
+                        </div>
                     </div>
+                </div>
+            </div> 
+        </div>
+    </div>  
+    
+    <div class="section-divider"></div>
+
+    <div class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Informations de Contact du Service Après-Vente -->
+                    <h4 class="section_title">Informations de Contact</h4>
+                    <ul>
+                        <li>Adresse : 123, Rue de l'Atelier, Ville</li>
+                        <li>Numéro de téléphone : +33 01 23 45 67 89</li>
+                        <li>Adresse e-mail : <a href="mailto:service@votresite.com">service@votresite.com</a></li>
+                        <li>Heures d'ouverture :
+                            <ul>
+                                <li>Lundi - Vendredi : 9h00 - 18h00</li>
+                                <li>Samedi : 10h00 - 16h00</li>
+                                <li>Dimanche : Fermé</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <!-- Rendez-vous en Ligne -->
+                    <h4 class="section_title">Vous avez achetez un véhicule chez nous ?</h4>
+                    <p>Suivez l'historique de vos visites</p>
+                    <span for="service-type"><b>VOUCHER</b></span>
+                    <form class="d-flex">
+                        <!-- Champs du formulaire (nom, téléphone, etc.) --> 
+                        <div class="">
+                            <input type="text" class="form-control numero_chassis" oninput="convertToUppercase(this)" maxlength="6">
+                        </div> &nbsp; &nbsp;
+                        <div class="">  
+                            <button type="submit" class="btn btn_popular_sm">Valider</button>
+                        </div> 
+                        <!-- Autres champs du formulaire (date, heure, etc.) -->
+                        <!-- Bouton "Planifier un Rendez-vous" -->
+                    </form> 
                 </div>
             </div>
         </div> 
-         
-    </main>
+    </div> 
+
 </div>
 <br>
-
+<script>
+    function convertToUppercase(input) {
+      input.value = input.value.toUpperCase();
+    }
+</script>
 
 
 {% endblock content %}

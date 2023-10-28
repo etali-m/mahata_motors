@@ -3,12 +3,23 @@ body{
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
+	color:#333333;
 	font-family: 'Lato', sans-serif;
 }
 
 a{
 	text-decoration: none;
 }
+
+.numero_chassis{ 
+	background-color: #b6c1cc;
+}
+
+.numero_chassis:focus{
+	outline: none !important; 
+	box-shadow: none; 
+	background-color: #b6c1cc;
+} 
 
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
@@ -305,8 +316,28 @@ h1,h2,h3,h4,h5,h6{
 	text-decoration: none;
   }
 
+  .section-divider{
+	height: 10px; 
+	background-color: #eaeaea;
+  }
+
   .sav-card{
 	text-align: center;
+	border:none; 
+	padding: 10px 0px;
+  }
+
+  .sav-btn{
+	padding:5px 10px;
+	border: 2px solid rgb(98, 98, 98);
+	color:black;
+	border-radius: 8px;
+  }
+
+  .card-img-top{
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
   }
 
   .detail_btn:hover{
@@ -367,6 +398,15 @@ h1,h2,h3,h4,h5,h6{
 
 .btn_popular{
 	padding:10px;
+	background-color: #e95a0c;
+	color:white;
+	border-radius:5px;
+	text-align: center;
+	font-weight: 800;
+	border:none;
+}
+
+.btn_popular_sm{
 	background-color: #e95a0c;
 	color:white;
 	border-radius:5px;
@@ -614,7 +654,7 @@ ul.footer__ul {
   /*page catégorie*/ 
   .categorie__title{
 	font-weight: bolder; 
-	color:#003e70;
+	color:#ffffff;
   }
 
   .subcategorie__title{
@@ -1006,6 +1046,21 @@ ul.footer__ul {
 	font-size: 28px;
 	font-weight: 550;
 }
+
+.pub-banner{
+	padding: 120px 20px 10px 20px;
+	color:white;  
+}
+
+.btn-banner{
+	color :white;
+}
+
+.pub-banner h4{
+	text-transform:uppercase;
+	color:white;
+	font-weight: bold;
+}
   
 
 /*#loader {
@@ -1034,4 +1089,3 @@ ul.footer__ul {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
   }*/
-  

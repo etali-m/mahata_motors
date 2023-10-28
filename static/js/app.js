@@ -1,4 +1,21 @@
+function formatChassis() {
+  let input = document.getElementById("chassisInput");
+  let value = input.value;
+
+  if (value.length > 17) {
+    value = value.slice(0, 17);
+  }
+
+  // Insère un espace entre chaque caractère
+  let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+
+  input.value = formattedValue;
+}
+
+
+
 /* responsive menu */
+
 $(document).ready(function(){
   $('.navigation_responsive').hide();
   $('.navigation_responsive_sub').hide();

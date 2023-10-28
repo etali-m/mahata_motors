@@ -87,20 +87,19 @@ def details(request, moto_id):
 
 def details_item(request, item_id):
     #on verifie si l'objet est une 
-    #les catégories pour le menu de navigation
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+    #les catégories pour le menu de navigation 
  
-    item = get_object_or_404(Accessory, id=item_id) 
-    item_images = item.images.all()
-    similars = Accessory.objects.filter(categorie= item.categorie).exclude(id=item.id)[:5]
+    item = get_object_or_404(Equipement, id=item_id) 
+    item_images = Images.objects.filter(product=item)
+    similars = Equipement.objects.filter(categorie= item.categorie).exclude(id=item.id)[:5]
      
     
     
     
     context = {'item':item, 
                'item_images': item_images,
-               'similars':similars,
-               'categories':categories}
+               'similars':similars 
+               }
 
         
     return render(request, 'store/details_2.html', context)
@@ -115,15 +114,32 @@ def detail_categorie(request, categorie_slug):
     #on recupère les élément de la categorie
     category = get_object_or_404(Categorie, slug=categorie_slug.lower())
     subcategories = Categorie.objects.filter(parent_category=category) 
+    target_categories = ["Motocyclette", "Tricycle"]
 
-    #si il y a des sous catégorie on les récupère
-   
-    products = category.produits.all()
-    if subcategories:
-        for subcategory in subcategories:
-            products = products.union(subcategory.produits.all())
-        products = list(products)
-        shuffle(products)
+    products = []
+
+    # Iterate through subcategories and collect products
+    for subcategory in subcategories:
+        if subcategory.name in ["Motocyclette", "Tricycle"]:
+            # If the subcategory is a motorcycle or tricycle, retrieve products of the Moto model
+            products.extend(Moto.objects.filter(categorie=subcategory))
+        else:
+            # Otherwise, retrieve products of the Equipement model
+            products.extend(Equipement.objects.filter(categorie=subcategory))
+
+    # If no subcategories exist, retrieve products directly from the selected category
+    if not subcategories:
+        if category.name in ["Motocyclette", "Tricycle"]:
+            # If the selected category is a motorcycle or tricycle, retrieve products of the Moto model
+            products.extend(Moto.objects.filter(categorie=category))
+        else:
+            # Otherwise, retrieve products of the Equipement model
+            products.extend(Equipement.objects.filter(categorie=category))
+
+    print(products)
+
+    # Shuffle the list of products
+    shuffle(products)
     
     
     
@@ -133,6 +149,7 @@ def detail_categorie(request, categorie_slug):
         'products':products,
         'subcategories':subcategories,
         'brands':brands,
+        'target_categories': target_categories
     }
     return render(request,'store/categorie.html', context)
 
@@ -212,6 +229,11 @@ def sav(request):
     }
 
     return render(request, 'store/sav.html', context)
+
+def suivie_sav(request, num_chassis):
+    context={ }
+
+    return render(request, 'store/suivie-sav.html', context)    
 
 
 def how_to_buy(request):

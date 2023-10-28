@@ -58,7 +58,7 @@ class Product(models.Model):
     is_on_sale = models.BooleanField(default=False)
     sale_price = models.PositiveIntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True, default="No description")
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, related_name='produits', default=1)
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, related_name='produits', default=1) 
 
 
 
@@ -77,6 +77,30 @@ class Product(models.Model):
             url = ''
         return url
     
+
+
+class ProductVariation(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    # Define choices for the type of variation (e.g., color or size)
+    VARIATION_TYPE_CHOICES = [
+        ('color', 'Color'),
+        ('size', 'Size'),
+    ]
+
+    variation_type = models.CharField(max_length=10, choices=VARIATION_TYPE_CHOICES)
+    value = models.CharField(max_length=250)
+    quantity = models.IntegerField()
+
+
+#Les images pour un produit donnée
+class Images(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, blank=True)
+    images = models.FileField(blank=True, upload_to='products_images/')
+
+    def __str__(self):
+        return self.title
+
 
 """ 
     Cette classe permet de définir les images pour un produit car un produit peut avoir plusieurs images

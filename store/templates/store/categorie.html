@@ -5,10 +5,19 @@
 
 {% block content %}
 {% include 'store/navigation.html'%}
-
-     <div class="row my-5">
-        <div class="col-12 text-center mb-5"> 
-            <h2 class="categorie__title">{{ categorie.name }} </h2>
+<style>
+   #title-section{
+        padding-top: 100px;
+        padding-bottom: 80px;
+        background-image: url("{% static 'images/banniere-moto.jpg' %}"); 
+        color:white;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+     <div class="row">
+        <div class="col-12 text-center mb-5 bg-dark" id="title-section"> 
+            <h2 class="categorie__title">Découvrez nos {{ categorie.name }} </h2>
             <div class="divider d-flex mx-auto"></div>
             <div class="container mt-4">
               <!--{{ categorie.description }}-->
@@ -48,11 +57,21 @@
                             <div class="bg-white px-2 py-2" style="border-radius: 0px 0px 5px 5px;text-align: left;">
                                 <small>{{product.categorie}}</small>
                                 <div class="d-flex justify-content-between">
-                                    <h4 class="item_name" style="font-size: 18px;">{{product.name}}</h4>  
+                                    <h4 class="item_name" style="font-size: 18px;"> 
+                                      {% if product.name %}
+                                        {{ product.name }}
+                                      {% else %}
+                                        {{ product.brand }} {{ product.type_model }}
+                                      {% endif %}
+                                    </h4> 
                                     <p class="item_price" style="font-size: 18px;">{{ product.price|separate_by_space }} FCFA</p>
                                 </div> 
                                 <div class="d-grid gap-2 pb-2"> 
-                                    <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir</a> 
+                                    {% if product.name %}
+                                      <a class="btn btn_popular" href="{% url 'details-item' item_id=product.pk %}" type="button">Voir</a> 
+                                    {% else %}
+                                      <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir</a>
+                                    {% endif %}
                                 </div>
                             </div> 
                         </div>

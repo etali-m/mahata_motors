@@ -5,9 +5,19 @@
     </a>  
     {% for categorie in categories %}
         <div class="deroulant">
-            <button class="dropbtn" style="border-right: 1px solid white;">
+            <button class="dropbtn">
             <a href="{% url 'categorie' categorie_slug=categorie.slug %}">  
-             {{ categorie.name }}
+             
+              {% if categorie.name == "Motocyclette" %}
+                <span class="icon-moto" style="font-size: 18px;"></span>
+              {% elif categorie.name == "Tricycle" %}
+                <span class="icon-tricycle" style="font-size: 18px;"></span>
+              {% elif categorie.name == "Accéssoires" %}
+                <span class="icon-accessoires" style="font-size: 18px;"></span>
+              {% elif categorie.name == "Pièces de rechange" %}
+                <span class="icon-pieces-de-rechange" style="font-size: 18px;"></span>
+              {% endif %}
+              {{ categorie.name }}
             </a> 
             </button> 
             <div class="deroulant-content">

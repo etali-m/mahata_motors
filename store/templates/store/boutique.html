@@ -62,22 +62,16 @@
                 <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" id="filtre-moto"> 
                     <div class="col-md-4 col-6">
                         <select class="form-select" name="type">
-                            <option selected value="">Type</option>
-                            {% for categorie in categories %}
-                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option>
-                                {% if categorie.sous_categories.all %}
-                                    {% for sous_categorie in categorie.sous_categories.all %}
-                                        <option style="padding-left: 15px;" value="{{ sous_categorie.name }}" {% if 'type' in request.GET and request.GET.type == sous_categorie.name  %}selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp; {{ sous_categorie.name }} </option>
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
+                            <option selected value="">Type de véhicule</option>
+                            <option value="Motocyclette">Motocyclette</option>
+                            <option value="Tricycle">Tricycle</option>
                         </select>
                     </div>
                     <div class="col-md-4 col-6">
                         <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
                         <select name="marque" class="form-select">
                             <optgroup label="Top marques">
-                                <option selected value="">Marques</option>
+                                <option selected value="">Marque</option>
                                 <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
                                 <option value="cocimecam" {% if 'marque' in request.GET and request.GET.marque == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
                                 <option value="senke" {% if 'marque' in request.GET and request.GET.marque == 'senke' %}selected{% endif %}>Senke</option>
@@ -111,11 +105,11 @@
                     </div>
                     <div class="col-md-4 col-6">
                         <select class="form-select" name="color">
-                            <option  value="">Couleur</option>
-                            <option value="rouge">Rouge</option>
-                            <option value="bleu">Bleu</option>
-                            <option value="vert">Vert</option>
-                            <option value="noir">Noir</option>
+                            <option  value="">Année</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
                         </select>
                     </div>  
                     <div class="col-md-4 col-6 d-grid">
@@ -202,9 +196,28 @@
                 </form>
             </div> 
         </div>
-               
-
+                
         <div class="container">
+
+            <!--  Affichage des bannières -->
+
+            <div class="row mt-5 mb-5">
+                <div class="col-md-6">
+                  <div class="pub-banner" style="background-image: url('{% static 'images/banniere-moto.jpg' %}');">
+                    <h4>Service après-vente de qualité.</h4>
+                    <p>Problème avec votre moto ? nous sommes là pour vous.</p>
+                    <button class="btn btn-banner">PAR ICI <i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="pub-banner" style="background-image: url('{% static 'images/banniere-moto.jpg' %}');">
+                    <h4>Guide d'achat de motos</h4>
+                    <p>Acheter une moto avec succès grâce à nos conseils d'expert.</p>
+                    <button class="btn btn-banner">S'informer <i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+
             <!-- affichage des motos -->
             {% if motos or equipement %}
                 {% if motos %}
