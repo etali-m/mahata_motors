@@ -67,19 +67,21 @@ def boutique(request):
 
     return render(request, 'store/boutique.html', context)
  
-
+#fonction qui affiche les détails sur les motos et le tricycles
 def details(request, moto_id):
     #on verifie si l'objet est une  
 
     moto = get_object_or_404(Moto, id=moto_id)  
     #moto_images = moto.images.all()
     similars = Moto.objects.filter(categorie= moto.categorie).exclude(id=moto.id)[:5] 
+    variantes = ProductVariation.objects.filter(product=moto)
     
-    
-    
+     
     context = {'moto':moto, 
+               'variantes': variantes,
                #'moto_images': moto_images,
-               'similars':similars }
+               'similars':similars
+            }
 
         
     return render(request, 'store/details.html', context)
@@ -93,11 +95,14 @@ def details_item(request, item_id):
     item_images = Images.objects.filter(product=item)
     similars = Equipement.objects.filter(categorie= item.categorie).exclude(id=item.id)[:5]
      
-    
-    
+    #on récupère les variantes du produit
+    variantes_couleur = ProductVariation.objects.filter(product=item, variation_type="color")
+    variantes_taille = ProductVariation.objects.filter(product=item, variation_type="size")
     
     context = {'item':item, 
                'item_images': item_images,
+               'variantes_couleur': variantes_couleur,
+               'variantes_taille' : variantes_taille,
                'similars':similars 
                }
 

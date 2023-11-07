@@ -25,19 +25,102 @@ h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
 
+.product-color{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%; 
+}
+
+.equipement-color{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%; 
+}
+
+
+.radio-button {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.radio-button input[type="radio"] {
+	display: none; /* Cachez le bouton radio natif */
+}
+
+.radio-button span {
+	display: inline-block;
+	padding: 3px 30px;
+	background-color: #fff; /* Couleur d'arrière-plan par défaut */
+	border: 1px solid #7c7c7c;
+	border-radius: 25px;
+	margin-right: 10px;
+	transition: background-color 0.3s; /* Transition de la couleur d'arrière-plan */
+}
+
+.radio-button input[type="radio"]:checked + span {
+	background-color: #e95a0c; /* Couleur d'arrière-plan lorsqu'un bouton radio est sélectionné */
+	color: #fff; /* Couleur du texte lorsque le bouton radio est sélectionné */
+	border: 2px solid #e95a0c; /* Bordure du bouton radio sélectionné */
+}
+
+.color-radio{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+
+.color-radio input[type="radio"] {
+	display: none; /* Cachez le bouton radio natif */
+}
+
+.color-radio span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #fff; /* Couleur d'arrière-plan par défaut */
+	border: 1px solid #7c7c7c;
+	border-radius: 25px;
+	margin-right: 10px;
+	transition: background-color 0.3s; /* Transition de la couleur d'arrière-plan */
+}
+
+.color-radio input[type="radio"]:checked + span { 
+	border: 1px solid #e95a0c; /* Bordure du bouton radio sélectionné */
+}
+
+.details2_solde{
+	background-color: rgb(233, 0, 0);
+	color:white;
+	font-weight: bolder;
+	padding: 5px;
+	margin-left: 15px;
+}
+
+
+.thumbnail {
+	width: 100px;
+	height: 100px;
+	margin: 5px;
+	cursor: pointer;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+}
+  
+.thumbnail.swiper-slide-thumb-active {
+	border-color: #3498db;
+}
+  
+
+
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 	background-color: #fff;
 	border-radius: 4px;
 	padding: 10px;
-}
-
-.thumbnail{
-	width: 100%;
-	height: 200px;
-	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
 }
 
 .product{

@@ -3,7 +3,70 @@
 {% load custom_filters %}
 {% block content %}
 {% include 'store/navigation.html' %}
+<style> 
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
 
+  .swiper-slide-custom {
+    text-align: center;
+    font-size: 18px;
+    background: #fff; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide-custom img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } 
+
+  .swiper {
+    width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide-custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .mySwiper2 {
+    height: 80%;
+    width: 80%;
+  }
+
+  .mySwiper {
+    height: 22%;
+    box-sizing: border-box;  
+    margin-top:15px; 
+    margin-bottom: 15px;
+  }
+
+  .mySwiper .swiper-slide-custom {
+    width: 90%;
+    height: 90%;
+    opacity: 0.4;
+  }
+
+  .mySwiper .swiper-slide-thumb-active {
+    opacity: 1; 
+  }
+
+  .swiper-slide-custom img {
+    display: block;
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
 
 <div style="background-color: #f7f7f7;">
     <section class="bg-white mb-3 py-4">
@@ -11,23 +74,33 @@
             <div class="row mt-2">
                 <div class="col-md-6 ">
                   {% if item_images %}
-                    <div class="swiper" id="swiper4">
+                    <div class="swiper mySwiper2" >
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                           <!-- Slides -->
                           {% for item_image in item_images %}
-                            <div class="swiper-slide text-center">
+                            <div class="swiper-slide text-center swiper-slide-custom">
                               <img class="detail__image" src="{{ item_image.images.url }}" alt="{{ item_image.title }}" width="300" height="300">
                             </div>  
                           {% endfor %}  
                           
-                        </div> 
-                      
+                        </div>  
                         <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev swiper-button-custom"></div>
                         <div class="swiper-button-next swiper-button-custom"></div>
                        
                     </div>
+
+                    <div thumbsSlider="" class="swiper mySwiper">
+                      <div class="swiper-wrapper">
+                        {% for item_image in item_images %}
+                            <div class="swiper-slide swiper-slide-custom text-center">
+                              <img class="detail__image" src="{{ item_image.images.url }}" alt="{{ item_image.title }}"  width="90" height="90">
+                            </div>  
+                          {% endfor %}  
+                      </div>
+                    </div>
+                    
                   {% else %}  
                     <div class="d-flex justify-content-center">
                       <img src="{{ item.imageURL }}" alt="" width="300" height="300">
@@ -37,22 +110,37 @@
                 <div class="col-md-6">
                     <h3 class="detail__header__name">{{item.name}}</h3>
                     <p>Catégorie: <b>{{item.categorie}}</b></p>
-                    <p><h3 class="detail__header__price">{{item.price|separate_by_space}} FCFA</h3></p>
-                    <strike  class="detail__header__price__strike" style="color:red">20 000 FCFA</strike>
-                    <p>Disponibilité: <span class="text-success">En stock</span></p>
-                    <p>Livraison estimée: 2-3 jours ouvrables</p>
-                    <div class="d-flex align-items-center"> <!-- Utilisez la classe "d-flex" pour aligner les éléments horizontalement -->
-                        <div class="input-group mr-5" id="details2__btn__quantite" style="width: 20%;"> <!-- Utilisez le style "width: 75%;" pour réduire la largeur de 25% -->
-                            <span class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" id="moins">-</button>
-                            </span>
-                            <input type="text" class="form-control text-center" id="quantite" value="1" readonly>
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="plus">+</button>
-                            </span>
-                        </div> &nbsp;&nbsp;
-                        <button class="btn btn_popular">Ajouter au panier</button> <!-- Utilisez la classe "ml-3" pour ajouter un espacement à gauche -->
-                    </div> <br> 
+                    <div class="d-flex justify-content-start">
+                      <strike style="padding: 5px; color: grey;">19 000FCFA</strike>
+                      <div class="details2_solde">
+                        -21%
+                      </div>
+                    </div>
+                    <p><h3 class="detail__header__price">{{item.price|separate_by_space}} FCFA</h3></p> 
+                    <p>Disponibilité: <span class="text-success">En stock</span></p> 
+                    <form action="">
+                      <span style="color:grey;">Selectionnez une taille :</span>
+                      <div class="d-flex justify-content-start"> 
+                        {% for item in variantes_taille %} 
+                          <label class="radio-button">
+                            <input type="radio" name="size_choice" value="{{ item.value }}">
+                            <span>{{ item.value }}</span>
+                          </label>
+                        {% endfor %}
+                      </div>
+                      <span style="color:grey;">Selectionnez une couleur :</span>
+                      <div class="d-flex justify-content-start mb-4 pt-2"> 
+                        {% for item in variantes_couleur %}  
+                          <label class="color-radio">
+                            <input type="radio" name="color_choice" value="{{ item.value }}">
+                            <span style="background-color: {{ item.value }};"></span>
+                          </label>
+                        {% endfor %}
+                      </div>
+                      <div class="d-flex align-items-center"> <!-- Utilisez la classe "d-flex" pour aligner les éléments horizontalement --> 
+                          <button class="btn btn_popular py-3 px-5">Ajouter au panier  <img src="{% static 'images/next.png' %}" alt=""></button> <!-- Utilisez la classe "ml-3" pour ajouter un espacement à gauche -->
+                      </div> <br> 
+                    </form> 
                 </div>
             </div>
         </div> 
@@ -141,30 +229,22 @@
 
 {% block javascript %}
 <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-<script>
-  // Récupérez les éléments du DOM
-  const quantiteInput = document.getElementById("quantite");
-  const boutonPlus = document.getElementById("plus");
-  const boutonMoins = document.getElementById("moins");
-
-  // Définissez la limite minimale de la quantité
-  const limiteMinimale = 1;
-
-  // Écoutez l'événement clic du bouton "+"
-  boutonPlus.addEventListener("click", function () {
-  let quantite = parseInt(quantiteInput.value);
-  quantite = isNaN(quantite) ? limiteMinimale : quantite;
-  quantiteInput.value = quantite + 1;
-  });
-
-  // Écoutez l'événement clic du bouton "-"
-  boutonMoins.addEventListener("click", function () {
-  let quantite = parseInt(quantiteInput.value);
-  quantite = isNaN(quantite) ? limiteMinimale : quantite;
-  if (quantite > limiteMinimale) {
-      quantiteInput.value = quantite - 1;
-  }
-  });
-
+<script>  
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      freeMode: true,
+      watchSlidesProgress: true,
+    });
+    var swiper2 = new Swiper(".mySwiper2", {
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: swiper,
+      },
+    });
 </script>
 {% endblock javascript %}

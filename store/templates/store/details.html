@@ -283,8 +283,10 @@
                     <div class="col-5">
                       <h6>Couleur extérieur</h6>
                     </div>
-                    <div class="col-5 offset-2">
-                      <span class="detail__texte">{{moto.coulour}}</span>
+                    <div class="col-5 offset-2 d-flex justify-content-start">
+                      {% for item in variantes %}
+                          <div class="product-color" style="background-color: {{ item.value }};"></div> &nbsp;
+                      {% endfor %}
                     </div>
                   </div>
                 </div> 

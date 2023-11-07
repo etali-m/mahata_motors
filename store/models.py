@@ -90,6 +90,8 @@ class ProductVariation(models.Model):
     variation_type = models.CharField(max_length=10, choices=VARIATION_TYPE_CHOICES)
     value = models.CharField(max_length=250)
     quantity = models.IntegerField()
+    # un image pour la variante de couleur
+    color_image = models.ImageField(upload_to='color_variations/', null=True, blank=True)
 
 
 #Les images pour un produit donnée
