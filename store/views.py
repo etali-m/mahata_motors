@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required 
  
 from urllib.parse import urlencode, unquote
@@ -15,7 +16,29 @@ def home(request):
     context = {'motos':motos, 'brands':brands } 
     return render(request, 'store/home.html', context)
 
- 
+
+#cette fonction est utilisé pour recupére le modèle de motos pour ajax
+def get_modeles(request):
+    marque = request.GET.get('marque')
+    print(marque)
+    if marque :
+        modeles = Moto.objects.filter(brand__name__icontains=marque).values_list('type_model', flat=True).distinct()
+        modele_dict = {str(i): modele for i, modele in enumerate(modeles)} 
+        return JsonResponse({'modeles': modele_dict})
+    else:
+        return JsonResponse({'modeles':{}})
+
+#Cette fonction est utilisé par ajax sur la page boutique pour récupérer les années correspondante à un modele de moto
+def get_annees(request):
+    modele = request.GET.get('modele')
+    print(modele)
+    if modele:
+        annees = Moto.objects.filter(type_model=modele).values_list('annee', flat=True) 
+        annee_dict = {str(i): annee for i, annee in enumerate(annees)}
+        return JsonResponse({'annees': annee_dict})
+    else:
+        return JsonResponse({'annees': {}})
+
 
 def boutique(request): 
 
@@ -26,46 +49,69 @@ def boutique(request):
     type = request.GET.get('type')
     gamme = request.GET.get('gamme')
     prix_max = request.GET.get('prix')
+    year = request.GET.get('year')
+    modele = request.GET.get('modele')
 
-    #on récupère les éléments pour le menu de navigation 
-    #commercials = MotorBike.objects.all()[:8]
+
+    type_accessoire = request.GET.get('accessoire')
+
 
     #on recupère toutes les marques pour les filtres 
     #sauf les marques bazar, cocimecam, senke
     brands = Brand.objects.all().exclude(name__icontains='Bazar').exclude(name__icontains='cocimecam').exclude(name__icontains='senke')
- 
+    type_accessoires = Categorie.objects.filter(parent_category__name__icontains='accéssoires')
+    
+    print(type_accessoires)
 
     motos = Moto.objects.all() 
-    equipements = Equipement.objects.all() 
-
-    """
-   if query and query!="":
-        motos = MotorBike.objects.filter(Q(name__icontains=query) | Q(brand__name__icontains=query))
-        tricycles = Tricycle.objects.filter(name__icontains=query)
-        accessoires = Accessory.objects.filter(name__icontains=query)
-
+    accessoires = Equipement.objects.filter(Q(categorie__name__icontains='accéssoires') | Q(categorie__parent_category__name__icontains='accéssoires'))
+    pieces = Equipement.objects.filter(Q(categorie__name__icontains='pièce') | Q(categorie__parent_category__name__icontains='pièce'))
  
+
+    if query and query!="":
+        accessoires = []
+        pieces = []
+        motos = Moto.objects.filter(Q(type_model__icontains=query) | Q(brand__name__icontains=query) | Q(categorie__name__icontains=query)) 
+        equipements = Equipement.objects.filter(name__icontains=query)
+        for elt in equipements:
+            if elt.categorie == 'Accéssoire' or elt.categorie.parent_category == 'Accéssoire':
+                accessoires.append(elt)
+            else:
+                pieces.append(elt)
+
+    
+
    
-   #si il y a des filtres qui sont choisis
+   #Formulaire de recherche pour les moto et tricycle
     if marque:
-        motos = motos.filter(brand__name__icontains=marque)
-        tricycles = tricycles.filter(brand__name__icontains=marque)
-        accessoires = accessoires.filter(name__icontains=marque)
+        motos = motos.filter(brand__name__icontains=marque) 
+        pieces = pieces.filter(moto_cible__brand__name=marque)
     if type:
-        motos = motos.filter(categorie__name__icontains=type)
-        tricycles = tricycles.filter(categorie__name__icontains=type)
-        accessoires = accessoires.filter(Q(categorie__name__icontains=type) | Q(categorie__parent_category__name__icontains=type))
+        motos = motos.filter(categorie__name__icontains=type) 
+    if type_accessoire:
+        accessoires = accessoires.filter(categorie__name__icontains=type_accessoire)
     if gamme:
         motos = motos.filter(usage__icontains=gamme)
     if prix_max:
         motos = motos.filter(price__lte=prix_max)
-    """
-    context = {
+        accessoires = accessoires.filter(price__lte=prix_max)
+    if year:
+        motos = motos.filter(annee=year)
+        pieces = pieces.filter(moto_cible__annee=year)
+    if modele:
+        pieces = pieces.filter(moto_cible__type_model=modele)
+    
+
+    context = { 
                 'motos': motos,
-                'equipements': equipements, 
+                'accessoires': accessoires,
+                'pieces': pieces,
+                'brands': brands,
+                'type_accessoires': type_accessoires
                }
 
     return render(request, 'store/boutique.html', context)
+
  
 #fonction qui affiche les détails sur les motos et le tricycles
 def details(request, moto_id):

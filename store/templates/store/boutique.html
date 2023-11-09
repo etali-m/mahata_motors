@@ -60,11 +60,12 @@
                 </div>
                 <!-- Formulaire pour les motos et les tricyles -->
                 <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" id="filtre-moto"> 
+                    <input type="hidden" name="active_form" value="moto"> <!-- Ajoutez cette ligne -->
                     <div class="col-md-4 col-6">
                         <select class="form-select" name="type">
                             <option selected value="">Type de véhicule</option>
-                            <option value="Motocyclette">Motocyclette</option>
-                            <option value="Tricycle">Tricycle</option>
+                            <option value="Motocyclette" {% if 'type' in request.GET and request.GET.type == 'Motocyclette' %}selected{% endif %}>Motocyclette</option>
+                            <option value="Tricycle" {% if 'type' in request.GET and request.GET.type == 'Tricycle' %}selected{% endif %}>Tricycle</option>
                         </select>
                     </div>
                     <div class="col-md-4 col-6">
@@ -94,17 +95,16 @@
                     <div class="col-md-4 col-6">
                         <select class="form-select" name="prix">
                             <option value="">Prix jusqu'à (FCFA)</option>
-                            <option value="400000">400 000 </option>
-                            <option value="450000">450 000</option>
-                            <option value="500000">500 000</option>
-                            <option value="600000">600 000</option>
-                            <option value="700000">700 000</option>
-                            <option value="800000">800 000</option>
-                            <option value="1000000">1000 000</option>
+                            <option value="400000"{% if 'prix' in request.GET and request.GET.prix == '400000' %}selected{% endif %}>400 000 FCFA</option> 
+                            <option value="500000"{% if 'prix' in request.GET and request.GET.prix == '500000' %}selected{% endif %}>500 000 FCFA</option>
+                            <option value="600000"{% if 'prix' in request.GET and request.GET.prix == '600000' %}selected{% endif %}>600 000 FCFA</option>
+                            <option value="700000"{% if 'prix' in request.GET and request.GET.prix == '700000' %}selected{% endif %}>700 000 FCFA</option>
+                            <option value="800000"{% if 'prix' in request.GET and request.GET.prix == '800000' %}selected{% endif %}>800 000 FCFA</option>
+                            <option value="1000000"{% if 'prix' in request.GET and request.GET.prix == '1000000' %}selected{% endif %}>1000 000 FCFA</option>
                         </select>
                     </div>
                     <div class="col-md-4 col-6">
-                        <select class="form-select" name="color">
+                        <select class="form-select" name="year">
                             <option  value="">Année</option>
                             <option value="2018">2018</option>
                             <option value="2017">2017</option>
@@ -113,51 +113,41 @@
                         </select>
                     </div>  
                     <div class="col-md-4 col-6 d-grid">
-                        <button class="filter-search-button" type="submit">Resultats</button>
+                        <button class="filter-search-button" type="submit">Resultats({{ motos.count }})</button>
                     </div>  
                 </form>
 
                 <!-- Formulaire pour les accéssoires -->
                 <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" style="display:none;" id="filtre-accessoires"> 
+                    <input type="hidden" name="active_form" value="accessoires"> <!-- Ajoutez cette ligne -->
                     <div class="col-md-4 col-6">
-                        <select class="form-select" name="type">
-                            <option selected value="">Catégorie</option>
-                            {% for categorie in categories %}
-                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option>
-                                {% if categorie.sous_categories.all %}
-                                    {% for sous_categorie in categorie.sous_categories.all %}
-                                        <option style="padding-left: 15px;" value="{{ sous_categorie.name }}" {% if 'type' in request.GET and request.GET.type == sous_categorie.name  %}selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp; {{ sous_categorie.name }} </option>
-                                    {% endfor %}
-                                {% endif %}
+                        <select class="form-select" name="accessoire">
+                            <option selected value="">Type d'accéssoire</option>
+                            {% for categorie in type_accessoires %}
+                                <option value="{{ categorie.name }}" {% if 'type' in request.GET and request.GET.type == categorie.name  %}selected{% endif %}>{{ categorie.name }}</option> 
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-4 col-6">
                         <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
-                        <select name="marque" class="form-select">
-                            <optgroup label="Top marques">
-                                <option selected value="">Fabriquant</option>
-                                <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
-                                <option value="cocimecam" {% if 'marque' in request.GET and request.GET.marque == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
-                                <option value="senke" {% if 'marque' in request.GET and request.GET.marque == 'senke' %}selected{% endif %}>Senke</option>
-                            </optgroup>
-                            <optgroup label="Autres marques"> 
-                                {% for brand in brands %}
-                                    <option value="{{ brand.name }}" {% if 'marque' in request.GET and request.GET.marque == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
-                                {% endfor %} 
-                            </optgroup>
+                        <select class="form-select" name="prix">
+                            <option value="">Prix jusqu'à (FCFA)</option>
+                            <option value="20000"{% if 'prix' in request.GET and request.GET.prix == '20000' %}selected{% endif %}>20 000 FCFA</option> 
+                            <option value="35000"{% if 'prix' in request.GET and request.GET.prix == '35000' %}selected{% endif %}>35 000 FCFA</option>
+                            <option value="50000"{% if 'prix' in request.GET and request.GET.prix == '50000' %}selected{% endif %}>50 000 FCFA</option>
                         </select>
                     </div> 
                     <div class="col-md-4 col-6 d-grid">
-                        <button class="filter-search-button" type="submit">Resultats</button>
+                        <button class="filter-search-button" type="submit">Resultats({{ accessoires.count }})</button>
                     </div>  
                 </form>
 
                 <!-- Formulaire pour les pièces de rechanges -->
-                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" style="display:none" id="filtre-pieces">  
+                <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" style="display:none" id="filtre-pieces"> 
+                    <input type="hidden" name="active_form" value="pieces"> <!-- Ajoutez cette ligne --> 
                     <div class="col-md-3 col-6">
-                        <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
-                        <select name="marque" class="form-select">
+                        <input type="text" name="marque" value="{{ request.GET.query }}" style="display:none;">
+                        <select name="marque" id="id_marque" class="form-select">
                             <optgroup label="Top marques">
                                 <option selected value="">Marques</option>
                                 <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
@@ -172,24 +162,15 @@
                         </select>
                     </div>   
                     <div class="col-md-3 col-6">
-                        <select class="form-select" name="gamme">
-                            <option selected value="">Année</option>
-                            <option value="">2018</option>
-                            <option value="">2019</option>
-                            <option value="">2020</option>
-                            <option value="">2021</option>
-                            <option value="">2022</option>
+                        <select class="form-select" name="modele" id="id_modele">
+                            <option  value="">Modèle</option> 
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <select class="form-select" name="annee" id="id_annee">
+                            <option selected value="">Année</option> 
                         </select>
                     </div>   
-                    <div class="col-md-3 col-6">
-                        <select class="form-select" name="color">
-                            <option  value="">Modèle</option>
-                            <option value="rouge">Rouge</option>
-                            <option value="bleu">Bleu</option>
-                            <option value="vert">Vert</option>
-                            <option value="noir">Noir</option>
-                        </select>
-                    </div>  
                     <div class="col-md-3 col-6 d-grid">
                         <button class="filter-search-button" type="submit">Resultats</button>
                     </div>  
@@ -216,10 +197,9 @@
                     <button class="btn btn-banner">S'informer <i class="bi bi-arrow-right"></i></button>
                   </div>
                 </div>
-              </div>
-
+              </div> 
             <!-- affichage des motos -->
-            {% if motos or equipement %}
+            {% if motos or accessoires or pieces %}
                 {% if motos %}
                     <div id="boutique-moto-block" class="content-table">
                         <div class="row mb-3 mt-3">
@@ -251,30 +231,62 @@
                     </div>
                 {% endif %} 
 
-                {% if equipements %}
-                    <div id="boutique-equipement-block" class="content-table" style="display:none;">
+                {% if accessoires %}
+                    <div id="boutique-accessoires-block" class="content-table" style="display:none;">
                         <div class="row mb-3 mt-2">
                             <div class="col-12 header_boutique d-flex justify-content-between">
-                                <h4 class="title__boutique">Pièces de rechanges & Accéssoires</h4> 
+                                <h4 class="title__boutique">Accéssoires</h4> 
                                 
                                 <div>
                                     <a href="">Voir plus</a> 
                                 </div>    
                             </div>
-                        </div>
+                        </div> 
                         <div class="row gy-2">
-                            {% for accessoire in equipements %}
+                            {% for accessoire in accessoires %}
                                 <div class="col-6 col-md-3">
                                     <div class="product_item">
                                         <img class="" src="{{accessoire.imageURL}}" alt="" width="100%">
                                         <div class="bg-white p-2" style="border-radius: 0px 0px 5px 5px;">
                                             <small>{{accessoire.categorie}}</small>
                                             <div class="d-flex justify-content-between">
-                                                <h4 class="item_name">{{accessoire.name}} {{accessoire.moto_cible}}</h4>  
+                                                <h4 class="item_name">{{accessoire.name}}</h4>  
                                                 <p class="item_price">{{ accessoire.price|separate_by_space }} FCFA</p>
                                             </div> 
                                             <div class="d-grid gap-2 pb-2"> 
                                                 <a class="btn btn_popular" href="{% url 'details-item' item_id=accessoire.pk %}" type="button">Voir cet équipement</a> 
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            {% endfor %} 
+                        </div> 
+                    </div> 
+                {% endif %}  
+
+                {% if pieces %}
+                    <div id="boutique-pieces-block" class="content-table" style="display:none;">
+                        <div class="row mb-3 mt-2">
+                            <div class="col-12 header_boutique d-flex justify-content-between">
+                                <h4 class="title__boutique">Pièces de rechange</h4>  
+                                <div>
+                                    <a href="">Voir plus</a> 
+                                </div>    
+                            </div>
+                        </div> 
+                        <div class="row gy-2">
+                            {% for piece in pieces %}
+                                <div class="col-6 col-md-3">
+                                    <div class="product_item">
+                                        <img class="" src="{{piece.imageURL}}" alt="" width="100%">
+                                        <div class="bg-white p-2" style="border-radius: 0px 0px 5px 5px;">
+                                            <small>{{piece.categorie}}</small>
+                                            <div class="d-flex justify-content-between">
+                                                <h4 class="item_name">{{piece.name}}</h4>  
+                                                <p class="item_price">{{ piece.price|separate_by_space }} FCFA</p>
+                                            </div> 
+                                            <div class="d-grid gap-2 pb-2"> 
+                                                <a class="btn btn_popular" href="{% url 'details-item' item_id=piece.pk %}" type="button">Voir cet équipement</a> 
                                             </div>
                                         </div> 
                                     </div>
@@ -314,5 +326,75 @@
     </div>
 </div>
 -->
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script> 
+    $(document).ready(function() {
+        var activeForm = getActiveForm();
+        if (activeForm) {
+            $('.content-table').hide();
+            $('#boutique-' + activeForm + '-block').show();
+            $('#filtre-' + activeForm).show();
+            $('.filter-menu div').removeClass('active');
+            $('#filter-btn-' + activeForm).addClass('active');
+        }
+        
+        //On désactive le champs modèle et annnee dans le formulaire de pièces de rechange
+        $('#id_modele').prop('disabled', true);
+        $('#id_annee').prop('disabled', true);
+
+        //requettes ajax pour le formulaire de recherche de pièces de rechange
+        $('#id_marque').change(function() {
+            console.log("BOnjour");
+            var selectedMarque = $(this).val();
+            if (selectedMarque) {
+                $('#id_modele').prop('disabled', false);
+                $.ajax({
+                    url: '/get_modeles/',
+                    data: {'marque': selectedMarque},
+                    dataType: 'json',
+                    success: function(data) {
+                        var modeleSelect = $('#id_modele');
+                        modeleSelect.empty();
+                        modeleSelect.append($('<option></option>').attr('value', '').text("Modèle"));
+                        $.each(data.modeles, function(key, value) { 
+                            modeleSelect.append($('<option></option>').attr('value', value).text(value));
+                        });
+                    }
+                });
+            }
+        });
+
+
+        $('#id_modele').change(function() {
+            console.log("bonjour");
+            var selectedModele = $(this).val();
+            console.log(selectedModele);
+            if (selectedModele) {
+                $('#id_annee').prop('disabled', false);
+                $.ajax({
+                    url: '/get_annees/',
+                    data: {'modele': selectedModele},
+                    dataType: 'json',
+                    success: function(data) {
+                        var anneeSelect = $('#id_annee');
+                        anneeSelect.empty();
+                        anneeSelect.append($('<option></option>').attr('value', '').text('Année'));
+                        $.each(data.annees, function(key, value) {
+                            anneeSelect.append($('<option></option>').attr('value', value).text(value));
+                        });
+                    }
+                });
+            }
+        });
+
+});
+
+function getActiveForm() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var activeForm = urlParams.get('active_form');
+  return activeForm;
+}
+
+</script>
  
 {% endblock content %}

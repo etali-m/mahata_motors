@@ -26,7 +26,7 @@ $(document).ready(function(){
 
   $('#filter-btn-accessoires').click(function() {
       $('.content-table').hide();
-      $('#boutique-equipement-block').show();
+      $('#boutique-accessoires-block').show();
       $('#filtre-accessoires').show();
       $('.filter-menu div').removeClass('active');
       $(this).addClass('active');
@@ -34,11 +34,13 @@ $(document).ready(function(){
 
   $('#filter-btn-pieces').click(function() {
       $('.content-table').hide();
-      $('#boutique-equipement-block').show();
+      $('#boutique-pieces-block').show();
       $('#filtre-pieces').show();
       $('.filter-menu div').removeClass('active');
       $(this).addClass('active');
   }); 
+
+  
 
 
 });
