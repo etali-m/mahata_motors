@@ -146,17 +146,17 @@
                 <form action="{% url 'boutique' %}" method="get" class="row mb-4 stiky-top gy-1 gx-2 p-3 bg-white content-table" style="display:none" id="filtre-pieces"> 
                     <input type="hidden" name="active_form" value="pieces"> <!-- Ajoutez cette ligne --> 
                     <div class="col-md-3 col-6">
-                        <input type="text" name="marque" value="{{ request.GET.query }}" style="display:none;">
-                        <select name="marque" id="id_marque" class="form-select">
+                        <input type="text" name="query" value="{{ request.GET.query }}" style="display:none;">
+                        <select name="marque_piece" id="id_marque" class="form-select">
                             <optgroup label="Top marques">
                                 <option selected value="">Marques</option>
-                                <option value="bazar" {% if 'marque' in request.GET and request.GET.marque == 'bazar' %}selected{% endif %}>Bazar</option>
-                                <option value="cocimecam" {% if 'marque' in request.GET and request.GET.marque == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
-                                <option value="senke" {% if 'marque' in request.GET and request.GET.marque == 'senke' %}selected{% endif %}>Senke</option>
+                                <option value="bazar" {% if 'marque_piece' in request.GET and request.GET.marque_piece == 'bazar' %}selected{% endif %}>Bazar</option>
+                                <option value="cocimecam" {% if 'marque_piece' in request.GET and request.GET.marque_piece == 'cocimecam' %}selected{% endif %}>Cocimecam</option>
+                                <option value="senke" {% if 'marque_piece' in request.GET and request.GET.marque_piece == 'senke' %}selected{% endif %}>Senke</option>
                             </optgroup>
                             <optgroup label="Autres marques"> 
                                 {% for brand in brands %}
-                                    <option value="{{ brand.name }}" {% if 'marque' in request.GET and request.GET.marque == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
+                                    <option value="{{ brand.name }}" {% if 'marque_piece' in request.GET and request.GET.marque_piece == brand.name  %}selected{% endif %}>{{ brand.name }}</option>
                                 {% endfor %} 
                             </optgroup>
                         </select>
@@ -167,12 +167,12 @@
                         </select>
                     </div>
                     <div class="col-md-3 col-6">
-                        <select class="form-select" name="annee" id="id_annee">
+                        <select class="form-select" name="year" id="id_annee">
                             <option selected value="">Année</option> 
                         </select>
                     </div>   
                     <div class="col-md-3 col-6 d-grid">
-                        <button class="filter-search-button" type="submit">Resultats</button>
+                        <button class="filter-search-button" type="submit">Resultats({{ pieces.count }})</button>
                     </div>  
                 </form>
             </div> 
@@ -338,14 +338,70 @@
             $('#filter-btn-' + activeForm).addClass('active');
         }
         
-        //On désactive le champs modèle et annnee dans le formulaire de pièces de rechange
-        $('#id_modele').prop('disabled', true);
-        $('#id_annee').prop('disabled', true);
+        // Récupérer les paramètres GET de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Vérifier si les paramètres sont présents dans l'URL
+        const marquePiece = urlParams.get('marque_piece');
+        const modele = urlParams.get('modele');
+        const year = urlParams.get('year');  
+
+        // Activer ou désactiver les champs en fonction de la présence des paramètres
+        if (marquePiece !== null) {
+            $('#id_marque').val(marquePiece); // Sélectionne la valeur dans le champ marque_piece
+        }
+
+        if (modele !== null) {
+            $('#id_modele').prop('disabled', false);   
+            $.ajax({
+                    url: '/get_modeles/',
+                    data: {'marque': marquePiece},
+                    dataType: 'json',
+                    success: function(data) {
+                        var modeleSelect = $('#id_modele'); 
+                        modeleSelect.empty();
+                        modeleSelect.append($('<option></option>').attr('value', '').text("Modèle"));
+                        $.each(data.modeles, function(key, value) { 
+                            if(value == modele){
+                                modeleSelect.append($('<option></option>').attr('selected','selected').attr('value', value).text(value));
+                            }else {
+                                modeleSelect.append($('<option></option>').attr('value', value).text(value));
+                            }  
+                        });
+                    }
+                });
+        } else {
+            $('#id_modele').prop('disabled', true);
+        }
+
+        if (year !== null) {
+            $('#id_annee').prop('disabled', false);
+            $.ajax({
+                    url: '/get_annees/',
+                    data: {'modele': modele},
+                    dataType: 'json',
+                    success: function(data) {
+                        var anneeSelect = $('#id_annee');
+                        anneeSelect.empty();
+                        anneeSelect.append($('<option></option>').attr('value', '').text('Année'));
+                        $.each(data.annees, function(key, value) {
+                            if(value == year){
+                                anneeSelect.append($('<option></option>').attr('selected', 'selected').attr('value', value).text(value));
+                            }else{
+                                anneeSelect.append($('<option></option>').attr('value', value).text(value));
+                            } 
+                        });
+                    }
+                });
+        } else {
+            $('#id_annee').prop('disabled', true);
+        }
 
         //requettes ajax pour le formulaire de recherche de pièces de rechange
         $('#id_marque').change(function() {
             console.log("BOnjour");
             var selectedMarque = $(this).val();
+            var valueOptions = [];
             if (selectedMarque) {
                 $('#id_modele').prop('disabled', false);
                 $.ajax({
@@ -353,14 +409,14 @@
                     data: {'marque': selectedMarque},
                     dataType: 'json',
                     success: function(data) {
-                        var modeleSelect = $('#id_modele');
+                        var modeleSelect = $('#id_modele'); 
                         modeleSelect.empty();
                         modeleSelect.append($('<option></option>').attr('value', '').text("Modèle"));
                         $.each(data.modeles, function(key, value) { 
-                            modeleSelect.append($('<option></option>').attr('value', value).text(value));
+                            modeleSelect.append($('<option></option>').attr('value', value).text(value)); 
                         });
                     }
-                });
+                }); 
             }
         });
 

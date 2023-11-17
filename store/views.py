@@ -46,6 +46,7 @@ def boutique(request):
     query = request.GET.get('query') 
     #On recupère les options de sélection des filtres soumises par l'utilisateur
     marque = request.GET.get('marque')
+    marque_piece = request.GET.get('marque_piece')
     type = request.GET.get('type')
     gamme = request.GET.get('gamme')
     prix_max = request.GET.get('prix')
@@ -85,7 +86,8 @@ def boutique(request):
    #Formulaire de recherche pour les moto et tricycle
     if marque:
         motos = motos.filter(brand__name__icontains=marque) 
-        pieces = pieces.filter(moto_cible__brand__name=marque)
+    if marque_piece:
+        pieces = pieces.filter(moto_cible__brand__name__icontains=marque_piece)
     if type:
         motos = motos.filter(categorie__name__icontains=type) 
     if type_accessoire:
@@ -101,6 +103,7 @@ def boutique(request):
     if modele:
         pieces = pieces.filter(moto_cible__type_model=modele)
     
+    print(pieces)
 
     context = { 
                 'motos': motos,

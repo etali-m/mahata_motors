@@ -68,9 +68,9 @@
                                 </div> 
                                 <div class="d-grid gap-2 pb-2"> 
                                     {% if product.name %}
-                                      <a class="btn btn_popular" href="{% url 'details-item' item_id=product.pk %}" type="button">Voir</a> 
+                                      <a class="btn btn_popular" href="{% url 'details-item' item_id=product.pk %}" type="button">Voir cet équipement</a> 
                                     {% else %}
-                                      <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir</a>
+                                      <a class="btn btn_popular" href="{% url 'details' moto_id=product.pk %}" type="button">Voir cet équipement</a>
                                     {% endif %}
                                 </div>
                             </div> 
