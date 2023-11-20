@@ -25,22 +25,24 @@
                 <div class="col-3 column">
                     <img src="{% static 'images/placeholder.png' %}" alt="" style="width: 300px; height: 250px;">
                 </div>
-                {% if categorie.sous_categories.all %}
+                <div class="col-9 row">
+                  {% if categorie.sous_categories.all %}
                     {% for sous_categorie in categorie.sous_categories.all %}
                         <div class="col-3 column">
-                            <a href="{% url 'categorie' categorie_slug=sous_categorie.slug %}"><h3>{{sous_categorie.name}}</h3></a>
+                            <a href="{% url 'categorie' categorie_slug=sous_categorie.slug %}"><h3 class="navigation__submenu">{{sous_categorie.name}}</h3></a>
                             {% for produit in sous_categorie.produits.all %}
                                 <a href="#">{{ produit.name }}</a>
                             {% endfor %} 
                         </div>
                     {% endfor %}
-                {% else %} 
-                    <div class="col-3 column"> 
-                        {% for produit in categorie.produits.all|slice:"10" %}
-                            <a href="#">{{ produit.name }}</a>
-                        {% endfor %} 
-                    </div> 
-                {% endif %} 
+                  {% else %} 
+                      <div class="col-3 column"> 
+                          {% for produit in categorie.produits.all|slice:"10" %}
+                              <a href="#">{{ produit.name }}</a>
+                          {% endfor %} 
+                      </div> 
+                  {% endif %} 
+                </div>
             </div>
             </div>
         </div>

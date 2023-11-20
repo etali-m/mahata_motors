@@ -30,36 +30,51 @@
                 <div class="col-md-6">
                   <label for="first_name" class="form-label">Nom</label>
                   {{form.first_name}}
+                  {% if form.first_name.errors %}
+                    <small style="color:red">{{ form.first_name.errors }}</small>
+                  {% endif %}
                 </div>
                 <div class="col-md-6">
                   <label for="last_name" class="form-label">Prénom</label>
                   {{form.last_name}}
+                  {% if form.last_name.errors %}
+                    <small style="color:red">{{ form.last_name.errors }}</small>
+                  {% endif %}
                 </div>
                 <div class="col-md-6">
                   <label for="numero_telephone" class="form-label">Téléphone</label>
                   <div class="d-flex">
                     {{form.numero_telephone}}
                   </div> 
+                  {% if form.numero_telephone.errors %}
+                    <small style="color:red">{{ form.numero_telephone.errors }}</small>
+                  {% endif %}
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">Adresse e-mail</label>
                   {{form.email}}
+                  {% if form.email.errors %}
+                    <small style="color:red">{{ form.email.errors }}</small>
+                  {% endif %}
                 </div>
                 <div class="col-md-12">
                   <label for="password1" class="form-label">Mot de passe</label>
                   {{form.password1}}
+                  {% if form.password1.errors %}
+                    <small style="color:red">{{ form.password1.errors }}</small>
+                  {% endif %}
                 </div>
                 <div class="col-md-12">
                   <label for="password2" class="form-label">Confirmer le mot de passe</label>
                   {{form.password2}}
+                  {% if form.password2.errors %}
+                    <small style="color:red">{{ form.password2.errors }}</small>
+                  {% endif %}
                 </div> 
                 <div class="d-grid gap-2 col-6 mx-auto">
                   <button type="submit" class="btn btn_popular">Valider</button> 
                 </div>
-              </form>
-              {% if form.errors %}
-                  {{ form.errors }}
-              {% endif %}
+              </form> 
             </div>
           </div>
         </div>
@@ -75,7 +90,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
   <script>
       var input = document.querySelector("#id_numero_telephone_0");
-      window.intlTelInput(input, { 
+      var iti = window.intlTelInput(input, { 
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
       });
 
@@ -87,8 +102,10 @@
           console.log(listItem);
           if (listItem) {
               var countryCode = listItem.getAttribute('data-country-code'); 
+              console.log(countryCode);
               iti.setCountry(countryCode); // Update selected country in the input
-              phoneNumberSelect.value = '+' + iti.getSelectedCountryData().dialCode; // Update select field 
+              phoneNumberSelect.value =  countryCode.toUpperCase(); // Update select field   
+              console.log(phoneNumberSelect.value);
           }
       });
   </script>
