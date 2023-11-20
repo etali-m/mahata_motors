@@ -75,8 +75,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
   <script>
       var input = document.querySelector("#id_numero_telephone_0");
-      window.intlTelInput(input, {
-          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
+      window.intlTelInput(input, { 
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
+      });
+
+      var countryList = document.querySelector('#iti-0__country-listbox');
+      var phoneNumberSelect = document.querySelector('#id_numero_telephone_0');
+
+      countryList.addEventListener('click', function (e) {
+          var listItem = e.target.closest('.iti__country'); 
+          console.log(listItem);
+          if (listItem) {
+              var countryCode = listItem.getAttribute('data-country-code'); 
+              iti.setCountry(countryCode); // Update selected country in the input
+              phoneNumberSelect.value = '+' + iti.getSelectedCountryData().dialCode; // Update select field 
+          }
       });
   </script>
 {% endblock javascript %}
+
+ 

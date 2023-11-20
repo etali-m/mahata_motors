@@ -178,26 +178,7 @@
             </div> 
         </div>
                 
-        <div class="container">
-
-            <!--  Affichage des bannières -->
-
-            <div class="row mt-5 mb-5">
-                <div class="col-md-6">
-                  <div class="pub-banner" style="background-image: url('{% static 'images/banniere-moto.jpg' %}');">
-                    <h4>Service après-vente de qualité.</h4>
-                    <p>Problème avec votre moto ? nous sommes là pour vous.</p>
-                    <button class="btn btn-banner">PAR ICI <i class="bi bi-arrow-right"></i></button>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="pub-banner" style="background-image: url('{% static 'images/banniere-moto.jpg' %}');">
-                    <h4>Guide d'achat de motos</h4>
-                    <p>Acheter une moto avec succès grâce à nos conseils d'expert.</p>
-                    <button class="btn btn-banner">S'informer <i class="bi bi-arrow-right"></i></button>
-                  </div>
-                </div>
-              </div> 
+        <div class="container"> 
             <!-- affichage des motos -->
             {% if motos or accessoires or pieces %}
                 {% if motos %}
@@ -297,6 +278,25 @@
                 {% endif %} 
 
             {% endif %}
+
+            <!--  Affichage des bannières -->
+
+            <div class="row mt-5 mb-5">
+                <div class="col-md-6">
+                  <div class="pub-banner" style="background-image: url('{% static 'images/banniere-moto.jpg' %}');">
+                    <h4>Service après-vente de qualité.</h4>
+                    <p>Problème avec votre moto ? nous sommes là pour vous.</p>
+                    <button class="btn btn-banner">PAR ICI <i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="pub-banner" style="background-image: url('{% static 'images/banniere-moto.jpg' %}');">
+                    <h4>Guide d'achat de motos</h4>
+                    <p>Acheter une moto avec succès grâce à nos conseils d'expert.</p>
+                    <button class="btn btn-banner">S'informer <i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+            </div>
 
         </div>
     </section>

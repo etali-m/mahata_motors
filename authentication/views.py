@@ -28,7 +28,7 @@ def signup_page(request):
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
-            messages.success(request, "Account was created for " + user)
+            messages.success(request, "Account was created for " + str(user))
             return redirect(settings.LOGIN_URL)
     return render(request, 'authentication/signup.html', context={'form': form})
  
