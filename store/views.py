@@ -33,6 +33,7 @@ def get_annees(request):
     modele = request.GET.get('modele')
     print(modele)
     if modele:
+        #on récupère les années des motos on effectue un filtre sur les motos et des ces motos on récupère uniquement le champs année grace à la fonction value_list()
         annees = Moto.objects.filter(type_model=modele).values_list('annee', flat=True) 
         annee_dict = {str(i): annee for i, annee in enumerate(annees)}
         return JsonResponse({'annees': annee_dict})
@@ -114,6 +115,106 @@ def boutique(request):
                }
 
     return render(request, 'store/boutique.html', context)
+
+#filtre moto
+def filtre_moto(request):
+    marque = request.GET.get('marque')
+    marque_piece = request.GET.get('marque_piece')
+    type = request.GET.get('type') 
+    year = request.GET.get('year')
+    prix_max = request.GET.get('prix')
+    gamme = request.GET.get('gamme')
+
+    motos = Moto.objects.all()  
+
+
+    if marque:
+        motos = motos.filter(brand__name__icontains=marque) 
+    if gamme:
+        motos = motos.filter(usage__icontains=gamme)
+    if marque_piece:
+        pieces = pieces.filter(moto_cible__brand__name__icontains=marque_piece)
+    if type:
+        motos = motos.filter(categorie__name__icontains=type) 
+    if year:
+        motos = motos.filter(annee=year)
+    if prix_max:
+        motos = motos.filter(price__lte=prix_max)
+     
+    motos_list = [
+        {
+            'id': moto.id,
+            'brand': moto.brand.name,
+            'type_model': moto.type_model,
+            'prix' : moto.price,
+            'categorie': moto.categorie.name,
+            'image': moto.image.url,
+            'annee': moto.annee,
+            'gamme': moto.usage
+        }
+        for moto in motos
+    ] 
+    return JsonResponse({'motos': motos_list})
+
+
+#filtre accessoires
+def filtre_accessoire(request):
+    type_accessoire = request.GET.get('accessoire')
+    prix_max = request.GET.get('prix')
+
+    accessoires = Equipement.objects.filter(Q(categorie__name__icontains='accéssoires') | Q(categorie__parent_category__name__icontains='accéssoires'))
+
+    if type_accessoire:
+        accessoires = accessoires.filter(categorie__name__icontains=type_accessoire)
+    if prix_max:
+        accessoires = accessoires.filter(price__lte=prix_max)
+
+    accessoire_list = [
+        {
+            'id': accessoire.id,
+            'name': accessoire.name,
+            'prix': accessoire.price,
+            'categorie': accessoire.categorie.name,
+            'image': accessoire.image.url
+
+        }
+        for accessoire in accessoires
+    ]
+    print("\n\nLes accessoires du filter\n\n")
+    print(accessoire_list)
+    return JsonResponse({'accessoires': accessoire_list})
+
+
+def filtre_piece(request): 
+    marque_piece = request.GET.get('marque_piece')
+    modele = request.GET.get('modele')
+    year = request.GET.get('year')
+
+    pieces = Equipement.objects.filter(Q(categorie__name__icontains='pièce') | Q(categorie__parent_category__name__icontains='pièce'))
+    
+    if marque_piece:
+        pieces = pieces.filter(moto_cible__brand__name__icontains=marque_piece)
+        print("Hello")
+        print(pieces)
+    if modele:
+        pieces = pieces.filter(moto_cible__type_model=modele)
+    if year: 
+        pieces = pieces.filter(moto_cible__annee=year)
+
+    pieces_list = [
+        {
+            'id': piece.id,
+            'name': piece.name,
+            'prix': piece.price,
+            'categorie': piece.categorie.name,
+            'image': piece.image.url
+
+        }
+        for piece in pieces
+    ]
+    print("\n\nLes accessoires du filter\n\n")
+    print(pieces_list)
+    return JsonResponse({'pieces': pieces_list})
 
  
 #fonction qui affiche les détails sur les motos et le tricycles

@@ -138,7 +138,7 @@
                         </select>
                     </div> 
                     <div class="col-md-4 col-6 d-grid">
-                        <button class="filter-search-button" type="submit">Resultats({{ accessoires.count }})</button>
+                        <button class="filter-search-button" id="btn-search-accessoires" type="submit">Resultats({{ accessoires.count }})</button>
                     </div>  
                 </form>
 
@@ -172,7 +172,7 @@
                         </select>
                     </div>   
                     <div class="col-md-3 col-6 d-grid">
-                        <button class="filter-search-button" type="submit">Resultats({{ pieces.count }})</button>
+                        <button class="filter-search-button" id="btn-search-pieces" type="submit">Resultats({{ pieces.count }})</button>
                     </div>  
                 </form>
             </div> 
@@ -189,7 +189,7 @@
                             </div>
                         </div> 
             
-                        <div class="row gy-2">
+                        <div class="row gy-2 resultats-moto" >
                             {% for moto in motos %} 
                                 <div class="col-6 col-md-3">
                                     <div class="product_item">
@@ -223,7 +223,7 @@
                                 </div>    
                             </div>
                         </div> 
-                        <div class="row gy-2">
+                        <div class="row gy-2 resultats-accessoires">
                             {% for accessoire in accessoires %}
                                 <div class="col-6 col-md-3">
                                     <div class="product_item">
@@ -255,7 +255,7 @@
                                 </div>    
                             </div>
                         </div> 
-                        <div class="row gy-2">
+                        <div class="row gy-2 resultats-pieces">
                             {% for piece in pieces %}
                                 <div class="col-6 col-md-3">
                                     <div class="product_item">
@@ -341,7 +341,7 @@
         // Récupérer les paramètres GET de l'URL
         const urlParams = new URLSearchParams(window.location.search);
 
-        // Vérifier si les paramètres sont présents dans l'URL
+        // Vérifier si les paramètres sont présents dans l'URL je les utilises au cas ou la page est rechargé pour afficher le formulaire avec les données précédentes
         const marquePiece = urlParams.get('marque_piece');
         const modele = urlParams.get('modele');
         const year = urlParams.get('year');  

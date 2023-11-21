@@ -10,6 +10,9 @@ urlpatterns = [
     path('boutique/', views.boutique, name='boutique'),
     path('get_modeles/', views.get_modeles, name='get_modeles'),
     path('get_annees/', views.get_annees, name='get_annees'),
+    path('filtre_moto/', views.filtre_moto, name="filtre_moto"),
+    path('filtre_accessoire/', views.filtre_accessoire, name='filtre_accessoire'),
+    path('filtre_piece/', views.filtre_piece, name='filtre_piece'),
 
     path('details/<int:moto_id>', views.details, name='details'),
     path('details_2/<int:item_id>', views.details_item, name='details-item'),

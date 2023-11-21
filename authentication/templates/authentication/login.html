@@ -21,11 +21,17 @@
             <div class="mb-3">
               <label for="username" class="form-label">Adresse e-mail</label>
               {{form.username}}
+              {% if form.username.errors %}
+                <small style="color:red">{{ form.username.errors }}</small>
+              {% endif %}
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-1">
               <label for="password" class="form-label">Mot de passe</label>
               {{form.password}}
+              {% if form.password.errors %}
+                <small style="color:red">{{ form.password.errors }}</small>
+              {% endif %}
             </div>
             <!--<div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">

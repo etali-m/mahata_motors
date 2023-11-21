@@ -164,7 +164,7 @@ class Moto(Product):
 class Equipement(Product):
     name = models.CharField(max_length=200)
     fabirquant = models.CharField(max_length=50) 
-    moto_cible = models.ForeignKey(Moto, on_delete=models.SET_NULL, null=True, blank=True) #une motot vient avec des équipements tels que casque etc...
+    moto_cible = models.ForeignKey(Moto, on_delete=models.SET_NULL, null=True, blank=True) #une pièce de rechange est pour une moto précise
     
 
     def __str__(self):
