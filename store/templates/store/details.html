@@ -32,8 +32,12 @@
          <p><b>Usage</b> : {{ moto.usage }}</p>
       </div>
       <div class="col-sm-3 text-md-end">
-        <h3 class="detail__header__price">{{moto.price|separate_by_space}} XAF</h3>
-        <strike  class="detail__header__price__strike" style="color:red">600 000 XAF</strike>
+        {% if moto.sale_price %}
+        <h3 class="detail__header__price">{{moto.get_sale_price|separate_by_space}} FCFA</h3>
+        <strike  class="detail__header__price__strike" style="color:red">{{ moto.price|separate_by_space }} FCFA</strike>
+        {% else %}
+        <h3 class="detail__header__price">{{moto.price|separate_by_space}} FCFA</h3>
+        {% endif %}
         <p>Lorem ipsum dolor sit </p>
       </div>
       <div class="col-sm-3">

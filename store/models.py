@@ -63,8 +63,14 @@ class Product(models.Model):
 
 
     def get_sale_price(self):
-        if self.is_on_sale:
+        if self.sale_price:
             return self.sale_price
+        else:
+            return None
+
+    def get_reduction_percentage(self):
+        if self.sale_price:
+            return 100*(1 - (self.sale_price / self.price ))
         else:
             return None
 
@@ -93,12 +99,23 @@ class ProductVariation(models.Model):
     # un image pour la variante de couleur
     color_image = models.ImageField(upload_to='color_variations/', null=True, blank=True)
 
+ 
+
 
 #Les images pour un produit donnée
 class Images(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True)
     images = models.FileField(blank=True, upload_to='products_images/')
+
+    def __str__(self):
+        return self.title
+
+
+class VariationImages(models.Model):
+    variation = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, blank=True)
+    images = models.FileField(blank=True, upload_to='variation_images/')  # Modifier le type de champ selon vos besoins
 
     def __str__(self):
         return self.title

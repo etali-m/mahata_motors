@@ -65,38 +65,26 @@ h1,h2,h3,h4,h5,h6{
 	border: 2px solid #e95a0c; /* Bordure du bouton radio sélectionné */
 }
 
-.color-radio{
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px;
-	cursor: pointer;
+.radio-input {
+    display: none; /* Cache les boutons radio natifs */
 }
 
-
-.color-radio input[type="radio"] {
-	display: none; /* Cachez le bouton radio natif */
+.radio-label {
+    margin: 5px; /* Espace entre les images */
+	padding: 10px;
+    border: 2px solid transparent; /* Bordure initiale */
+    border-radius: 50%; /* Bordure arrondie */
 }
 
-.color-radio span {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	background-color: #fff; /* Couleur d'arrière-plan par défaut */
-	border: 1px solid #7c7c7c;
-	border-radius: 25px;
-	margin-right: 10px;
-	transition: background-color 0.3s; /* Transition de la couleur d'arrière-plan */
-}
-
-.color-radio input[type="radio"]:checked + span { 
-	border: 1px solid #e95a0c; /* Bordure du bouton radio sélectionné */
+.radio-input:checked + .radio-label {
+    border-color: #e95a0c; /* Couleur de la bordure lorsqu'un bouton est sélectionné */
 }
 
 .details2_solde{
 	background-color: rgb(233, 0, 0);
 	color:white;
 	font-weight: bolder;
-	padding: 5px;
+	padding: 3px ;
 	margin-left: 15px;
 }
 

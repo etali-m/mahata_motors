@@ -186,7 +186,7 @@ $(document).ready(function(){
                                 <p class="item_price">${formatPrice(piece.prix)} F</p> 
                             </div>  
                             <div class="d-grid gap-1 pb-2"> 
-                                <a class="btn btn_popular" href="/details/${piece.id}" type="button">Voir cet équipement</a> 
+                                <a class="btn btn_popular" href="/details_2/${piece.id}" type="button">Voir cet équipement</a> 
                             </div>
                         </div> 
                     </div>

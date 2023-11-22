@@ -32,7 +32,7 @@
                 {% for subcategorie in subcategories %}
                   <div class="col-md-2">
                     <div class="subcategorie__block">
-                      <a href="{% url 'boutique' %}?type={{subcategorie.name}}">
+                      <a href="{% url 'categorie' categorie_slug=subcategorie.slug%}">
                         <img src="{{subcategorie.imageURL}}" alt=""> 
                         <div>{{subcategorie.name}}</div>
                       </a>

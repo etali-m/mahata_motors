@@ -12,10 +12,17 @@ class ProductImageInline(admin.TabularInline):
     model = Images
     extra = 3
 
+class ImageVariationInline(admin.TabularInline):
+    model = VariationImages
+    extra = 3
+
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductVariationInline, ProductImageInline]
 
+class VariationAdmin(admin.ModelAdmin):
+    inlines = [ImageVariationInline]
 
+admin.site.register(ProductVariation, VariationAdmin) 
 admin.site.register(Moto, ProductAdmin) 
 admin.site.register(Equipement, ProductAdmin)
 
