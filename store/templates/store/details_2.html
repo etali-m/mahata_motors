@@ -55,8 +55,7 @@
   .swiper-slide-custom img {
     display: block; 
     object-fit: cover;
-  }
- 
+  } 
 </style>
 
 <div style="background-color: #f7f7f7;">
@@ -65,30 +64,34 @@
             <div class="row mt-2 gx-4">
               <div class="col-md-7">
                 {% if item_images %}
-                    <div class="row">
-                        <div class="col-3">
-                            <div thumbsSlider="" class="swiper mySwiper" style="height: 400px;">
-                                <div class="swiper-wrapper">
-                                    {% for item_image in item_images %}
-                                    <div class="swiper-slide swiper-slide-custom text-center">
-                                        <img class="detail__image" src="{{ item_image.images.url }}" alt="{{ item_image.title }}" width="90" height="90">
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="swiper mySwiper2" style="height: 500px;">
-                                <div class="swiper-wrapper">
-                                    {% for item_image in item_images %}
-                                    <div class="swiper-slide text-center swiper-slide-custom">
-                                        <img class="detail__image" src="{{ item_image.images.url }}" alt="{{ item_image.title }}" width="100%" height="100%">
-                                    </div>
-                                    {% endfor %}
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
+                <div class="row">
+                  <div class="col-md-3">
+                      <div thumbsSlider="" class="swiper mySwiper" style="height: 400px;">
+                          <div class="swiper-wrapper">
+                              {% for item_image in item_images %}
+                                  <div class="swiper-slide swiper-slide-custom text-center">
+                                      <img class="detail__image" src="{{ item_image.images.url }}" alt="{{ item_image.title }}" width="90" height="90">
+                                  </div>
+                              {% endfor %}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-9">
+                      <div class="swiper mySwiper2" style="height: 500px;">
+                          <div class="swiper-wrapper">
+                              {% for item_image in item_images %}
+                                  <div class="swiper-slide text-center swiper-slide-custom">
+                                      <img class="detail__image" src="{{ item_image.images.url }}" alt="{{ item_image.title }}" width="100%" height="100%">
+                                  </div>
+                              {% endfor %}
+                          </div> 
+                          <!-- Boutons de navigation -->
+                          <div class="swiper-button-next"></div>
+                          <div class="swiper-button-prev"></div>
+                      </div>
+                  </div>
+              </div>
+              
                 {% else %}
                     <div class="d-flex justify-content-center">
                         <img src="{{ item.imageURL }}" alt="" width="300" height="300">
@@ -110,30 +113,24 @@
                     {% else %}
                     <p><h3 class="detail__header__price">{{item.price|separate_by_space}} FCFA</h3></p>
                     {% endif %}
+                    <hr>
                     <p>Disponibilité: <span class="text-success">En stock</span></p> 
-                    <form action="">
+                    <form action="" data-product-id="{{ item.id }}">
                       <span style="color:grey;">Selectionnez une taille :</span>
                       <div class="d-flex justify-content-start"> 
-                        {% for item in variantes_taille %} 
+                        {% for item in variantes %}  
                           <label class="radio-button">
-                            <input type="radio" name="size_choice" value="{{ item.value }}">
-                            <span>{{ item.value }}</span>
+                            <input type="radio" name="size_choice" value="{{ item.size }}">
+                            <span>{{ item.size }}</span>
                           </label>
                         {% endfor %}
-                      </div>
+                      </div> 
                       <span style="color:grey;">Selectionnez une couleur :</span>
                       <div class="d-flex justify-content-start mb-4 pt-2">    
-                          <input type="radio" id="radio1" name="radios" class="radio-input" />
-                          <label for="radio1" class="radio-label">
-                              <img src="{% static 'images/moto3.png' %}" alt="Image 1" width="70" height="70" />
-                          </label>
-                          <input type="radio" id="radio2" name="radios" class="radio-input" />
-                          <label for="radio2" class="radio-label">
-                              <img src="chemin/vers/image2.jpg" alt="Image 2" />
-                          </label> 
-                      </div>
+                        <div class="color-options d-flex justify-content-start"></div>  
+                      </div> 
                       <div class="d-flex align-items-center"> <!-- Utilisez la classe "d-flex" pour aligner les éléments horizontalement --> 
-                          <button class="btn btn_popular py-3 px-5">Ajouter au panier  <img src="{% static 'images/next.png' %}" alt=""></button> <!-- Utilisez la classe "ml-3" pour ajouter un espacement à gauche -->
+                          <button class="btn btn_popular update-cart py-3 px-5" data-product={{item.id}} data-action="add">Ajouter au panier <img src="{% static 'images/next.png' %}" alt=""></button> <!-- Utilisez la classe "ml-3" pour ajouter un espacement à gauche -->
                       </div> <br> 
                     </form> 
                 </div>
@@ -237,6 +234,55 @@
       thumbs: {
         swiper: swiper,
       },
+      navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+      },
+    });
+
+
+    $(document).ready(function() {
+        // Lorsqu'un utilisateur change la taille
+        $('input[name="size_choice"]').on('change', function() {
+            var productId = $(this).closest('form').data('product-id');
+            var selectedSize = $(this).val();
+
+            // Effectuer une requête AJAX pour récupérer les couleurs
+            $.ajax({
+                url: '/get_colors/',  // Remplacez par l'URL de votre vue Django pour récupérer les couleurs
+                type: 'GET',
+                data: {
+                    product_id: productId,
+                    size: selectedSize,
+                },
+                success: function(data) {
+                    // Mettez à jour l'affichage des couleurs avec les données reçues 
+                    updateColorOptions(data);
+                },
+                error: function(error) {
+                    console.error('Erreur lors de la requête AJAX', error);
+                }
+            });
+        });
+
+        // Fonction pour mettre à jour l'affichage des couleurs
+        function updateColorOptions(data) {
+            // Supprimer toutes les options de couleur actuelles
+            $('.color-options').empty();
+            console.log(data)
+
+            // Ajouter les nouvelles options de couleur
+            data.forEach(function(item) { 
+                console.log("bonjour le monde");
+                var colorOption = '<div class="color-option">' +
+                                      '<input type="radio" id="color_' + item.id + '" name="color_variant" class="radio-input"/>' +
+                                      '<label for="color_' + item.id + '" class="radio-label">' +
+                                          '<img src="' + item.image + '" alt="Image 1" width="70" height="70"/>' +
+                                      '</label>' +
+                                  '</div>';
+                $('.color-options').append(colorOption);
+            });
+        }
     });
 </script>
 {% endblock javascript %}

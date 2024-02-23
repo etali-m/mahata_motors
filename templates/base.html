@@ -25,9 +25,26 @@
     <title>Mahata motors - site de vente de véhicules</title>
     <link rel="shortcut icon" href="{% static 'images/logo3.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css">
-    <style>
-      
-    </style>
+    <script type="text/javascript">
+
+      var user = '{{ request.user }}'
+      function getToken(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      const csrftoken = getToken('csrftoken');
+    </script>
 </head>
 <body>
   <!--
@@ -195,7 +212,7 @@
             <li><a href="" class="footer__link">FAQ</a></li>
             <li><a href="{% url 'services' %}" class="footer__link">Opportunités (Services)</a></li>
             <li><a href="{% url 'contact' %}" class="footer__link">Contactez nous</a></li>
-            <li><a href="{% url 'contact' %}" class="footer__link">Livraison</a></li>
+            <li><a href="{% url 'contact' %}" class="footer__link">Livraison & Immatriculation</a></li>
           </ul>
         </div>
       </div>
@@ -243,9 +260,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> 
   <script type="text/javascript" src="{% static 'js/app.js' %}"></script> 
+  <script type="text/javascript" src="{% static 'js/panier.js' %}"></script> 
   {% block javascript %} {% endblock javascript %}
 </body>
 </html>

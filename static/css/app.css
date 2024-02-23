@@ -82,8 +82,7 @@ h1,h2,h3,h4,h5,h6{
 
 .details2_solde{
 	background-color: rgb(233, 0, 0);
-	color:white;
-	font-weight: bolder;
+	color:white; 
 	padding: 3px ;
 	margin-left: 15px;
 }
@@ -337,7 +336,13 @@ h1,h2,h3,h4,h5,h6{
 	outline: none;
   } 
 
-  .form-select:focus{
+  input:focus{
+	outline:none;
+	box-shadow: none;
+	border:1px solid #e95a0c;
+  }
+
+  .form-select:focus, .form-control:focus{
 	outline: none !important;
 	border:1px solid #e95a0c;
 	box-shadow: none;
@@ -1131,6 +1136,69 @@ ul.footer__ul {
 	text-transform:uppercase;
 	color:white;
 	font-weight: bold;
+}
+
+.btn_delete{
+	border-radius: 8px;
+	color:#e95a0c; 
+}
+
+.btn_delete:hover{
+	color:#0066cc;
+}
+
+.panier_moto_block{
+	border-radius: 5px;
+}
+
+.btn_type_client{
+	background-color: #fff;
+	border: 2px solid #d8d8d8;
+	line-height: 30px;
+	border-radius:3px;
+	margin-right:20px;
+	padding:8px;
+	width: 40%;
+	font-weight: bold;
+	color:rgb(91, 91, 91);
+}
+
+.type_actif{
+	color:#e55000;
+}
+
+.form-check-input:checked {
+    background-color: #e55000;
+    border-color: #e55000;
+}
+
+.form-check-input:focus {
+    outline: none !important;
+	box-shadow: none;
+}
+
+.form-check{
+	padding-left: 2.0rem;
+}
+
+.form-check-label-title{
+	font-size: 16px;
+}
+
+.form-check-label p{
+	font-size: 12px;
+}
+
+.selected {
+    border: 2px solid #e55000;
+	border-radius: 8px;
+}
+
+.panier_moto_name{
+	font-size: 16px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color:#e55000;
 }
   
 

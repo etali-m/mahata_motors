@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.http import JsonResponse
+import json
 from django.contrib.auth.decorators import login_required 
  
 from urllib.parse import urlencode, unquote
@@ -40,6 +41,30 @@ def get_annees(request):
     else:
         return JsonResponse({'annees': {}})
 
+
+
+def get_colors(request):
+    if request.method == 'GET':
+        product_id = request.GET.get('product_id')
+        size = request.GET.get('size')
+
+        try:
+            product = Product.objects.get(id=product_id)
+            variations = ProductVariation.objects.filter(product=product, size=size)
+
+            data = []
+            for variation in variations:
+                data.append({
+                    'id': variation.id, 
+                    'image': variation.color_image.url,
+                })
+            print(data)
+            return JsonResponse(data, safe=False)
+
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'Produit non trouvé'}, status=404)
+
+    return JsonResponse({'error': 'Requête non autorisée'}, status=403)
 
 def boutique(request): 
 
@@ -246,13 +271,12 @@ def details_item(request, item_id):
     similars = Equipement.objects.filter(categorie= item.categorie).exclude(id=item.id)[:5]
      
     #on récupère les variantes du produit
-    variantes_couleur = ProductVariation.objects.filter(product=item, variation_type="color")
-    variantes_taille = ProductVariation.objects.filter(product=item, variation_type="size")
-    
+    variantes = ProductVariation.objects.filter(product=item) 
+    variantes = variantes.values('size').distinct()
+
     context = {'item':item, 
                'item_images': item_images,
-               'variantes_couleur': variantes_couleur,
-               'variantes_taille' : variantes_taille,
+               'variantes': variantes,
                'similars':similars 
                }
 
@@ -310,32 +334,63 @@ def detail_categorie(request, categorie_slug):
 
 
 
-def cart(request):
-    #les catégories pour le menu de navigation
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
+def cart(request): 
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
+        items = order.orderitemequipement_set.all()  
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0}
-    context = {'categories': categories, 'items':items, 'order':order}
+
+    for item in items:
+        pass
+    context = {'items':items, 'order':order}
     return render(request, 'store/cart.html', context)
 
+def panier_moto(request):
+    return render(request, 'store/panier-moto.html')
 
-def checkout(request):
-    categories = Categorie.objects.filter(parent_category=None).prefetch_related('sous_categories__produits')
-
+def checkout(request): 
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
+        items = order.orderitemequipement_set.all()
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0}
-    context = {'items':items, 'order':order, 'categories':categories}
+    context = {'items':items, 'order':order}
     return render(request, 'store/checkout.html', context)
+
+
+def updateItem(request):
+    data = json.loads(request.body) #we load the json data sended in update_item url in the cart.js file
+    productId = data['productId']
+    action = data['action']
+
+    print('Action:',action)
+    print('productId:', productId)
+
+    customer = request.user.customer
+    product = Equipement.objects.get(id=productId)
+    #now we want to get order of the customer or create it if it doesn't exist
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)  
+
+    #Now we create an OrderItem for the order we have created
+    #we get_or_create because we need to change the value of the orderItem if it
+    #already exist we will add or substract the quantity of product
+    orderItem, created = OrderItemEquipement.objects.get_or_create(order=order, equipement=product)
+
+    if action == 'add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+    
+    orderItem.save()
+    if orderItem.quantity == 0:
+        orderItem.delete()
+        
+    return JsonResponse('Item was added', safe=False)
 
 
 def contact(request):

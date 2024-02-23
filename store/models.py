@@ -18,6 +18,7 @@ class Customer(models.Model):
 La classe Catégorie défini la catégorie d'un produit
 """
 class Categorie(models.Model):
+    #Ajouter un champs pour la baniere
     name = models.CharField(max_length=200)
     logo = models.ImageField(null=True, blank = True)
     image = models.ImageField(null=True, blank = True)
@@ -61,7 +62,6 @@ class Product(models.Model):
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, related_name='produits', default=1) 
 
 
-
     def get_sale_price(self):
         if self.sale_price:
             return self.sale_price
@@ -70,10 +70,9 @@ class Product(models.Model):
 
     def get_reduction_percentage(self):
         if self.sale_price:
-            return 100*(1 - (self.sale_price / self.price ))
+            return int(100*(1 - (self.sale_price / self.price )))
         else:
             return None
-
 
     @property
     def imageURL(self):
@@ -88,21 +87,16 @@ class Product(models.Model):
 class ProductVariation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     # Define choices for the type of variation (e.g., color or size)
-    VARIATION_TYPE_CHOICES = [
-        ('color', 'Color'),
-        ('size', 'Size'),
-    ]
-
-    variation_type = models.CharField(max_length=10, choices=VARIATION_TYPE_CHOICES)
-    value = models.CharField(max_length=250)
-    quantity = models.IntegerField()
+    size = models.CharField(max_length=20)
     # un image pour la variante de couleur
     color_image = models.ImageField(upload_to='color_variations/', null=True, blank=True)
+    
+    quantity = models.IntegerField()
 
  
 
 
-#Les images pour un produit donnée
+#Les images de gallerie pour un produit donnée
 class Images(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True)
@@ -220,14 +214,14 @@ class Order(models.Model):
     #le prix total d'une commande
     @property
     def get_cart_total(self):
-        orderitems = self.orderitem_set.all()
+        orderitems = self.orderitemequipement_set.all()
         total = sum([item.get_total for item in orderitems])
         return total
         
     #la quantité totale d'article dans le panier
     @property
     def get_cart_items(self):
-        orderitems = self.orderitem_set.all()
+        orderitems = self.orderitemequipement_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
 
@@ -236,16 +230,30 @@ class Order(models.Model):
     une commande peut avoir plusieur ligne de commande et une 
     ligne de commande concerne un produit
 """
-class OrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+class OrderItemEquipement(models.Model):
+    equipement = models.ForeignKey(Equipement, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def get_total(self):
+        if self.equipement.sale_price:
+            total = self.equipement.sale_price * self.quantity
+        else: 
+            total = self.equipement.price * self.quantity
+        return total
+
+
+class OrderItemMoto(models.Model):
+    moto = models.ForeignKey(Moto, on_delete=models.SET_NULL, null=True, blank=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     @property
     def get_total(self):
-        total = self.product.price * self.quantity
+        total = self.moto.price * self.quantity
         return total
 
 

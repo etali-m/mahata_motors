@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+{% include 'store/navigation.html' %}
+
+<main>
+    <section style="background-color: #f7f7f7; padding-top:15px">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-lg-8">
+                 <div class="p-5 bg-white panier_moto_block">
+                    <div class="col-12 text-center">
+                        <h4 class="section_title">Informations personnelles</h4>
+                        <div class="divider d-flex mx-auto"></div>
+                    </div>
+                    <div class="mt-4">
+                        <p>Quel type de client êtes vous ?</p>
+                        <div class="d-flex">
+                            <button class="btn_type_client type_actif">Particulier</button>
+                            <button class="btn_type_client">Société</button>
+                        </div>
+                    </div>
+                    <form class="mt-4" action="">
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="exampleFormControlInput1" class="form-label">Civilité*</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected> </option>
+                                    <option value="1">M.</option>
+                                    <option value="2">Mme</option> 
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="nom" class="form-label">Nom*</label>
+                                <input type="text" class="form-control" id="nom">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="nom" class="form-label">Prénom*</label>
+                                <input type="text" class="form-control" id="prenom">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="email" class="form-label">Email*</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="telephone" class="form-label">Téléphone*</label>
+                                <input type="telephone" class="form-control" id="telephone">
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <p>Souhaitez vous une assistance pour l'immatriculation ?</p> 
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <div class="form-check form-check-immatricualtion">
+                                    <input class="form-check-input" type="radio" name="immatriculation" id="yes_immatriculation" value="option1">
+                                    <label class="form-check-label" for="yes_immatriculation">
+                                      <h6 class="form-check-label-title">Oui</h6>
+                                      <p>Je souhaite une assistance pour l'immatriculation.</p>
+                                    </label>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4">
+                                <div class="form-check form-check-immatricualtion">
+                                    <input class="form-check-input" type="radio" name="immatriculation" id="no_immatriculation" value="option1">
+                                    <label class="form-check-label" for="no_immatriculation">
+                                      <h6 class="form-check-label-title">Non</h6>
+                                      <p>Je ne souhaite pas d'assistance pour l'immatriculation.</p>
+                                    </label>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="mt-5">
+                            <p>Option de livraison:</p> 
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <div class="form-check" id="retraitCheck">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="retrait" value="option1">
+                                    <label class="form-check-label" for="retrait">
+                                      <h6 class="form-check-label-title">Agence</h6>
+                                      <p>Récupérer votre moto dans notre boutique</p>
+                                    </label>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4" id="domicileCheck">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="domicile" value="option1">
+                                    <label class="form-check-label" for="domicile">
+                                      <h6 class="form-check-label-title">À domicile</h6>
+                                      <p>Nous vous livrons votre véhicule à votre adresse</p>
+                                    </label>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row mb-3 gy-2" id="adresseSection" style="display: none;">
+                            <div class="col-sm-6">
+                                <label for="adresse" class="form-label">Adresse*</label>
+                                <input type="text" class="form-control" id="adresse">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="ville" class="form-label">Ville*</label>
+                                <input type="text" class="form-control" id="ville">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="quartier" class="form-label">Quartier*</label>
+                                <input type="text" class="form-control" id="quartier">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="bp" class="form-label">Boite postal*</label>
+                                <input type="text" class="form-control" id="bp">
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12 text-center">
+                                <button class="btn_popular" style="width: 30%;" type="submit">Suivant</button>
+                            </div>
+                        </div>
+                </form>
+                 </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="p-4 bg-white panier_moto_block">
+                    <!-- VEHICLE IMAGE --> 
+                    <img src="{% static 'images/placeholder.png' %}" width="100%" height="200" alt="vehicle image" id="panierMotoImage" class="panier_moto_image mb-2">
+                    <span class="panier_moto_name">Cocimecam AG 256</span> 
+                    <p>2020 | Double embrayage | Diesel | 15 CV | 12L </p>
+                    <h6 class="mb-4">Récapitulatif</h6>
+
+                    <div class="d-flex justify-content-between">
+                        <span>Prix du véhicule</span>
+                        <span>458 000 FCFA</span>
+                    </div> 
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span><b>Prix total</b></span>
+                        <span>458 000 FCFA</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+</main>
+{% endblock content %}
+
+{% block javascript %}
+
+<script>
+    $(document).ready(function() {
+
+        // Fonction pour rendre les champs obligatoires
+        function rendreChampsObligatoires() {
+            $('#adresse').prop('required', true);
+            $('#ville').prop('required', true);
+            $('#quartier').prop('required', true);
+            $('#bp').prop('required', true);
+        }
+        
+        // Fonction pour supprimer l'obligation des champs
+        function supprimerObligationChamps() {
+            $('#adresse').prop('required', false);
+            $('#ville').prop('required', false);
+            $('#quartier').prop('required', false);
+            $('#bp').prop('required', false);
+        }
+
+        $('input[type="radio"]').change(function() {
+            var groupName = $(this).attr('name');
+            var groupContainer = $('input[name="' + groupName + '"]').closest('.form-check');
+
+            // Retirez d'abord la classe et réinitialisez la couleur de tous les titres h6 du groupe
+            groupContainer.removeClass('selected');
+            groupContainer.find('label h6').css('color', '');
+
+            if ($(this).is(':checked')) {
+                var parentFormCheck = $(this).closest('.form-check');
+                parentFormCheck.addClass('selected');
+                parentFormCheck.find('label h6').css('color', '#e55000');
+                parentFormCheck.find('label h6 ').css('font-weight', "700");
+            } 
+
+            $('input[type="radio"]').change(function() {
+                if ($(this).is(':checked') && $(this).attr('id') === 'domicile') {
+                    $('#adresseSection').fadeIn();
+                    rendreChampsObligatoires();
+                } else {
+                    $('#adresseSection').fadeOut();
+                    supprimerObligationChamps();
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock javascript %}

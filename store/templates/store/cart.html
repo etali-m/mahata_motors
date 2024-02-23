@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static %} 
+{% load custom_filters %}
 {% block content %}
 
 {% include 'store/navigation.html' %}
@@ -11,43 +12,62 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            
-            <div class="box-element">
+            <div class="">
+                {% for item in items %}
+                    <div class="cart-row mt-2">
+                        <div class="col-md-2 col-4">
+                            <img class="row-image" src="{{ item.equipement.imageURL }}" alt="">
+                        </div>
+                        <div class="col-md-5 col-8">
+                            <h5><b>{{ item.equipement.name }}</b></h5>
+                            <div class="d-flex justify-content-between">
+                                <input type="number" name="" id="" value="{{ item.quantity }}" style="width:40px; height: 30px;"> &nbsp; x &nbsp;
+                                {% if item.equipement.get_sale_price %}
+                                    <p class="">{{ item.equipement.get_sale_price|separate_by_space }} FCFA</p>
+                                {% else %}
+                                    <p class="">{{ item.equipement.price|separate_by_space }} FCFA</p>
+                                {% endif %}
+
+                            </div>
+                            <p style="font-weight: 500; font-size: 17px;">{{ item.get_total|separate_by_space }} FCFA</p>
+                            <button class="btn btn-light btn_delete"><i class="bi bi-trash"></i> Retirer</button>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+            <br> <br>
+
+            <div class="">
                 <a class="btn btn-outline-dark" href="{% url 'boutique' %}">&#x2190;Continuer les achats</a>
                 <br><br>
 
                 <table class="table">
-                    <tr>
-                        <th><h5>Produits : <strong>{{ order.get_cart_items }}</strong></h5></th>
-                        <th><h5>Totale: <strong>{{ order.get_cart_total }} FCFA</strong></h5></th>
-                        <th>
-                            <a style="float: right; margin:5px" class="btn btn_popular"
-                            href="{% url 'checkout' %}">Passer la commande</a>
-                        </th>
-                    </tr>
-                </table>
-            </div>
-
-            <br>
-
-            <div class="box-element">
-                {% for item in items %}
-                    <div class="cart-row mt-2">
-                        <div class="col-md-2 col-4">
-                            <img class="row-image" src="{{ item.product.imageURL }}" alt="">
-                        </div>
-                        <div class="col-md-5 col-8">
-                            <h5>{{ item.product.name }}</h5>
-                            <div class="d-flex">
-                                <input type="number" name="" id="" value="{{ item.quantity }}" style="width:30px; height: 30px;"> &nbsp; x &nbsp;
-                                <p class="">{{ item.product.price }} FCFA</p>
+                    <tr> 
+                        <td></td>
+                        <td>
+                            <div class="d-flex justify-content-between">
+                                <h6><b>SOUS-TOTAL</b></h6>
+                                <div><strong>{{ order.get_cart_total|separate_by_space }} FCFA</strong></div>
+                            </div> 
+                            <div class="d-flex justify-content-between">
+                                <h6><b>Frais</b></h6>
+                                <div>Calculé pendant la commande</div>
                             </div>
-                            <p style="font-weight: 500; font-size: 20px;">{{ item.get_total }} FCFA</p>
-                        </div>
-                    </div>
-                {% endfor %}
+                            <div class="d-flex justify-content-between">
+                                <h6><b>TVA</b> </h6>
+                                <div>0 FCFA</div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6><b>TOTAL</b> </h6>
+                                <div>Calculé pendant la commande</div>
+                            </div>
+                        </td> 
+                    </tr> 
+                </table>
+                <a style="float: right; margin-bottom: 0px;" class="btn btn_popular"
+                            href="{% url 'checkout' %}">Finaliser ma commande</a>
             </div>
-            <br> <br>
             <!-- 
                   <div class="box-element">
                 <div class="cart-row">

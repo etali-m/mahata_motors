@@ -1,5 +1,4 @@
 /* responsive menu */
-
 $(document).ready(function(){
   $('.navigation_responsive').hide();
   $('.navigation_responsive_sub').hide();
